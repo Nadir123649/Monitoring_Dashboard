@@ -308,58 +308,89 @@
 
             <!-- Metric Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+              <!-- Completion Rate Card -->
               <div
-                class="p-[20px] border-l-4 border-green-500 bg-white rounded"
+                class="border-l-4 border-l-green-500 p-5 flex flex-col min-h-[140px] bg-white rounded-xl shadow-sm"
               >
-                <h3 class="text-sm text-gray-500">Completion Rate</h3>
-                <div class="mt-2 text-2xl font-semibold">71.6%</div>
-                <div class="text-green-600 font-medium">+24%</div>
-                <div class="mt-3 pt-3 border-t">
+                <div class="flex-1">
+                  <h3 class="text-gray-500 text-sm font-medium">
+                    Completion Rate
+                  </h3>
+                  <div class="mt-2 flex items-baseline gap-2">
+                    <div class="text-sm font-medium text-[#020817] font-normal">
+                      71.6% + 24%
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-3 pt-3 border-t border-gray-100">
                   <div
-                    class="flex justify-between items-center text-xs text-gray-500"
+                    class="bg-gray-50 -mx-5 -mb-5 mt-2 p-3 flex justify-between items-center"
                   >
-                    <span>Avg. Rate</span>
-                    <div class="w-3/4 bg-green-100 h-2 rounded">
-                      <div
-                        class="bg-green-500 h-2 rounded"
-                        style="width: 72%"
-                      ></div>
+                    <span class="text-xs text-gray-500">Avg. Rate</span>
+                    <div
+                      class="bg-green-100 h-2 w-3/4 rounded-full overflow-hidden"
+                    >
+                      <div class="bg-green-500 h-full" style="width: 72%"></div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="p-[20px] border-l-4 border-blue-500 bg-white rounded">
-                <h3 class="text-sm text-gray-500">Average Onboarding Time</h3>
-                <div class="mt-2 text-2xl font-semibold">35 sec</div>
-                <div class="text-green-600 font-medium">+8%</div>
-                <div class="mt-3 pt-3 border-t">
+
+              <!-- Onboarding Time Card -->
+              <div
+                class="border-l-4 border-l-blue-500 p-5 flex flex-col min-h-[140px] bg-white rounded-xl shadow-sm"
+              >
+                <div class="flex-1">
+                  <h3 class="text-gray-500 text-sm font-medium">
+                    Average Onboarding Time
+                  </h3>
+                  <div class="mt-2 flex items-baseline gap-2">
+                    <div class="text-sm font-medium text-[#020817] font-normal">
+                      35 sec +8%
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-3 pt-3 border-t border-gray-100">
                   <div
-                    class="flex justify-between items-center text-xs text-gray-500"
+                    class="bg-gray-50 -mx-5 -mb-5 mt-2 p-3 flex justify-between items-center"
                   >
-                    <span>Avg. Rate</span>
-                    <div class="w-3/4 bg-blue-100 h-2 rounded">
-                      <div
-                        class="bg-blue-500 h-2 rounded"
-                        style="width: 35%"
-                      ></div>
+                    <span class="text-xs text-gray-500">Avg. Rate</span>
+                    <div
+                      class="bg-blue-100 h-2 w-3/4 rounded-full overflow-hidden"
+                    >
+                      <div class="bg-blue-500 h-full" style="width: 35%"></div>
                     </div>
                   </div>
                 </div>
               </div>
+
+              <!-- SLA Compliance Card -->
               <div
-                class="p-[20px] border-l-4 border-yellow-500 bg-white rounded"
+                class="border-l-4 border-l-yellow-500 p-5 flex flex-col min-h-[140px] bg-white rounded-xl shadow-sm"
               >
-                <h3 class="text-sm text-gray-500">Response Time vs SLA</h3>
-                <div class="mt-2 text-2xl font-semibold">55%</div>
-                <p class="text-sm text-gray-500">Target: 85% within SLA</p>
-                <div class="mt-3 pt-3 border-t">
+                <div class="flex-1">
+                  <h3 class="text-gray-500 text-sm font-medium">
+                    Response Time vs SLA
+                  </h3>
+                  <div class="mt-2 flex items-baseline gap-2">
+                    <div class="text-sm font-medium text-[#020817] font-normal">
+                      55%
+                    </div>
+                  </div>
+                  <p class="mt-2 text-[#020817]">Target: 85% within SLA</p>
+                </div>
+                <div class="mt-3 pt-3 border-t border-gray-100">
                   <div
-                    class="flex justify-between items-center text-xs text-gray-500"
+                    class="bg-gray-50 -mx-5 -mb-5 mt-2 p-3 flex justify-between items-center"
                   >
-                    <span>SLA Compliance</span>
-                    <div class="w-3/4 bg-yellow-100 h-2 rounded">
+                    <span class="text-xs text-gray-500 mr-2"
+                      >SLA Compliance</span
+                    >
+                    <div
+                      class="bg-yellow-100 h-2 w-3/4 rounded-full overflow-hidden"
+                    >
                       <div
-                        class="bg-yellow-500 h-2 rounded"
+                        class="bg-yellow-500 h-full"
                         style="width: 55%"
                       ></div>
                     </div>
