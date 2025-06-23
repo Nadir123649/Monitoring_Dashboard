@@ -1,12 +1,17 @@
-const { fontFamily } = require("tailwindcss/defaultTheme");
-const plugin = require("tailwindcss-animate");
+/** @type {import('tailwindcss').Config} */
+const plugin = require("tailwindcss/plugin");
 
 module.exports = {
   darkMode: "class",
   content: [
+    "./pages/**/*.{html,js}",
+    "./components/**/*.{html,js}",
+    "./app/**/*.{html,js}",
+    "./src/**/*.{html,js}",
     "./**/*.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./**/*.js",
   ],
+  prefix: "",
   theme: {
     container: {
       center: true,
@@ -35,7 +40,7 @@ module.exports = {
           foreground: "hsl(var(--destructive-foreground))",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))"
+          DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
@@ -111,5 +116,5 @@ module.exports = {
       },
     },
   },
-  plugins: [plugin],
+  plugins: [require("tailwindcss-animate")],
 };
