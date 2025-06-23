@@ -150,7 +150,6 @@ a {
   border-radius: 1.5rem;
   padding: 1rem;
   position: relative;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
   width: 100%;
 }
 
@@ -178,7 +177,6 @@ a {
   font-weight: 600;
   font-size: 0.8rem;
   color: #222;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
   transition: all 0.2s ease-in-out;
 }
 
