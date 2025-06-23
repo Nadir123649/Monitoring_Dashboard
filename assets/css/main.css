@@ -313,14 +313,8 @@ a {
 	box-sizing: border-box;
 	padding: 16px 24px;
 }
-.span-text{
-  color: #2563EB;
-	cursor: pointer;
-	font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-	font-size: 14px;
-	font-weight: 600;
-	line-height: 20px;
-}
+
+
 
 @keyframes pulse {
   0%,

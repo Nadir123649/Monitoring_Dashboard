@@ -15,62 +15,119 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+
+    <style>
+        .sidebar-item {
+            @apply flex items-center gap-2 text-gray-700 px-3 py-2 rounded hover:bg-gray-100 transition;
+        }
+
+        .sidebar-subitem {
+            @apply flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded;
+        }
+
+        .active {
+            @apply bg-gray-200 font-semibold;
+        }
+    </style>
 </head>
 
 <body class="h-screen overflow-hidden font-sans">
     <div class="flex h-screen overflow-hidden">
-
         <!-- Overlay for Mobile -->
         <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-20" onclick="closeMobileMenu()">
         </div>
 
         <!-- Sidebar -->
         <div id="sidebar"
-            class="transition-all duration-300 z-30 bg-white border-r w-[250px] h-full shadow-sm overflow-y-auto">
-            <div class="flex items-center justify-between p-4 border-b">
+            class="bg-white border-r border-gray-200 shadow-sm w-[250px] transition-all duration-300 flex flex-col">
+            <div class="flex items-center justify-between p-4 border-b border-gray-200">
                 <div class="flex items-center gap-2">
-                    <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10" stroke-width="2" />
-                    </svg>
+                    <div class="h-6 w-6 bg-blue-500 rounded-full"></div>
                     <span class="font-semibold text-gray-800">IDBox™</span>
                 </div>
-                <button onclick="toggleSidebar()" class="p-1 rounded-full hover:bg-gray-100">
-                    <svg id="chevron-icon" class="h-5 w-5 text-gray-500" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
+                <button onclick="toggleCollapse()" class="p-1 rounded-full hover:bg-gray-100">
+                    <svg id="collapseIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
             </div>
-
-            <nav class="p-3">
-                <div>
-                    <button class="sidebar-item w-full" onclick="toggleDropdown('service-monitoring')">
-                        <svg class="h-5 w-5" fill="none" stroke="currentColor">
-                            <circle cx="12" cy="12" r="10" stroke-width="2" />
-                        </svg>
-                        <span>Service Monitoring</span>
-                        <svg id="dropdown-icon-service-monitoring" class="ml-auto h-4 w-4 transition-transform"
-                            fill="none" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            <nav class="flex-1 overflow-y-auto py-4 px-3">
+                <a href="#"
+                    class="flex items-center gap-2 text-gray-700 px-3 py-2 rounded hover:bg-gray-100 transition  bg-gray-200 font-semibold active">
+                    <div class="h-5 w-5 bg-gray-400 rounded"></div>
+                    <span>Dashboard</span>
+                </a>
+                <div class="relative">
+                    <button onclick="toggleDropdown('monitoring')"
+                        class=" flex items-center gap-2 text-gray-700 px-3 py-2 rounded hover:bg-gray-100 transition w-full flex justify-between">
+                        <span class="flex items-center gap-2">
+                            <div class="h-5 w-5 bg-gray-400 rounded"></div>
+                            <span>Service Monitoring</span>
+                        </span>
+                        <svg id="dropdownIcon-monitoring" xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4 transform transition-transform" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.292l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.65a.75.75 0 01-1.08 0l-4.25-4.65a.75.75 0 01.02-1.06z"
+                                clip-rule="evenodd" />
                         </svg>
                     </button>
-                    <div id="dropdown-service-monitoring" class="ml-4 mt-1 hidden space-y-1">
-                        <a href="#" class="sidebar-subitem"><span>Overall Success</span></a>
-                        <a href="#" class="sidebar-subitem"><span>Abandoned by Customer</span></a>
-                        <a href="#" class="sidebar-subitem"><span>Verification Failure</span></a>
-                        <!-- Add more subitems as needed -->
+                    <div id="dropdown-monitoring" class="ml-6 mt-1 space-y-1 hidden">
+                        <a href="#"
+                            class="flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded">Overall
+                            Success</a>
+                        <a href="#"
+                            class="flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded">Abandoned
+                            by Customer</a>
+                        <a href="#"
+                            class="flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded">Verification
+                            Failure</a>
+                        <a href="#"
+                            class="flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded">ID
+                            Breakdown</a>
+                        <a href="#"
+                            class="flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded">Document
+                            Breakdown</a>
+                        <a href="#"
+                            class="flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded">Video
+                            Call Waiting</a>
+                        <a href="#"
+                            class="flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded">Verification
+                            Time</a>
+                        <a href="#"
+                            class="flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded">Average
+                            Response</a>
+                        <a href="#"
+                            class="flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded">Country
+                            Distribution</a>
+                        <a href="#"
+                            class="flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded">Mobile
+                            Devices</a>
+                        <a href="#"
+                            class="flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded">Detailed
+                            Transactions</a>
                     </div>
                 </div>
-
-                <a href="#" class="sidebar-item"><span>Success Rate</span></a>
-                <a href="#" class="sidebar-item"><span>Transactions</span></a>
-                <a href="#" class="sidebar-item"><span>Settings</span></a>
-
-                <div class="mt-4">
-                    <a href="#" class="sidebar-item text-red-500 hover:bg-red-50">
-                        <span>Logout</span>
-                    </a>
-                </div>
+                <a href="#"
+                    class=" flex items-center gap-2 text-gray-700 px-3 py-2 rounded hover:bg-gray-100 transition">
+                    <div class="h-5 w-5 bg-gray-400 rounded"></div>
+                    <span>Success Rate</span>
+                </a>
+                <a href="#"
+                    class=" flex items-center gap-2 text-gray-700 px-3 py-2 rounded hover:bg-gray-100 transition">
+                    <div class="h-5 w-5 bg-gray-400 rounded"></div>
+                    <span>Transactions</span>
+                </a>
+                <a href="#"
+                    class=" flex items-center gap-2 text-gray-700 px-3 py-2 rounded hover:bg-gray-100 transition">
+                    <div class="h-5 w-5 bg-gray-400 rounded"></div>
+                    <span>Settings</span>
+                </a>
+                <a href="#"
+                    class=" flex items-center gap-2 text-gray-700 px-3 py-2 rounded hover:bg-gray-100 transition text-red-500 hover:bg-red-100 mt-4">
+                    <div class="h-5 w-5 bg-red-400 rounded"></div>
+                    <span>Logout</span>
+                </a>
             </nav>
         </div>
 
@@ -247,8 +304,8 @@
             <footer class="footer bg-white border-t border-gray-200">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-2">
-                        <i class="fa-regular fa-circle-user text-[#2563EB] span-text text-xl"></i>
-                        <span class="text-sm font-semibold text-[#2563EB] span-text">IDBox™ Service Monitoring</span>
+                        <i class="fa-regular fa-circle-user text-[#2563EB]  text-xl"></i>
+                        <span class="text-sm font-semibold ">IDBox™ Service Monitoring</span>
                         <span class="text-xs text-gray-500 leading-normal">v.2.1</span>
                     </div>
                     <div class="text-sm text-gray-500">
@@ -260,22 +317,29 @@
     </div>
 
     <script>
-        const dropdowns = {};
-        function toggleDropdown(id) {
-            const dropdown = document.getElementById(`dropdown-${id}`);
-            const icon = document.getElementById(`dropdown-icon-${id}`);
-            const isOpen = dropdown.classList.contains('block');
-            dropdown.classList.toggle('hidden');
-            dropdown.classList.toggle('block');
-            icon.classList.toggle('rotate-180');
-        }
+        let collapsed = false;
+        let dropdownOpen = {};
 
-        function toggleSidebar() {
+        function toggleCollapse() {
             const sidebar = document.getElementById('sidebar');
+            const icon = document.getElementById('collapseIcon');
+            collapsed = !collapsed;
             sidebar.classList.toggle('w-[250px]');
             sidebar.classList.toggle('w-[70px]');
+            if (icon) icon.classList.toggle('rotate-180');
         }
 
+        function toggleDropdown(name) {
+            const dropdown = document.getElementById('dropdown-' + name);
+            const icon = document.getElementById('dropdownIcon-' + name);
+            if (dropdown.classList.contains('hidden')) {
+                dropdown.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                dropdown.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
         function openMobileMenu() {
             document.getElementById('sidebar').classList.add('fixed', 'left-0', 'top-0');
             document.getElementById('overlay').classList.remove('hidden');
@@ -285,6 +349,7 @@
             document.getElementById('sidebar').classList.remove('fixed');
             document.getElementById('overlay').classList.add('hidden');
         }
+
 
         document.getElementById("year").textContent = new Date().getFullYear();
     </script>
