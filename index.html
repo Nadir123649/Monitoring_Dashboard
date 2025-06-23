@@ -32,7 +32,7 @@
       <!-- Overlay for Mobile -->
       <div
         id="overlay"
-        class="hidden fixed inset-0 bg-black bg-opacity-50 z-20"
+        class="fixed inset-0 z-20 hidden bg-black bg-opacity-50"
         onclick="closeMobileMenu()"
       ></div>
 
@@ -41,7 +41,7 @@
         class="bg-white border-r border-gray-200 shadow-sm w-[250px] transition-all duration-300 flex flex-col"
       >
         <div
-          class="sidebar-top flex items-center justify-between p-4 border-b border-gray-200"
+          class="flex items-center justify-between p-4 border-b border-gray-200 sidebar-top"
         >
           <div class="flex items-center gap-2">
             <i class="fa-regular fa-circle-user text-[#2563EB] text-xl"></i>
@@ -54,7 +54,7 @@
             <svg
               id="collapseIcon"
               xmlns="http://www.w3.org/2000/svg"
-              class="h-5 w-5 text-gray-500"
+              class="w-5 h-5 text-gray-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -68,11 +68,11 @@
             </svg>
           </button>
         </div>
-        <nav class="flex-1 overflow-y-auto py-4 px-3">
+        <nav class="flex-1 px-3 py-4 overflow-y-auto">
           <a
             href="#"
             title="Dashboard"
-            class="flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100 transition bg-gray-200 font-semibold sidebar-item active"
+            class="flex items-center gap-2 px-3 py-2 font-semibold transition bg-gray-200 rounded hover:bg-gray-100 sidebar-item active"
           >
             <i class="fa-solid fa-chart-column text-[#2563EB]"></i>
             <span class="text-[#2563EB] sidebar-label">Dashboard</span>
@@ -81,7 +81,7 @@
             <button
               onclick="toggleDropdown('monitoring')"
               title="Service Monitoring"
-              class="flex items-center gap-2 text-gray-700 sidebar-item px-3 py-2 rounded hover:bg-gray-100 transition w-full flex justify-between"
+              class="flex items-center justify-between w-full gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100"
             >
               <span class="flex items-center gap-2">
                 <i class="fa-regular fa-file"></i>
@@ -90,7 +90,7 @@
               <svg
                 id="dropdownIcon-monitoring"
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4 transform transition-transform"
+                class="w-4 h-4 transition-transform transform"
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >
@@ -101,79 +101,79 @@
                 />
               </svg>
             </button>
-            <div id="dropdown-monitoring" class="ml-2 mt-1 space-y-1 hidden">
+            <div id="dropdown-monitoring" class="hidden mt-1 ml-2 space-y-1">
               <a
                 href="#"
-                class="flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded"
+                class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"
               >
                 <i class="fa-solid fa-chart-line"></i>
                 <span> Overall Success </span>
               </a>
               <a
                 href="#"
-                class="flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded"
+                class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"
                 ><i class="fa-regular fa-user"></i>
                 <span> Abandoned by Customer </span>
               </a>
               <a
                 href="#"
-                class="flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded"
+                class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"
               >
                 <i class="fa-solid fa-circle-xmark"></i>
                 <span> Verification Failure</span>
               </a>
               <a
                 href="#"
-                class="flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded"
+                class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"
               >
                 <i class="fa-solid fa-database"></i>
                 <span> ID Breakdown </span>
               </a>
               <a
                 href="#"
-                class="flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded"
+                class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"
               >
                 <i class="fa-regular fa-file"></i>
                 <span> Document Breakdown </span></a
               >
               <a
                 href="#"
-                class="flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded"
+                class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"
               >
                 <i class="fa-regular fa-clock"></i>
                 <span> Video Call Waiting </span>
               </a>
               <a
                 href="#"
-                class="flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded"
+                class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"
               >
                 <i class="fa-regular fa-clock"></i>
                 <span> Verification Time </span></a
               >
               <a
                 href="#"
-                class="flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded"
+                class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"
               >
                 <i class="fa-solid fa-chart-line"></i>
                 <span> Average Response </span>
               </a>
               <a
                 href="#"
-                class="flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded"
+                class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"
               >
                 <i class="fa-solid fa-globe"></i>
                 <span> Country Distribution </span></a
               >
               <a
                 href="#"
-                class="flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded"
+                class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"
               >
                 <i class="fa-solid fa-mobile-screen"></i>
                 <span> Mobile Devices </span>
               </a>
               <a
                 href="#"
-                class="flex items-center gap-2 text-sm text-gray-600 px-3 py-1 hover:bg-gray-100 rounded"
+                class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"
               >
                 <i class="fa-solid fa-chart-line"></i>
                 <span> Detailed Transactions </span>
@@ -183,7 +183,7 @@
           <a
             href="#"
             title="Success Rate"
-            class="flex items-center gap-2 text-gray-700 sidebar-item px-3 py-2 rounded hover:bg-gray-100 transition"
+            class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100"
           >
             <i class="fa-solid fa-chart-column"></i>
             <span class="sidebar-label">Success Rate</span>
@@ -191,7 +191,7 @@
           <a
             href="#"
             title="Transactions"
-            class="flex items-center gap-2 text-gray-700 sidebar-item px-3 py-2 rounded hover:bg-gray-100 transition"
+            class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100"
           >
             <i class="fa-regular fa-file"></i>
             <span class="sidebar-label">Transactions</span>
@@ -199,7 +199,7 @@
           <a
             href="#"
             title="Settings"
-            class="flex items-center gap-2 text-gray-700 sidebar-item px-3 py-2 rounded hover:bg-gray-100 transition"
+            class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100"
           >
             <i class="fa-solid fa-gear"></i>
             <span class="sidebar-label">Settings</span>
@@ -207,7 +207,7 @@
           <a
             href="#"
             title="Logout"
-            class="flex items-center gap-2 text-gray-700 sidebar-item px-3 py-2 rounded hover:bg-gray-100 transition text-red-500 hover:bg-red-100 mt-4"
+            class="flex items-center gap-2 px-3 py-2 mt-4 text-gray-700 text-red-500 transition rounded sidebar-item hover:bg-gray-100 hover:bg-red-100"
           >
             <i class="fa-solid fa-right-from-bracket"></i>
             <span class="sidebar-label">Logout</span>
@@ -216,14 +216,14 @@
       </div>
 
       <!-- Main content -->
-      <div class="flex-1 flex flex-col h-full overflow-hidden">
+      <div class="flex flex-col flex-1 h-full overflow-hidden">
         <!-- Mobile Header -->
         <header
-          class="md:hidden bg-white border-b py-3 px-4 flex items-center justify-between"
+          class="flex items-center justify-between px-4 py-3 bg-white border-b md:hidden"
         >
           <div class="flex items-center gap-2">
             <svg
-              class="h-6 w-6 text-blue-600"
+              class="w-6 h-6 text-blue-600"
               fill="none"
               stroke="currentColor"
             >
@@ -236,7 +236,7 @@
             class="p-1 rounded hover:bg-gray-100"
           >
             <svg
-              class="h-6 w-6 text-gray-700"
+              class="w-6 h-6 text-gray-700"
               fill="none"
               stroke="currentColor"
             >
@@ -253,7 +253,7 @@
         <main class="flex-1 overflow-y-auto bg-gray-50 p-[24px]">
           <div>
             <div
-              class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4"
+              class="flex flex-col items-start justify-between gap-4 mb-6 md:flex-row md:items-center"
             >
               <div>
                 <h1 class="text-2xl font-bold">Service Monitoring</h1>
@@ -265,11 +265,11 @@
                 <span class="text-sm font-medium">Define Time Period:</span>
                 <button
                   id="from-date-button"
-                  class="border p-2 rounded text-sm flex items-center gap-2 bg-white"
+                  class="flex items-center gap-2 p-2 text-sm bg-white border rounded"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4"
+                    class="w-4 h-4"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -285,11 +285,11 @@
                 </button>
                 <button
                   id="to-date-button"
-                  class="border p-2 rounded text-sm flex items-center gap-2 bg-white"
+                  class="flex items-center gap-2 p-2 text-sm bg-white border rounded"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4"
+                    class="w-4 h-4"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -307,30 +307,30 @@
             </div>
 
             <!-- Metric Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div class="grid grid-cols-1 gap-6 mb-6 md:grid-cols-3">
               <!-- Completion Rate Card -->
               <div
                 class="border-l-4 border-l-green-500 p-5 flex flex-col min-h-[140px] bg-white rounded-xl shadow-sm"
               >
                 <div class="flex-1">
-                  <h3 class="text-gray-500 text-sm font-medium">
+                  <h3 class="text-sm font-medium text-gray-500">
                     Completion Rate
                   </h3>
-                  <div class="mt-2 flex items-baseline gap-2">
+                  <div class="flex items-baseline gap-2 mt-2">
                     <div class="text-sm font-medium text-[#020817] font-normal">
                       71.6% + 24%
                     </div>
                   </div>
                 </div>
-                <div class="mt-3 pt-3 border-t border-gray-100">
+                <div class="pt-3 mt-3 border-t border-gray-100">
                   <div
-                    class="bg-gray-50 -mx-5 -mb-5 mt-2 p-3 flex justify-between items-center"
+                    class="flex items-center justify-between p-3 mt-2 -mx-5 -mb-5 bg-gray-50"
                   >
                     <span class="text-xs text-gray-500">Avg. Rate</span>
                     <div
-                      class="bg-green-100 h-2 w-3/4 rounded-full overflow-hidden"
+                      class="w-3/4 h-2 overflow-hidden bg-green-100 rounded-full"
                     >
-                      <div class="bg-green-500 h-full" style="width: 72%"></div>
+                      <div class="h-full bg-green-500" style="width: 72%"></div>
                     </div>
                   </div>
                 </div>
@@ -341,24 +341,24 @@
                 class="border-l-4 border-l-blue-500 p-5 flex flex-col min-h-[140px] bg-white rounded-xl shadow-sm"
               >
                 <div class="flex-1">
-                  <h3 class="text-gray-500 text-sm font-medium">
+                  <h3 class="text-sm font-medium text-gray-500">
                     Average Onboarding Time
                   </h3>
-                  <div class="mt-2 flex items-baseline gap-2">
+                  <div class="flex items-baseline gap-2 mt-2">
                     <div class="text-sm font-medium text-[#020817] font-normal">
                       35 sec +8%
                     </div>
                   </div>
                 </div>
-                <div class="mt-3 pt-3 border-t border-gray-100">
+                <div class="pt-3 mt-3 border-t border-gray-100">
                   <div
-                    class="bg-gray-50 -mx-5 -mb-5 mt-2 p-3 flex justify-between items-center"
+                    class="flex items-center justify-between p-3 mt-2 -mx-5 -mb-5 bg-gray-50"
                   >
                     <span class="text-xs text-gray-500">Avg. Rate</span>
                     <div
-                      class="bg-blue-100 h-2 w-3/4 rounded-full overflow-hidden"
+                      class="w-3/4 h-2 overflow-hidden bg-blue-100 rounded-full"
                     >
-                      <div class="bg-blue-500 h-full" style="width: 35%"></div>
+                      <div class="h-full bg-blue-500" style="width: 35%"></div>
                     </div>
                   </div>
                 </div>
@@ -369,28 +369,28 @@
                 class="border-l-4 border-l-yellow-500 p-5 flex flex-col min-h-[140px] bg-white rounded-xl shadow-sm"
               >
                 <div class="flex-1">
-                  <h3 class="text-gray-500 text-sm font-medium">
+                  <h3 class="text-sm font-medium text-gray-500">
                     Response Time vs SLA
                   </h3>
-                  <div class="mt-2 flex items-baseline gap-2">
+                  <div class="flex items-baseline gap-2 mt-2">
                     <div class="text-sm font-medium text-[#020817] font-normal">
                       55%
                     </div>
                   </div>
                   <p class="mt-2 text-[#020817]">Target: 85% within SLA</p>
                 </div>
-                <div class="mt-3 pt-3 border-t border-gray-100">
+                <div class="pt-3 mt-3 border-t border-gray-100">
                   <div
-                    class="bg-gray-50 -mx-5 -mb-5 mt-2 p-3 flex justify-between items-center"
+                    class="flex items-center justify-between p-3 mt-2 -mx-5 -mb-5 bg-gray-50"
                   >
-                    <span class="text-xs text-gray-500 mr-2"
+                    <span class="mr-2 text-xs text-gray-500"
                       >SLA Compliance</span
                     >
                     <div
-                      class="bg-yellow-100 h-2 w-3/4 rounded-full overflow-hidden"
+                      class="w-3/4 h-2 overflow-hidden bg-yellow-100 rounded-full"
                     >
                       <div
-                        class="bg-yellow-500 h-full"
+                        class="h-full bg-yellow-500"
                         style="width: 55%"
                       ></div>
                     </div>
@@ -400,10 +400,10 @@
             </div>
 
             <!-- Charts -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2">
               <!-- Chart Container -->
               <div
-                class="chart-container w-full p-4 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300 bg-white"
+                class="w-full p-4 transition-shadow duration-300 bg-white shadow-sm chart-container rounded-2xl hover:shadow-md"
               >
                 <div id="chart" class="mt-[-30px] h-[400px] w-full"></div>
                 <div class="custom-legend" id="legend"></div>
@@ -418,14 +418,14 @@
             </div>
 
             <div
-              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6"
+              class="grid grid-cols-1 gap-6 mb-6 md:grid-cols-2 lg:grid-cols-4"
             >
               <!-- Card 1 -->
               <a
                 href="/success-rate"
-                class="flex-card flex flex-col items-center justify-center p-6 gap-3 bg-white rounded-lg shadow border border-gray-100 hover:border-blue-500/50 transition-colors"
+                class="flex flex-col items-center justify-center gap-3 p-6 transition-colors bg-white border border-gray-100 rounded-lg shadow flex-card hover:border-blue-500/50"
               >
-                <div class="bg-blue-500/10 p-3 rounded-full">
+                <div class="p-3 rounded-full bg-blue-500/10">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -436,7 +436,7 @@
                     stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    class="lucide lucide-chart-no-axes-column h-6 w-6 text-primary h-6 w-6 text-blue-500"
+                    class="w-6 h-6 text-blue-500 lucide lucide-chart-no-axes-column text-primary"
                     data-lov-id="src\pages\Index.tsx:104:14"
                     data-lov-name="BarChart2"
                     data-component-path="src\pages\Index.tsx"
@@ -456,9 +456,9 @@
               <!-- Card 2 -->
               <a
                 href="/transactions"
-                class="flex-card flex flex-col items-center justify-center p-6 gap-3 bg-white rounded-lg shadow border border-gray-100 hover:border-blue-500/50 transition-colors"
+                class="flex flex-col items-center justify-center gap-3 p-6 transition-colors bg-white border border-gray-100 rounded-lg shadow flex-card hover:border-blue-500/50"
               >
-                <div class="bg-blue-500/10 p-3 rounded-full">
+                <div class="p-3 rounded-full bg-blue-500/10">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -469,7 +469,7 @@
                     stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    class="lucide lucide-file-text h-6 w-6 text-blue-500"
+                    class="w-6 h-6 text-blue-500 lucide lucide-file-text"
                     data-lov-id="src\pages\Index.tsx:111:14"
                     data-lov-name="FileText"
                     data-component-path="src\pages\Index.tsx"
@@ -492,9 +492,9 @@
 
               <!-- Card 3 - Coming Soon -->
               <div
-                class="flex flex-col items-center justify-center p-6 gap-3 bg-white rounded-lg shadow border border-gray-100"
+                class="flex flex-col items-center justify-center gap-3 p-6 bg-white border border-gray-100 rounded-lg shadow"
               >
-                <div class="bg-gray-100 p-3 rounded-full">
+                <div class="p-3 bg-gray-100 rounded-full">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -505,7 +505,7 @@
                     stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    class="lucide lucide-chart-no-axes-column h-6 w-6 text-primary h-6 w-6 text-gray-400"
+                    class="w-6 h-6 text-gray-400 lucide lucide-chart-no-axes-column text-primary"
                     data-lov-id="src\pages\Index.tsx:104:14"
                     data-lov-name="BarChart2"
                     data-component-path="src\pages\Index.tsx"
@@ -525,9 +525,9 @@
 
               <!-- Card 4 - Coming Soon -->
               <div
-                class="flex flex-col items-center justify-center p-6 gap-3 bg-white rounded-lg shadow border border-gray-100"
+                class="flex flex-col items-center justify-center gap-3 p-6 bg-white border border-gray-100 rounded-lg shadow"
               >
-                <div class="bg-gray-100 p-3 rounded-full">
+                <div class="p-3 bg-gray-100 rounded-full">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -538,7 +538,7 @@
                     stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    class="lucide lucide-file-text h-6 w-6 text-gray-400"
+                    class="w-6 h-6 text-gray-400 lucide lucide-file-text"
                     data-lov-id="src\pages\Index.tsx:111:14"
                     data-lov-name="FileText"
                     data-component-path="src\pages\Index.tsx"
@@ -566,14 +566,14 @@
         </main>
 
         <!-- Footer -->
-        <footer class="footer bg-white border-t border-gray-200">
+        <footer class="bg-white border-t border-gray-200 footer">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
               <i class="fa-regular fa-circle-user text-[#2563EB] text-xl"></i>
               <span class="text-sm font-semibold"
                 >IDBox™ Service Monitoring</span
               >
-              <span class="text-xs text-gray-500 leading-normal">v.2.1</span>
+              <span class="text-xs leading-normal text-gray-500">v.2.1</span>
             </div>
             <div class="text-sm text-gray-500">
               © <span id="year"></span> Intelli Group All rights reserved
@@ -709,6 +709,7 @@
         });
       });
     </script>
+    
     <script>
       const data = [
         {
