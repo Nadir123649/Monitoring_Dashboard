@@ -1,97 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Settings Page</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* Custom Tailwind utility for 'primary' color */
-    .bg-primary {
-      @apply bg-blue-600;
-    }
-
-    .bg-primary\/90 {
-      background-color: rgba(37, 99, 235, 0.9);
-    }
-
-    .peer:checked~.peer-checked\:bg-primary {
-      background-color: #2563eb;
-    }
-  </style>
-</head>
-
-<body class="p-6 font-sans bg-gray-50">
-  <div class="mb-6">
-    <h1 class="text-2xl font-bold text-gray-800">Settings</h1>
-    <p class="text-gray-500">Manage your application settings</p>
-  </div>
-
-  <div class="p-6 bg-white rounded-lg shadow">
-    <div class="space-y-6">
-      <div class="pb-4 border-b">
-        <h2 class="mb-2 text-lg font-medium">General Settings</h2>
-        <p class="text-sm text-gray-500">Configure basic application settings</p>
-      </div>
-
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <!-- User Interface Section -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transactions Dashboard</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .metric-value {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+      .metric-label {
+        font-size: 0.875rem;
+        color: #6b7280;
+      }
+      .metric-change-positive {
+        color: #16a34a;
+      }
+      .metric-change-negative {
+        color: #dc2626;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <div class="p-6">
+      <div
+        class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4"
+      >
         <div>
-          <h3 class="mb-3 font-medium text-md">User Interface</h3>
-          <div class="space-y-4">
-            <div class="flex items-center justify-between">
-              <span class="text-gray-700">Language</span>
-              <select class="px-3 py-2 bg-white border rounded">
-                <option>English</option>
-                <option>Greek</option>
-                <option>Spanish</option>
-              </select>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="text-gray-700">Theme</span>
-              <select class="px-3 py-2 bg-white border rounded">
-                <option>Light</option>
-                <option>Dark</option>
-                <option>System</option>
-              </select>
-            </div>
-          </div>
+          <h1 class="text-2xl font-bold text-gray-800">Transactions</h1>
+          <p class="text-gray-500">Monitoring and analysis of transactions</p>
         </div>
-
-        <!-- Notifications Section -->
-        <div>
-          <h3 class="mb-3 font-medium text-md">Notifications</h3>
-          <div class="space-y-4">
-            <div class="flex items-center justify-between">
-              <span class="text-gray-700">Email Alerts</span>
-              <label class="relative inline-flex items-center cursor-pointer">
-                <input type="checkbox" class="sr-only peer" />
-                <div
-                  class="w-11 h-6 bg-gray-200 rounded-full peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 peer peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full peer-checked:after:border-white">
-                </div>
-              </label>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="text-gray-700">System Notifications</span>
-              <label class="relative inline-flex items-center cursor-pointer">
-                <input type="checkbox" class="sr-only peer" checked />
-                <div
-                  class="w-11 h-6 bg-gray-200 rounded-full peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 peer peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full peer-checked:after:border-white">
-                </div>
-              </label>
-            </div>
-          </div>
+        <div class="bg-white px-4 py-2 rounded shadow text-gray-700">
+          Time Filter
         </div>
       </div>
 
-      <div class="pt-4 border-t">
-        <button class="px-4 py-2 text-white transition-colors bg-blue-600 rounded hover:bg-blue-700">
-          Save Settings
+      <div class="flex border-b border-gray-200 mb-6">
+        <button
+          class="tab-button px-4 py-2 font-semibold text-gray-700 border-b-2 border-blue-500"
+        >
+          Success Rate
+        </button>
+        <button
+          class="tab-button px-4 py-2 font-semibold text-gray-700 border-b-2 border-transparent"
+        >
+          Transactions Monitoring
         </button>
       </div>
-    </div>
-  </div>
-</body>
 
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div
+          class="p-5 border-l-4 border-blue-500 bg-white shadow rounded min-h-[140px] flex flex-col"
+        >
+          <h3 class="text-gray-500 text-sm font-medium">
+            Average Response Time per Transaction
+          </h3>
+          <div class="mt-2 flex items-baseline gap-2">
+            <div class="metric-value">186 sec</div>
+          </div>
+          <p class="metric-label mt-1">vs 360 sec</p>
+          <div class="bg-gray-50 mt-4 p-3 flex justify-between items-center">
+            <span class="text-xs text-gray-500">Current</span>
+            <div class="bg-blue-200 h-2 w-3/4 rounded-full overflow-hidden">
+              <div class="bg-blue-500 h-full" style="width: 52%"></div>
+            </div>
+            <span class="text-xs text-gray-500">Target</span>
+          </div>
+        </div>
+
+        <div
+          class="p-5 border-l-4 border-yellow-500 bg-white shadow rounded min-h-[140px] flex flex-col"
+        >
+          <h3 class="text-gray-500 text-sm font-medium">
+            % Response Time vs SLA
+          </h3>
+          <div class="mt-2 flex items-baseline gap-2">
+            <div class="metric-value">55%</div>
+          </div>
+          <p class="metric-label mt-1">vs 85%</p>
+          <div class="bg-gray-50 mt-4 p-3 flex justify-between items-center">
+            <span class="text-xs text-gray-500">Current</span>
+            <div class="bg-yellow-200 h-2 w-3/4 rounded-full overflow-hidden">
+              <div class="bg-yellow-500 h-full" style="width: 55%"></div>
+            </div>
+            <span class="text-xs text-gray-500">Target</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div
+          class="bg-white rounded-xl p-6 shadow flex items-center justify-center min-h-[350px]"
+        >
+          <div id="chart-response-time" class="w-full h-[320px]"></div>
+        </div>
+        <div
+          class="bg-white rounded-xl p-6 shadow flex items-center justify-center min-h-[350px]"
+        >
+          <div id="chart-document-types" class="w-full h-[320px]"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      Highcharts.chart("chart-response-time", {
+        chart: {
+          type: "bar",
+          options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25,
+          },
+          backgroundColor: "transparent",
+          height: 320,
+        },
+        title: {
+          text: "Response Time Distribution",
+          align: "left",
+          style: { fontSize: "18px", fontWeight: "bold" },
+        },
+        xAxis: {
+          categories: [
+            "Between 0 And 5 Minutes",
+            "Between 5 And 6 Minutes",
+            "Between 6 And 7 Minutes",
+            "Between 7 And 10 Minutes",
+            "More than 10 Minutes",
+          ],
+          labels: { style: { fontSize: "15px", color: "#64748b" } },
+          gridLineWidth: 1,
+          gridLineColor: "#e5e7eb",
+        },
+        yAxis: {
+          min: 0,
+          max: 100,
+          title: { text: null },
+          labels: { style: { fontSize: "14px", color: "#64748b" } },
+          gridLineWidth: 1,
+          gridLineColor: "#e5e7eb",
+        },
+        legend: { enabled: false },
+        plotOptions: {
+          bar: {
+            depth: 40,
+            groupZPadding: 10,
+            grouping: false,
+            dataLabels: {
+              enabled: true,
+              format: "{point.y:.2f}",
+              style: { color: "#222", fontWeight: "bold", fontSize: "15px" },
+              align: "right",
+              inside: false,
+            },
+          },
+        },
+        tooltip: { pointFormat: "<b>{point.y:.2f}%</b>" },
+        series: [
+          {
+            name: "value",
+            data: [
+              { y: 84.47, color: "#2196F3" },
+              { y: 7.23, color: "#4CAF50" },
+              { y: 3.25, color: "#FF9800" },
+              { y: 3.55, color: "#FF9800" },
+              { y: 1.5, color: "#F44336" },
+            ],
+          },
+        ],
+      });
+
+      Highcharts.chart("chart-document-types", {
+        chart: {
+          type: "bar",
+          options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25,
+          },
+          backgroundColor: "transparent",
+          height: 320,
+        },
+        title: {
+          text: "Document Types",
+          align: "left",
+          style: { fontSize: "18px", fontWeight: "bold" },
+        },
+        xAxis: {
+          categories: [
+            "Tax Document",
+            "Passport",
+            "Police ID",
+            "Student ID",
+            "Military ID",
+          ],
+          labels: { style: { fontSize: "15px", color: "#64748b" } },
+          gridLineWidth: 1,
+          gridLineColor: "#e5e7eb",
+        },
+        yAxis: {
+          min: 0,
+          title: { text: null },
+          labels: { style: { fontSize: "14px", color: "#64748b" } },
+          gridLineWidth: 1,
+          gridLineColor: "#e5e7eb",
+        },
+        legend: { enabled: false },
+        plotOptions: {
+          bar: {
+            depth: 40,
+            groupZPadding: 10,
+            grouping: false,
+            dataLabels: {
+              enabled: true,
+              format: "{point.y:.0f}",
+              style: { color: "#222", fontWeight: "bold", fontSize: "15px" },
+              align: "right",
+              inside: false,
+            },
+          },
+        },
+        tooltip: { pointFormat: "<b>{point.y:.0f}</b>" },
+        series: [
+          {
+            name: "value",
+            data: [
+              { y: 3134, color: "#2196F3" },
+              { y: 3434, color: "#4CAF50" },
+              { y: 23946, color: "#FF9800" },
+              { y: 39, color: "#9E9E9E" },
+              { y: 243, color: "#F44336" },
+            ],
+          },
+        ],
+      });
+    </script>
+  </body>
 </html>
