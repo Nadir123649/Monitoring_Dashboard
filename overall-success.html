@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+        integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="path/to/line-awesome/css/line-awesome-font-awesome.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Overall Success</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="h-screen overflow-hidden font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Overlay for Mobile -->
+        <div id="overlay" class="fixed inset-0 z-20 hidden bg-black bg-opacity-50" onclick="closeMobileMenu()"></div>
+
+        <div id="sidebar"
+            class="bg-white border-r border-gray-200 shadow-sm w-[250px] transition-all duration-300 flex flex-col">
+            <div class="flex items-center justify-between p-4 border-b border-gray-200 sidebar-top">
+                <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-circle-user text-[#2563EB] text-xl"></i>
+                    <span class="font-bold text-gray-800 sidebar-label">IDBox™</span>
+                </div>
+                <button onclick="toggleCollapse()" class="p-1 rounded-full hover:bg-gray-100">
+                    <svg id="collapseIcon" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+            </div>
+            <nav class="flex-1 px-3 py-4 overflow-y-auto">
+                <a href="/index.html" title="Dashboard"
+                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
+                    <i class="fa-solid fa-chart-column"></i>
+                    <span class="sidebar-label">Dashboard</span>
+                </a>
+                <div class="relative">
+                    <button onclick="toggleDropdown('monitoring')" title="Service Monitoring"
+                        class="flex items-center justify-between w-full gap-2 px-3 py-2 font-semibold text-gray-700 transition rounded sidebar-item active hover:bg-gray-100">
+                        <span class="flex items-center gap-2">
+                            <i class="fa-regular fa-file text-[#2563EB]"></i>
+                            <span class="sidebar-label text-[#2563EB]">Service Monitoring</span>
+                        </span>
+                        <svg id="dropdownIcon-monitoring" xmlns="http://www.w3.org/2000/svg"
+                            class="w-4 h-4 transition-transform transform" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.292l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.65a.75.75 0 01-1.08 0l-4.25-4.65a.75.75 0 01.02-1.06z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="dropdown-monitoring" class="hidden mt-1 ml-2 space-y-1">
+                        <a href="/overall-success.html"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded sidebar-item active hover:bg-gray-100">
+                            <i class="fa-solid fa-chart-line  ont-semibold text-[#2563EB]"></i>
+                            <span class="ont-semibold text-[#2563EB]"> Overall Success </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"><i
+                                class="fa-regular fa-user"></i>
+                            <span> Abandoned by Customer </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                            <span> Verification Failure</span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-database"></i>
+                            <span> ID Breakdown </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-regular fa-file"></i>
+                            <span> Document Breakdown </span></a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-regular fa-clock"></i>
+                            <span> Video Call Waiting </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-regular fa-clock"></i>
+                            <span> Verification Time </span></a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span> Average Response </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-globe"></i>
+                            <span> Country Distribution </span></a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-mobile-screen"></i>
+                            <span> Mobile Devices </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span> Detailed Transactions </span>
+                        </a>
+                    </div>
+                </div>
+                <a href="#" title="Success Rate"
+                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
+                    <i class="fa-solid fa-chart-column"></i>
+                    <span class="sidebar-label">Success Rate</span>
+                </a>
+                <a href="#" title="Transactions"
+                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
+                    <i class="fa-regular fa-file"></i>
+                    <span class="sidebar-label">Transactions</span>
+                </a>
+                <a href="/settings.html" title="Settings"
+                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded hover:bg-gray-100">
+                    <i class="fa-solid fa-gear "></i>
+                    <span class="sidebar-label">Settings</span>
+                </a>
+                <a href="#" title="Logout"
+                    class="flex items-center gap-2 px-3 py-2 mt-4 text-red-500 transition rounded sidebar-item hover:bg-red-100">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span class="sidebar-label">Logout</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main content -->
+        <div class="flex flex-col flex-1 h-full overflow-hidden">
+            <!-- Mobile Header -->
+            <header class="flex items-center justify-between px-4 py-3 bg-white border-b md:hidden">
+                <div class="flex items-center gap-2">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor">
+                        <circle cx="12" cy="12" r="10" stroke-width="2" />
+                    </svg>
+                    <span class="font-semibold text-gray-800">IDBox™</span>
+                </div>
+                <button onclick="openMobileMenu()" class="p-1 rounded hover:bg-gray-100">
+                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </header>
+
+            <main class="flex-1 p-6 overflow-y-auto font-sans bg-gray-50">
+                <div class="max-w-screen-xl mx-auto">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-900">Overall Success</h1>
+                            <p class="text-sm text-gray-600">Metrics related to verification success rates</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-sm font-medium text-gray-700">Define Time Period:</span>
+                            <input type="date" class="px-3 py-1 text-sm border rounded" />
+                            <span class="text-gray-500">To</span>
+                            <input type="date" class="px-3 py-1 text-sm border rounded" />
+                        </div>
+                    </div>
+                    <div class="flex justify-between gap-6 p-6 bg-white shadow main-div rounded-2xl">
+                        <!-- KPI Cards -->
+                        <div class="flex flex-col gap-6 left-card text-fonts max-w-[400px] w-full min-w-[400px]">
+                            <div>
+                                <div class="flex items-center gap-2 text-fonts">
+                                    <span class="text-3xl font-bold text-green-600 text-fonts">71,6%</span>
+                                    <span
+                                        class="bg-green-100 text-green-600 text-xs font-bold px-2 py-0.5 rounded">+24%</span>
+                                </div>
+                                <p class="mt-1 text-sm font-semibold text-gray-700 text-fonts">Completion Rate</p>
+                                <div class="h-3 bg-green-700 rounded mt-2 w-[70%]"></div>
+                                <div class="h-3 bg-green-100 rounded mt-1 w-[50%]"></div>
+                                <p class="text-xs text-green-700 ml-1 mt-0.5">Avg Rate</p>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2 text-fonts">
+                                    <span class="text-3xl font-bold text-blue-700 text-fonts">35 sec</span>
+                                    <span
+                                        class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded">+8%</span>
+                                </div>
+                                <p class="mt-1 text-sm font-semibold text-gray-700">Average Onboarding Time</p>
+                                <div class="h-3 bg-blue-700 rounded mt-2 w-[70%]"></div>
+                                <div class="h-3 bg-blue-100 rounded mt-1 w-[90%]"></div>
+                                <p class="text-xs text-blue-700 ml-1 mt-0.5">Avg Rate</p>
+                            </div>
+                        </div>
+
+                        <!-- Chart Card -->
+                        <div class="relative">
+                            <div id="pie-chart-container" class="w-[700px] h-[500px] mx-auto"></div>
+                            <div
+                                class="absolute  bottom-[30px] left-1/2 transform -translate-x-1/2 grid grid-cols-2 gap-2">
+                                <div class="flex items-center gap-2 px-[16px] py-[12px] bg-white shadow rounded-xl">
+                                    <div class="w-4 h-4 rounded-full" style="background:#00d4ff"></div>
+                                    <span class="text-[11px] font-semibold text-gray-800 text-style">NOT STARTED</span>
+                                </div>
+                                <div class="flex items-center gap-2 px-[16px] py-[12px] bg-white shadow rounded-xl">
+                                    <div class="w-4 h-4 rounded-full" style="background:#ff006e"></div>
+                                    <span class="text-[11px] font-semibold text-gray-800 text-style">ABANDONED BY
+                                        CUSTOMER</span>
+                                </div>
+                                <div class="flex items-center gap-2 px-[16px] py-[12px] bg-white shadow rounded-xl">
+                                    <div class="w-4 h-4 rounded-full" style="background:#06ffa5"></div>
+                                    <span class="text-[11px] font-semibold text-gray-800 text-style">VERIFICATION
+                                        FAILURE</span>
+                                </div>
+                                <div class="flex items-center gap-2 px-[16px] py-[12px] bg-white shadow rounded-xl ">
+                                    <div class="w-4 h-4 rounded-full" style="background:#ffbe0b"></div>
+                                    <span class="text-[11px] font-semibold text-gray-800 text-style">VERIFICATION
+                                        SUCCESS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <footer class="bg-white border-t border-gray-200 footer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-regular fa-circle-user text-[#2563EB] text-xl"></i>
+                        <span class="text-sm font-semibold">IDBox™ Service Monitoring</span>
+                        <span class="text-xs leading-normal text-gray-500">v.2.1</span>
+                    </div>
+                    <div class="text-sm text-gray-500">
+                        © <span id="year"></span> Intelli Group All rights reserved
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const futuristicGradients = [
+                { stops: [['0', '#00d4ff'], ['0.5', '#006eff'], ['1', '#0047ff']] },
+                { stops: [['0', '#ff006e'], ['0.5', '#8338ec'], ['1', '#3a86ff']] },
+                { stops: [['0', '#06ffa5'], ['0.5', '#00d4aa'], ['1', '#0056b3']] },
+                { stops: [['0', '#ffbe0b'], ['0.5', '#fb8500'], ['1', '#ff006e']] }
+            ];
+
+            const pieData = [
+                { name: 'Not Started', y: 465, grad: futuristicGradients[0] },
+                { name: 'Abandoned by Customer', y: 7644, grad: futuristicGradients[1] },
+                { name: 'Verification Failure', y: 5667, grad: futuristicGradients[2] },
+                { name: 'Verification Success', y: 35400, grad: futuristicGradients[3] }
+            ];
+
+            const total = pieData.reduce((sum, item) => sum + item.y, 0);
+
+            Highcharts.chart('pie-chart-container', {
+                chart: {
+                    type: 'pie',
+                    options3d: { enabled: true, alpha: 35, beta: 0, depth: 45 },
+                    backgroundColor: 'transparent',
+                    height: 380
+                },
+                title: {
+                    text: `
+                    <div style="text-align: center;">
+                        <div style="font-size: 48px; font-weight: 900; color: #333;">${total.toLocaleString()}</div>
+                        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 4px; font-weight: 700; color: #666;">Total Data Points</div>
+                    </div>
+                `,
+                    useHTML: true,
+                    align: 'center',
+                    verticalAlign: 'middle',
+                    floating: true
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        depth: 45,
+                        innerSize: '55%',
+                        borderColor: 'rgba(255,255,255,0.1)',
+                        borderWidth: 1,
+                        slicedOffset: 12,
+                        shadow: false,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.percentage:.0f}%',
+                            style: {
+                                fontSize: '12px',
+                                fontWeight: '900',
+                                color: '#111',
+                                textOutline: 'none',
+                                textShadow: 'none'
+                            },
+                            distance: -22,
+                            connectorWidth: 0
+                        },
+                        animation: {
+                            duration: 2500
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Data',
+                    data: pieData.map(d => ({
+                        name: d.name,
+                        y: d.y,
+                        color: {
+                            linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+                            stops: d.grad.stops
+                        },
+                        sliced: true
+                    }))
+                }],
+                credits: { enabled: false },
+                legend: { enabled: false }
+            });
+        });
+    </script>
+
+    <script src="https://kit.fontawesome.com/ce278ed6db.js" crossorigin="anonymous"></script>
+    <script src="/assets/js/main.js"></script>
+</body>
+
+</html>
