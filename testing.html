@@ -2,149 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ID Breakdown Chart</title>
+  <title>Document Breakdown Chart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/highcharts-3d.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 </head>
 <body class="font-sans bg-gray-100">
 
-  <div class="p-6 mx-auto max-w-7xl">
+  <div class="px-4 py-8 mx-auto max-w-7xl">
     <div class="flex flex-col items-start justify-between gap-4 mb-6 md:flex-row md:items-center">
       <div>
-        <h1 class="text-2xl font-bold text-gray-800">ID Breakdown</h1>
-        <p class="text-gray-500">Analysis of identification document types</p>
+        <h1 class="text-2xl font-bold text-gray-800">Document Breakdown</h1>
+        <p class="text-gray-500">Analysis of document types submitted for verification</p>
       </div>
-      <!-- Placeholder for filter (not functional in this static version) -->
-      <div class="text-sm font-medium text-gray-700">Time Filter Placeholder</div>
     </div>
 
     <div class="p-6 bg-white border border-gray-200 shadow-sm rounded-2xl">
-      <div id="id-breakdown-chart" class="w-full"></div>
+      <div id="document-breakdown-chart" class="w-full"></div>
     </div>
   </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      Highcharts.chart('id-breakdown-chart', {
-        chart: {
-          type: 'column',
-          options3d: {
-            enabled: true,
-            alpha: 15,
-            beta: 15,
-            depth: 60,
-            viewDistance: 30
-          },
-          backgroundColor: 'transparent',
-          height: 600,
-          style: { fontFamily: 'Inter, sans-serif' }
-        },
-        title: {
-          text: 'ID Breakdown',
-          style: { fontWeight: 'bold', fontSize: '20px' }
-        },
-        xAxis: {
-          categories: [
-            'Student Identity Card ASEI-SSY', 'Army  Identity Card',
-            'NEW GREEK CITIZEN IDENTITY', 'ARMED FORCES IDENTITY (GEA) - MONIMOU',
-            'ΤΑΥΤΟΤΗΤΑ ΕΝΟΠΛΩΝ ΔΥΝΑΜΕΩΝ (ΓΕΝ) - ΜΟΝΙΜΟΥ', 'ΤΑΥΤΟΤΗΤΑ ΕΝΟΠΛΩΝ ΔΥΝΑΜΕΩΝ (ΓΕΣ) - ΜΟΝΙΜΟΥ',
-            'ΤΑΥΤΟΤΗΤΑ ΕΥΡΩΠΑΪΚΗΣ ΕΝΩΣΗΣ - EU ID', 'ΤΑΥΤΟΤΗΤΑ ΣΩΜΑΤΩΝ ΑΣΦΑΛΕΙΑΣ ΕΛΛΗΝΙΚΗ',
-            'ΤΑΥΤΟΤΗΤΑ ΕΝΟΠΛΩΝ ΔΥΝΑΜΕΩΝ (ΓΕΑ) - ΕΦΕΔΡΟΥ', 'ΤΑΥΤΟΤΗΤΑ ΕΝΟΠΛΩΝ ΔΥΝΑΜΕΩΝ (ΓΕΣ) - ΕΦΕΔΡΟΥ',
-            'ΤΑΥΤΟΤΗΤΑ ΟΜΟΓΕΝΩΝ', 'ΔΕΛΤΙΟ ΑΣΤΥΝΟΜΙΚΗΣ ΤΑΥΤΟΤΗΤΑΣ',
-            'ΤΑΥΤΟΤΗΤΑ ΕΝΟΠΛΩΝ ΔΥΝΑΜΕΩΝ (ΓΕΝ) - ΕΦΕΔΡΟΥ', 'ΤΑΥΤΟΤΗΤΑ ΣΩΜΑΤΩΝ ΑΣΦΑΛΕΙΑΣ ΛΙΜΕΝΙΚΟ',
-            'ΔΙΑΒΑΤΗΡΙΟ - PASSPORT'
-          ],
-          labels: {
-            rotation: -30,
-            style: {
-              fontSize: '14px',
-              color: '#374151',
-              fontWeight: 500
-            }
-          },
-          gridLineWidth: 0,
-          lineColor: '#E5E7EB',
-          tickColor: '#E5E7EB'
-        },
-        yAxis: {
-          min: 0,
-          title: null,
-          labels: {
-            style: { fontSize: '13px', color: '#6B7280' }
-          },
-          gridLineWidth: 1,
-          gridLineColor: '#E5E7EB'
-        },
-        legend: { enabled: false },
-        plotOptions: {
-          column: {
-            depth: 60,
-            borderRadius: 8,
-            color: {
-              linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-              stops: [
-                [0, 'rgba(59,130,246,0.95)'],
-                [1, 'rgba(96,165,250,0.85)']
-              ]
-            },
-            dataLabels: {
-              enabled: true,
-              format: '{point.y}',
-              style: {
-                color: '#374151',
-                fontWeight: 'bold',
-                fontSize: '14px',
-                textOutline: 'none'
-              },
-              inside: false
-            }
-          }
-        },
-        tooltip: {
-          backgroundColor: '#fff',
-          borderColor: '#E5E7EB',
-          borderRadius: 8,
-          style: {
-            color: '#374151',
-            fontSize: '14px'
-          },
-          pointFormat: '<b>{point.y}</b> documents'
-        },
-        series: [{
-          name: 'Amount',
-          data: [
-            39, 243, 3659, 106, 80, 352, 483, 251, 14,
-            107, 21, 23946, 15, 34, 3434
-          ]
-        }],
-        responsive: {
-          rules: [{
-            condition: {
-              maxWidth: 768
-            },
-            chartOptions: {
-              chart: { height: 400 },
-              xAxis: {
-                labels: { style: { fontSize: '10px' }, rotation: 0 }
-              },
-              yAxis: {
-                labels: { style: { fontSize: '10px' } }
-              },
-              plotOptions: {
-                column: {
-                  dataLabels: { style: { fontSize: '10px' } }
-                }
-              },
-              tooltip: {
-                style: { fontSize: '12px' }
-              }
-            }
-          }]
-        }
-      });
-    });
-  </script>
+
+
 </body>
 </html>
