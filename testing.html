@@ -1,162 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Abandoned by Customer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ID Breakdown Chart</title>
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/highcharts-3d.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    @keyframes float {
-
-      0%,
-      100% {
-        transform: translateY(0) rotate(0);
-      }
-
-      50% {
-        transform: translateY(-20px) rotate(180deg);
-      }
-    }
-
-    @keyframes pulse {
-
-      0%,
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-
-      50% {
-        opacity: 0.7;
-        transform: scale(1.1);
-      }
-    }
-
-    @keyframes gridMove {
-      0% {
-        transform: translate(0, 0);
-      }
-
-      100% {
-        transform: translate(40px, 40px);
-      }
-    }
-
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
+<body class="font-sans bg-gray-100">
 
-<body class="p-6 font-sans bg-gray-100">
-  <section class="mx-auto max-w-7xl">
-    <h1 class="mb-4 text-3xl font-bold">Abandoned by Customer</h1>
-    <p class="mb-8 text-gray-700">Analysis of customer abandonment rates at different stages</p>
-    <div class="flex flex-col gap-6 md:flex-row">
-      <div
-        class="bg-white rounded-xl p-6 shadow hover:shadow-lg hover:scale-105 transition-transform flex-1 min-h-[350px]">
-        <div id="bar-container" class="w-full h-[350px]"></div>
+  <div class="p-6 mx-auto max-w-7xl">
+    <div class="flex flex-col items-start justify-between gap-4 mb-6 md:flex-row md:items-center">
+      <div>
+        <h1 class="text-2xl font-bold text-gray-800">ID Breakdown</h1>
+        <p class="text-gray-500">Analysis of identification document types</p>
       </div>
-      <div id="pie-card"
-        class="relative bg-white rounded-3xl p-6 shadow hover:scale-[1.02] transition-transform flex-1 min-h-[350px] max-w-lg overflow-hidden">
-        <div class="absolute inset-0 rounded-3xl bg-[length:40px_40px] bg-grid animate-[gridMove_20s_linear_infinite]">
-        </div>
-        <div
-          class="absolute w-20 h-20 rounded-full top-1/6 right-1/10 bg-gradient-to-br from-[#00d4ff33] to-[#006eff1a] blur-[20px] animate-[float_6s_ease-in-out_infinite]">
-        </div>
-        <div
-          class="absolute w-15 h-15 rounded-full bottom-1/5 left-1/5 bg-gradient-to-br from-[#ff006e33] to-[#8338ec1a] blur-[15px] animate-[float_8s_ease-in-out_infinite_reverse]">
-        </div>
-        <div class="absolute inset-0 bg-white/5 backdrop-blur-[30px] rounded-3xl border border-white/5"></div>
-        <div id="pie-container" class="relative z-10 flex items-center justify-center w-full h-full"></div>
-        <div class="absolute z-20 grid grid-cols-2 gap-4 transform -translate-x-1/2 bottom-6 left-1/2"></div>
-      </div>
+      <!-- Placeholder for filter (not functional in this static version) -->
+      <div class="text-sm font-medium text-gray-700">Time Filter Placeholder</div>
     </div>
-  </section>
+
+    <div class="p-6 bg-white border border-gray-200 shadow-sm rounded-2xl">
+      <div id="id-breakdown-chart" class="w-full"></div>
+    </div>
+  </div>
+
   <script>
-    const barData = [
-      { stage: 'Upload Documents', Stoiximan_OB1: 2023, Stoiximan_OB2: 208, Stoiximan_OB3: 0 },
-      { stage: 'Upload ID', Stoiximan_OB1: 3688, Stoiximan_OB2: 17, Stoiximan_OB3: 0 },
-      { stage: 'Register', Stoiximan_OB1: 15, Stoiximan_OB2: 1, Stoiximan_OB3: 0 },
-      { stage: 'Info Page', Stoiximan_OB1: 1624, Stoiximan_OB2: 16, Stoiximan_OB3: 52 }
-    ];
-    const futuristicGradients = [
-      { stops: [['0', '#00d4ff'], ['0.5', '#006eff'], ['1', '#0047ff']] },
-      { stops: [['0', '#ff006e'], ['0.5', '#8338ec'], ['1', '#3a86ff']] },
-      { stops: [['0', '#06ffa5'], ['0.5', '#00d4aa'], ['1', '#0056b3']] },
-      { stops: [['0', '#ffbe0b'], ['0.5', '#fb8500'], ['1', '#ff006e']] }
-    ];
-    const pieData = [
-      { name: 'Not Started', value: 465, grad: futuristicGradients[0] },
-      { name: 'Abandoned by Customer', value: 7644, grad: futuristicGradients[1] },
-      { name: 'Verification Failure', value: 5667, grad: futuristicGradients[2] },
-      { name: 'Verification Success', value: 15441, grad: futuristicGradients[3] }
-    ];
-    const total = pieData.reduce((s, d) => s + d.value, 0);
-    Highcharts.chart('bar-container', {
-      chart: { type: 'bar', options3d: { enabled: true, alpha: 10, beta: 15, depth: 50 }, backgroundColor: 'transparent', height: 400 },
-      xAxis: { categories: barData.map(d => d.stage), labels: { style: { fontSize: '16px' } }, lineWidth: 0, tickLength: 0, gridLineWidth: 0 },
-      yAxis: { min: 0, labels: { style: { fontSize: '14px' } }, lineWidth: 0, tickLength: 0, gridLineWidth: 0 },
-      plotOptions: {
-        series: {
-          depth: 40, dataLabels: {
-            enabled: true, inside: true, style: { fontSize: '14px', fontWeight: 'bold', color: '#333' },
-            formatter() { return Highcharts.numberFormat(this.y, 0, '.', '.') }
-          }
-        }
-      },
-      legend: { align: 'center', verticalAlign: 'bottom', layout: 'horizontal', itemStyle: { fontSize: '14px' } },
-      series: [
-        { name: 'Stoiximan_OB1', data: barData.map(d => d.Stoiximan_OB1), color: '#B0B0B0', borderRadius: 5 },
-        { name: 'Stoiximan_OB2', data: barData.map(d => d.Stoiximan_OB2), color: '#888888', borderRadius: 5 },
-        { name: 'Stoiximan_OB3', data: barData.map(d => d.Stoiximan_OB3), color: '#222222', borderRadius: 5 }
-      ],
-      title: { text: '' }, credits: { enabled: false }
-    });
-    Highcharts.chart('pie-container', {
-      chart: { type: 'pie', options3d: { enabled: true, alpha: 35, depth: 45 }, backgroundColor: 'transparent', height: 380 },
-      plotOptions: {
-        pie: {
-          allowPointSelect: true, cursor: 'pointer', depth: 45, innerSize: '55%',
-          borderRadius: 25, borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1,
-          slicedOffset: 12, dataLabels: {
-            enabled: true, format: '{point.percentage:.0f}%',
-            style: { fontSize: '12px', fontWeight: '900', color: '#111', textOutline: 'none' }
+    document.addEventListener('DOMContentLoaded', function () {
+      Highcharts.chart('id-breakdown-chart', {
+        chart: {
+          type: 'column',
+          options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 60,
+            viewDistance: 30
           },
-          animation: { duration: 2500 }
+          backgroundColor: 'transparent',
+          height: 600,
+          style: { fontFamily: 'Inter, sans-serif' }
+        },
+        title: {
+          text: 'ID Breakdown',
+          style: { fontWeight: 'bold', fontSize: '20px' }
+        },
+        xAxis: {
+          categories: [
+            'Student Identity Card ASEI-SSY', 'Army  Identity Card',
+            'NEW GREEK CITIZEN IDENTITY', 'ARMED FORCES IDENTITY (GEA) - MONIMOU',
+            'ΤΑΥΤΟΤΗΤΑ ΕΝΟΠΛΩΝ ΔΥΝΑΜΕΩΝ (ΓΕΝ) - ΜΟΝΙΜΟΥ', 'ΤΑΥΤΟΤΗΤΑ ΕΝΟΠΛΩΝ ΔΥΝΑΜΕΩΝ (ΓΕΣ) - ΜΟΝΙΜΟΥ',
+            'ΤΑΥΤΟΤΗΤΑ ΕΥΡΩΠΑΪΚΗΣ ΕΝΩΣΗΣ - EU ID', 'ΤΑΥΤΟΤΗΤΑ ΣΩΜΑΤΩΝ ΑΣΦΑΛΕΙΑΣ ΕΛΛΗΝΙΚΗ',
+            'ΤΑΥΤΟΤΗΤΑ ΕΝΟΠΛΩΝ ΔΥΝΑΜΕΩΝ (ΓΕΑ) - ΕΦΕΔΡΟΥ', 'ΤΑΥΤΟΤΗΤΑ ΕΝΟΠΛΩΝ ΔΥΝΑΜΕΩΝ (ΓΕΣ) - ΕΦΕΔΡΟΥ',
+            'ΤΑΥΤΟΤΗΤΑ ΟΜΟΓΕΝΩΝ', 'ΔΕΛΤΙΟ ΑΣΤΥΝΟΜΙΚΗΣ ΤΑΥΤΟΤΗΤΑΣ',
+            'ΤΑΥΤΟΤΗΤΑ ΕΝΟΠΛΩΝ ΔΥΝΑΜΕΩΝ (ΓΕΝ) - ΕΦΕΔΡΟΥ', 'ΤΑΥΤΟΤΗΤΑ ΣΩΜΑΤΩΝ ΑΣΦΑΛΕΙΑΣ ΛΙΜΕΝΙΚΟ',
+            'ΔΙΑΒΑΤΗΡΙΟ - PASSPORT'
+          ],
+          labels: {
+            rotation: -30,
+            style: {
+              fontSize: '14px',
+              color: '#374151',
+              fontWeight: 500
+            }
+          },
+          gridLineWidth: 0,
+          lineColor: '#E5E7EB',
+          tickColor: '#E5E7EB'
+        },
+        yAxis: {
+          min: 0,
+          title: null,
+          labels: {
+            style: { fontSize: '13px', color: '#6B7280' }
+          },
+          gridLineWidth: 1,
+          gridLineColor: '#E5E7EB'
+        },
+        legend: { enabled: false },
+        plotOptions: {
+          column: {
+            depth: 60,
+            borderRadius: 8,
+            color: {
+              linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+              stops: [
+                [0, 'rgba(59,130,246,0.95)'],
+                [1, 'rgba(96,165,250,0.85)']
+              ]
+            },
+            dataLabels: {
+              enabled: true,
+              format: '{point.y}',
+              style: {
+                color: '#374151',
+                fontWeight: 'bold',
+                fontSize: '14px',
+                textOutline: 'none'
+              },
+              inside: false
+            }
+          }
+        },
+        tooltip: {
+          backgroundColor: '#fff',
+          borderColor: '#E5E7EB',
+          borderRadius: 8,
+          style: {
+            color: '#374151',
+            fontSize: '14px'
+          },
+          pointFormat: '<b>{point.y}</b> documents'
+        },
+        series: [{
+          name: 'Amount',
+          data: [
+            39, 243, 3659, 106, 80, 352, 483, 251, 14,
+            107, 21, 23946, 15, 34, 3434
+          ]
+        }],
+        responsive: {
+          rules: [{
+            condition: {
+              maxWidth: 768
+            },
+            chartOptions: {
+              chart: { height: 400 },
+              xAxis: {
+                labels: { style: { fontSize: '10px' }, rotation: 0 }
+              },
+              yAxis: {
+                labels: { style: { fontSize: '10px' } }
+              },
+              plotOptions: {
+                column: {
+                  dataLabels: { style: { fontSize: '10px' } }
+                }
+              },
+              tooltip: {
+                style: { fontSize: '12px' }
+              }
+            }
+          }]
         }
-      },
-      tooltip: {
-        useHTML: true, backgroundColor: 'white', borderRadius: 20, borderWidth: 0,
-        style: { fontSize: '13px', fontWeight: '600' },
-        formatter() {
-          return `<div style="padding:20px;text-align:center"><div style="font-size:15px;font-weight:900;color:#111;margin-bottom:10px;">${this.point.name}</div><div>Value: <strong>${this.y.toLocaleString()}</strong></div><div>Share: <strong>${this.percentage.toFixed(1)}%</strong></div></div>`;
-        }
-      },
-      title: {
-        useHTML: true, verticalAlign: 'middle', floating: true, y: 0,
-        text: `<div class="text-center"><div style="font-size:48px;font-weight:900;color:#111;animation:pulse 2s infinite">${total}</div><div style="font-size:11px;color:#222;font-weight:700;letter-spacing:4px;margin-top:8px;animation:fadeIn 3s ease-in">TOTAL DATA POINTS</div></div>`
-      },
-      series: [{
-        name: 'Data',
-        data: pieData.map(d => ({ name: d.name, y: d.value, color: { linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 }, stops: d.grad.stops }, sliced: true })),
-        animation: { duration: 2500 }
-      }],
-      credits: { enabled: false },
-      legend: { enabled: false }
+      });
     });
   </script>
 </body>
-
 </html>
