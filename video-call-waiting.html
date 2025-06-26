@@ -14,7 +14,7 @@
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/highcharts-3d.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <title>Document Breakdown</title>
+    <title>Video Call Waiting (SLA)</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -154,7 +154,8 @@
             </header>
 
             <main class="flex-1 p-6 overflow-y-auto font-sans bg-gray-50">
-                <div class="mx-auto max-w-7xl">
+
+                <div class="mx-auto max-w-7xl ">
                     <div class="flex flex-col items-start justify-between gap-4 mb-6 md:flex-row md:items-center">
                         <div>
                             <h1 class="text-2xl font-bold text-gray-800">Document Breakdown</h1>
@@ -168,11 +169,56 @@
                         </div>
                     </div>
 
-                    <div class="p-6 bg-white border border-gray-200 shadow-sm rounded-2xl">
-                        <div id="document-breakdown-chart" class="w-full"></div>
+                    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2 dashboard-container">
+
+                        <!-- KPI Cards -->
+                        <div class="flex flex-col gap-6">
+
+                            <!-- Average Waiting Time -->
+                            <div class="flex flex-col gap-2 p-6 bg-white rounded-lg shadow">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-5xl font-extrabold text-blue-500">G63 sec</span>
+                                    <span
+                                        class="px-2 py-1 ml-2 text-xs font-semibold text-blue-600 bg-blue-100 rounded-full">vs
+                                        300 sec</span>
+                                </div>
+                                <div class="mt-1 text-base text-gray-500">Average Waiting Time per Video call</div>
+                                <div class="w-full h-3 mt-3 bg-gray-200 rounded-full">
+                                    <div class="h-3 bg-blue-500 rounded-full" style="width: 21%;"></div>
+                                </div>
+                                <div class="w-full h-3 mt-3 bg-gray-200 rounded-full">
+                                    <div class="h-3 bg-blue-100 rounded-full" style="width: 21%;"></div>
+                                </div>
+                            </div>
+
+                            <!-- Response Time % vs SLA -->
+                            <div class="flex flex-col gap-2 p-6 bg-white rounded-lg shadow">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-4xl font-extrabold text-blue-500">G95%</span>
+                                    <span
+                                        class="px-2 py-1 ml-2 text-xs font-semibold text-blue-600 bg-blue-100 rounded-full">vs
+                                        85%</span>
+                                </div>
+                                <div class="mt-1 text-base text-gray-500">% Response Time vs SLA</div>
+                                <div class="w-full h-3 mt-3 bg-gray-200 rounded-full">
+                                    <div class="h-3 bg-blue-500 rounded-full" style="width: 100%;"></div>
+                                </div>
+                                <div class="w-full h-3 mt-3 bg-gray-200 rounded-full">
+                                    <div class="h-3 bg-blue-200 rounded-full" style="width: 100%;"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Chart Section -->
+                        <div class="bg-white rounded-lg p-6 shadow flex flex-col justify-center h-[350px]">
+                            <div id="video-waiting-chart" class="w-full h-full"></div>
+                        </div>
+
                     </div>
                 </div>
-            </main> 
+
+            </main>
 
             <!-- Footer -->
             <footer class="bg-white border-t border-gray-200 footer">
@@ -192,27 +238,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const chartData = [
-                { type: 'Unclassified', count: 9710, color: '#9E9E9E' },
-                { type: 'Αποδεικτικό AMKA', count: 423, color: '#9E9E9E' },
-                { type: 'Βεβαίωση Μόνιμης Κατοικίας', count: 576, color: '#9E9E9E' },
-                { type: 'TaxisNet Registration', count: 4216, color: '#FFA500' },
-                { type: 'ΔΗΛΩΣΗ ΕΙΣΟΔΗΜΑΤΟΣ E1', count: 2328, color: '#FFA500' },
-                { type: 'ΒΕΒΑΙΩΣΗ ΑΠΟΔΟΣΗΣ ΑΦΜ', count: 528, color: '#FFA500' },
-                { type: 'ΑΑΔΕ ΔΗΛΩΣΗ ΠΛΗΡΟΦΟΡΙΑΚΩΝ ΣΤΟΙΧΕΙΩΝ ΜΙΣΘΩΣΗΣ ΑΚΙΝΗΤΗΣ...', count: 467, color: '#9E9E9E' },
-                { type: 'ΛΟΓΑΡΙΑΣΜΟΣ ΠΑΡΟΧΟΥ ΡΕΥΜΑΤΟΣ', count: 8715, color: '#FACC15' },
-                { type: 'Bank Statement', count: 1116, color: '#F44336' },
-                { type: 'Έγγραφο ΔΟΥ (Μεταβολή στοιχείων φυσικού προσώπου)', count: 21, color: '#F44336' },
-                { type: 'ΛΟΓΑΡΙΑΣΜΟΣ ΤΗΛΕΠΙΚΟΙΝΩΝΙΑΚΟΥ ΠΑΡΟΧΟΥ', count: 5626, color: '#FACC15' },
-                { type: 'Βεβαίωση κατοικίας ειδικής χρήσης', count: 0, color: '#9E9E9E' },
-                { type: 'Αποδεικτικό ασφαλιστικής ενημερότητας ΕΦΚΑ', count: 224, color: '#9E9E9E' },
-                { type: 'ΠΙΣΤΟΠΟΙΗΤΙΚΟ ΟΑΕΔ', count: 60, color: '#9E9E9E' },
-                { type: 'ΛΟΓΑΡΙΑΣΜΟΣ ΠΑΡΟΧΟΥ ΝΕΡΟΥ', count: 1439, color: '#FACC15' },
-                { type: 'TAX Document', count: 3134, color: '#FFA500' },
-                { type: '', count: 0, color: '#9E9E9E' }
-            ];
-
-            Highcharts.chart('document-breakdown-chart', {
+            Highcharts.chart('video-waiting-chart', {
                 chart: {
                     type: 'bar',
                     options3d: {
@@ -223,49 +249,56 @@
                         viewDistance: 25
                     },
                     backgroundColor: 'transparent',
-                    height: 600,
+                    height: 350,
                     style: { fontFamily: 'Inter, sans-serif' }
                 },
-                title: { text: '', style: { fontSize: '20px', fontWeight: 'bold' } },
+                title: { text: '' },
                 xAxis: {
-                    categories: chartData.map(d => d.type),
+                    categories: ['More than 5 Minutes', 'Between 0 And 5 Minutes'],
                     labels: {
                         style: {
-                            fontSize: '14px',
-                            color: '#374151',
-                            fontWeight: 500
+                            fontSize: '16px',
+                            color: '#64748b'
                         }
                     },
                     gridLineWidth: 1,
-                    gridLineColor: '#E5E7EB'
+                    gridLineColor: '#e5e7eb'
                 },
                 yAxis: {
                     min: 0,
+                    max: 100,
                     title: null,
                     labels: {
                         style: {
-                            fontSize: '13px',
-                            color: '#6B7280'
+                            fontSize: '14px',
+                            color: '#64748b'
                         }
                     },
                     gridLineWidth: 1,
-                    gridLineColor: '#E5E7EB'
+                    gridLineColor: '#e5e7eb'
                 },
-                legend: { enabled: false },
+                legend: {
+                    enabled: true,
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                },
                 plotOptions: {
                     bar: {
                         depth: 40,
                         groupZPadding: 10,
                         grouping: false,
-                        borderRadius: 8,
+                        edgeColor: '#60A5FA',
+                        edgeWidth: 2,
+                        color: '#ffffff',
+                        borderColor: '#60A5FA',
+                        borderWidth: 2,
                         dataLabels: {
                             enabled: true,
-                            format: '{point.y}',
+                            format: '{point.y:.2f}',
                             style: {
                                 color: '#222',
                                 fontWeight: 'bold',
-                                fontSize: '15px',
-                                textOutline: 'none'
+                                fontSize: '16px'
                             },
                             align: 'right',
                             inside: false
@@ -273,22 +306,19 @@
                     }
                 },
                 tooltip: {
-                    backgroundColor: '#fff',
-                    borderColor: '#E5E7EB',
-                    borderRadius: 8,
-                    style: {
-                        color: '#374151',
-                        fontSize: '14px'
-                    },
-                    pointFormat: '<b>{point.y}</b> documents'
+                    pointFormat: '<b>{point.y:.2f}%</b>'
                 },
                 series: [{
-                    name: 'Amount',
-                    data: chartData.map(d => ({ y: d.count, color: d.color }))
+                    name: '% Rate',
+                    data: [5.03, 94.97],
+                    color: '#ffffff',
+                    borderColor: '#60A5FA',
+                    borderWidth: 2
                 }]
             });
         });
     </script>
+
     <script src="https://kit.fontawesome.com/ce278ed6db.js" crossorigin="anonymous"></script>
     <script src="/assets/js/main.js"></script>
 </body>

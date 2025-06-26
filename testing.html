@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Document Breakdown Chart</title>
+  <title>Verification Time (SLA)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/highcharts-3d.js"></script>
@@ -11,19 +11,146 @@
 <body class="font-sans bg-gray-100">
 
   <div class="px-4 py-8 mx-auto max-w-7xl">
-    <div class="flex flex-col items-start justify-between gap-4 mb-6 md:flex-row md:items-center">
-      <div>
-        <h1 class="text-2xl font-bold text-gray-800">Document Breakdown</h1>
-        <p class="text-gray-500">Analysis of document types submitted for verification</p>
-      </div>
+    <div class="mb-6">
+      <h1 class="text-2xl font-bold text-gray-800">Verification Time (SLA)</h1>
+      <p class="text-gray-500">Analysis of verification processing times</p>
     </div>
 
-    <div class="p-6 bg-white border border-gray-200 shadow-sm rounded-2xl">
-      <div id="document-breakdown-chart" class="w-full"></div>
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+
+      <!-- Left KPI Cards -->
+      <div class="flex flex-col gap-6">
+
+        <!-- Average Response Time -->
+        <div class="flex flex-col gap-2 p-6 bg-white rounded-lg shadow">
+          <div class="flex items-center gap-2">
+            <span class="text-4xl font-extrabold text-green-600">186 sec</span>
+            <span class="px-2 py-1 ml-2 text-xs font-semibold text-green-600 bg-green-100 rounded-full">vs 360 sec</span>
+          </div>
+          <div class="mt-1 text-base text-gray-500">Average Response Time per Transaction</div>
+          <div class="w-full h-3 mt-3 bg-gray-200 rounded-full">
+            <div class="h-3 bg-green-500 rounded-full" style="width: 51.67%;"></div>
+          </div>
+          <div class="w-full h-3 mt-3 bg-gray-200 rounded-full">
+            <div class="h-3 bg-green-100 rounded-full" style="width: 51.67%;"></div>
+          </div>
+        </div>
+
+        <!-- % Response Time vs SLA -->
+        <div class="flex flex-col gap-2 p-6 bg-white rounded-lg shadow">
+          <div class="flex items-center gap-2">
+            <span class="text-4xl font-extrabold text-green-600">55%</span>
+            <span class="px-2 py-1 ml-2 text-xs font-semibold text-green-600 bg-green-100 rounded-full">vs 85%</span>
+          </div>
+          <div class="mt-1 text-base text-gray-500">% Response Time vs SLA</div>
+          <div class="w-full h-3 mt-3 bg-gray-200 rounded-full">
+            <div class="h-3 bg-green-500 rounded-full" style="width: 64.7%;"></div>
+          </div>
+          <div class="w-full h-3 mt-3 bg-gray-200 rounded-full">
+            <div class="h-3 bg-green-200 rounded-full" style="width: 64.7%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Chart -->
+      <div class="bg-white rounded-lg p-6 shadow flex flex-col justify-center h-[400px]">
+        <div id="verification-chart" class="w-full h-full"></div>
+      </div>
     </div>
   </div>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const data = [
+        { name: 'More than 10 Minutes', value: 1.5 },
+        { name: 'Between 7 And 10 Minutes', value: 3.55 },
+        { name: 'Between 6 And 7 Minutes', value: 3.25 },
+        { name: 'Between 5 And 6 Minutes', value: 7.23 },
+        { name: 'Between 0 And 5 Minutes', value: 84.47 }
+      ];
 
+      Highcharts.chart('verification-chart', {
+        chart: {
+          type: 'bar',
+          options3d: {
+            enabled: true,
+            alpha: 15,
+            beta: 15,
+            depth: 50,
+            viewDistance: 25
+          },
+          backgroundColor: 'transparent',
+          height: 400,
+          style: {
+            fontFamily: 'Inter, sans-serif'
+          }
+        },
+        title: { text: '' },
+        xAxis: {
+          categories: data.map(d => d.name),
+          labels: {
+            style: {
+              fontSize: '15px',
+              color: '#64748b'
+            }
+          },
+          gridLineWidth: 1,
+          gridLineColor: '#e5e7eb'
+        },
+        yAxis: {
+          min: 0,
+          max: 100,
+          title: null,
+          labels: {
+            style: {
+              fontSize: '14px',
+              color: '#64748b'
+            }
+          },
+          gridLineWidth: 1,
+          gridLineColor: '#e5e7eb'
+        },
+        legend: {
+          enabled: true,
+          align: 'center',
+          verticalAlign: 'bottom'
+        },
+        plotOptions: {
+          bar: {
+            depth: 40,
+            groupZPadding: 10,
+            grouping: false,
+            edgeColor: '#60A5FA',
+            edgeWidth: 2,
+            color: '#ffffff',
+            borderColor: '#60A5FA',
+            borderWidth: 2,
+            dataLabels: {
+              enabled: true,
+              format: '{point.y:.2f}',
+              style: {
+                color: '#222',
+                fontWeight: 'bold',
+                fontSize: '15px'
+              },
+              align: 'right',
+              inside: false
+            }
+          }
+        },
+        tooltip: {
+          pointFormat: '<b>{point.y:.2f}%</b>'
+        },
+        series: [{
+          name: '% Rate',
+          data: data.map(d => d.value),
+          color: '#ffffff',
+          borderColor: '#60A5FA',
+          borderWidth: 2
+        }]
+      });
+    });
+  </script>
 
 </body>
 </html>

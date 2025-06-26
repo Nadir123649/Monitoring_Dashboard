@@ -451,9 +451,17 @@ a {
   display: none;
 }
 
+.dashboard-container {
+  background-color: #ffffff;
+  border: 0.8px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: #00000000 0px 0px 0px 0px, #00000000 0px 0px 0px 0px,
+    #0000000d 0px 1px 2px 0px;
+  box-sizing: border-box;
+  padding: 24px;
+}
 
 @keyframes pulse {
-
   0%,
   100% {
     transform: scale(1);
@@ -486,5 +494,3 @@ a {
     height: 280px;
   }
 }
-
-
