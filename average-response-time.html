@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+        integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="path/to/line-awesome/css/line-awesome-font-awesome.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Average Response Time</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="h-screen overflow-hidden font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Overlay for Mobile -->
+        <div id="overlay" class="fixed inset-0 z-20 hidden bg-black bg-opacity-50" onclick="closeMobileMenu()"></div>
+
+        <div id="sidebar"
+            class="bg-white border-r border-gray-200 shadow-sm w-[250px] transition-all duration-300 flex flex-col">
+            <div class="flex items-center justify-between p-4 border-b border-gray-200 sidebar-top">
+                <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-circle-user text-[#2563EB] text-xl"></i>
+                    <span class="font-bold text-gray-800 sidebar-label">IDBox™</span>
+                </div>
+                <button onclick="toggleCollapse()" class="p-1 rounded-full hover:bg-gray-100">
+                    <svg id="collapseIcon" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+            </div>
+            <nav class="flex-1 px-3 py-4 overflow-y-auto">
+                <a href="/index.html" title="Dashboard"
+                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
+                    <i class="fa-solid fa-chart-column"></i>
+                    <span class="sidebar-label">Dashboard</span>
+                </a>
+                <div class="relative">
+                    <button onclick="toggleDropdown('monitoring')" title="Service Monitoring"
+                        class="flex items-center justify-between w-full gap-2 px-3 py-2 font-semibold text-gray-700 transition rounded sidebar-item active hover:bg-gray-100">
+                        <span class="flex items-center gap-2">
+                            <i class="fa-regular fa-file text-[#2563EB]"></i>
+                            <span class="sidebar-label text-[#2563EB]">Service Monitoring</span>
+                        </span>
+                        <svg id="dropdownIcon-monitoring" xmlns="http://www.w3.org/2000/svg"
+                            class="w-4 h-4 transition-transform transform" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.292l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.65a.75.75 0 01-1.08 0l-4.25-4.65a.75.75 0 01.02-1.06z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="dropdown-monitoring" class="hidden mt-1 ml-2 space-y-1">
+                        <a href="/overall-success.html"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded sidebar-item active hover:bg-gray-100">
+                            <i class="fa-solid fa-chart-line  ont-semibold text-[#2563EB]"></i>
+                            <span class="ont-semibold text-[#2563EB]"> Overall Success </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"><i
+                                class="fa-regular fa-user"></i>
+                            <span> Abandoned by Customer </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                            <span> Verification Failure</span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-database"></i>
+                            <span> ID Breakdown </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-regular fa-file"></i>
+                            <span> Document Breakdown </span></a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-regular fa-clock"></i>
+                            <span> Video Call Waiting </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-regular fa-clock"></i>
+                            <span> Verification Time </span></a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span> Average Response </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-globe"></i>
+                            <span> Country Distribution </span></a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-mobile-screen"></i>
+                            <span> Mobile Devices </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span> Detailed Transactions </span>
+                        </a>
+                    </div>
+                </div>
+                <a href="#" title="Success Rate"
+                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
+                    <i class="fa-solid fa-chart-column"></i>
+                    <span class="sidebar-label">Success Rate</span>
+                </a>
+                <a href="#" title="Transactions"
+                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
+                    <i class="fa-regular fa-file"></i>
+                    <span class="sidebar-label">Transactions</span>
+                </a>
+                <a href="/settings.html" title="Settings"
+                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded hover:bg-gray-100">
+                    <i class="fa-solid fa-gear "></i>
+                    <span class="sidebar-label">Settings</span>
+                </a>
+                <a href="#" title="Logout"
+                    class="flex items-center gap-2 px-3 py-2 mt-4 text-red-500 transition rounded sidebar-item hover:bg-red-100">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span class="sidebar-label">Logout</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main content -->
+        <div class="flex flex-col flex-1 h-full overflow-hidden">
+            <!-- Mobile Header -->
+            <header class="flex items-center justify-between px-4 py-3 bg-white border-b md:hidden">
+                <div class="flex items-center gap-2">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor">
+                        <circle cx="12" cy="12" r="10" stroke-width="2" />
+                    </svg>
+                    <span class="font-semibold text-gray-800">IDBox™</span>
+                </div>
+                <button onclick="openMobileMenu()" class="p-1 rounded hover:bg-gray-100">
+                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </header>
+
+            <main class="flex-1 p-6 overflow-y-auto font-sans bg-gray-50">
+
+                <div class="mx-auto max-w-7xl ">
+                    <div class="flex flex-col items-start justify-between gap-4 mb-6 md:flex-row md:items-center">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-800">Verification Time (SLA)</h1>
+                            <p class="text-gray-500">Analysis of verification processing times</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-sm font-medium text-gray-700">Define Time Period:</span>
+                            <input type="date" class="px-3 py-1 text-sm border rounded" />
+                            <span class="text-gray-500">To</span>
+                            <input type="date" class="px-3 py-1 text-sm border rounded" />
+                        </div>
+                    </div>
+
+
+                    <div class="dashboard-container">
+                        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                            <div class="flex gap-2">
+                                <button id="tab-success"
+                                    class="px-4 py-2 font-semibold bg-white border-b-2 border-gray-700 tab-btn active-tab rounded-t-md">Success
+                                    Rate</button>
+                                <button id="tab-transactions"
+                                    class="px-4 py-2 font-semibold bg-gray-100 border-b-2 border-transparent tab-btn rounded-t-md">Transactions
+                                    Monitoring</button>
+                            </div>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="text-sm font-medium text-gray-700">Define Time Period:</span>
+                                <input type="date" class="px-2 py-1 border rounded" />
+                                <span class="hidden sm:inline">to</span>
+                                <input type="date" class="px-2 py-1 border rounded" />
+                            </div>
+                        </div>
+
+                        <!-- Grid Layout -->
+                        <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                            <!-- KPI Card -->
+                            <div class="flex flex-col items-center justify-center p-6 bg-white rounded-lg shadow">
+                                <div class="flex items-center justify-center mb-2">
+                                    <span class="mr-3 text-4xl font-bold text-green-600">35 sec</span>
+                                    <span class="px-2 py-1 text-sm font-semibold text-green-700 bg-green-100 rounded">vs
+                                        45 sec</span>
+                                </div>
+                                <p class="mb-4 text-gray-500">Average Response Time per ID/ Document</p>
+                                <div class="w-full">
+                                    <div class="h-3 mb-2 bg-gray-200 rounded-full">
+                                        <div class="h-3 bg-green-400 rounded-full" style="width: 74%;"></div>
+                                    </div>
+                                    <div class="h-3 mb-2 bg-gray-200 rounded-full">
+                                        <div class="h-3 bg-green-200 rounded-full" style="width: 100%;"></div>
+                                    </div>
+                                    <div class="flex justify-between text-xs">
+                                        <span class="font-semibold text-green-700">74%</span>
+                                        <span class="text-gray-400">target</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Chart + Legend -->
+                            <div class="p-6 bg-white rounded-lg shadow">
+                                <div id="response-time-chart" class="w-full h-[350px]"></div>
+                                <div
+                                    class="flex flex-col flex-wrap items-stretch justify-center w-full px-2 mt-4 sm:flex-row sm:gap-4">
+                                    <div
+                                        class="w-full  text-green-900 bg-green-300 sm:w-auto flex flex-col items-center px-3 py-2 rounded ${item.color} w-full text-center break-words mb-2 sm:mb-0 sm:w-auto sm:flex-1">
+                                        <span class="text-lg font-bold">74%</span>
+                                        <span class="text-xs">0–50 secs</span>
+                                    </div>
+                                    <div
+                                        class="flex flex-col items-center w-full px-3 py-2 mb-2 text-center text-yellow-900 break-words bg-yellow-200 rounded sm:w-auto sm:mb-0 sm:flex-1">
+                                        <span class="text-lg font-bold">19%</span>
+                                        <span class="text-xs">50–100 secs</span>
+                                    </div>
+                                    <div
+                                        class="flex flex-col items-center w-full px-3 py-2 mb-2 text-center text-gray-700 break-words bg-gray-200 rounded sm:w-auto sm:mb-0 sm:flex-1">
+                                        <span class="text-lg font-bold">7%</span>
+                                        <span class="text-xs">Remaining</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+
+            <!-- Footer -->
+            <footer class="bg-white border-t border-gray-200 footer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-regular fa-circle-user text-[#2563EB] text-xl"></i>
+                        <span class="text-sm font-semibold">IDBox™ Service Monitoring</span>
+                        <span class="text-xs leading-normal text-gray-500">v.2.1</span>
+                    </div>
+                    <div class="text-sm text-gray-500">
+                        © <span id="year"></span> Intelli Group All rights reserved
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Highcharts Script -->
+    <script>
+        const responseTimeData1 = Array.from({ length: 120 }, (_, i) => ({
+            hour: i + 1,
+            '0-50': Math.floor(Math.random() * 100),
+            '50-100': Math.floor(Math.random() * 50),
+            '100-150': Math.floor(Math.random() * 30),
+            '150-200': Math.floor(Math.random() * 20),
+            '200-250': Math.floor(Math.random() * 10),
+            '250-300': Math.floor(Math.random() * 5),
+            '300-350': Math.floor(Math.random() * 3),
+            '350-400': Math.floor(Math.random() * 2),
+            '400-450': Math.floor(Math.random() * 1),
+            '450-500': Math.floor(Math.random() * 1)
+        }));
+
+        const responseTimeData2 = Array.from({ length: 120 }, (_, i) => ({
+            hour: i + 1,
+            '0-50': Math.floor(Math.random() * 100),
+            '50-100': Math.floor(Math.random() * 50),
+            '100-150': Math.floor(Math.random() * 30),
+            '150-200': Math.floor(Math.random() * 20),
+            '200-250': Math.floor(Math.random() * 10),
+            '250-300': Math.floor(Math.random() * 5),
+            '300-350': Math.floor(Math.random() * 3),
+            '350-400': Math.floor(Math.random() * 2),
+            '400-450': Math.floor(Math.random() * 1),
+            '450-500': Math.floor(Math.random() * 1)
+        }));
+
+        const seriesKeys = ['0-50', '50-100', '100-150', '150-200', '200-250', '250-300', '300-350', '350-400', '400-450', '450-500'];
+        const colors = ['#22c55e', '#eab308', '#a3e635', '#fde047', '#38bdf8', '#818cf8', '#f472b6', '#fca5a5', '#a3a3a3', '#d4d4d4'];
+
+        function createChart(responseTimeData) {
+            const series = seriesKeys.map((key, idx) => ({
+                name: key,
+                data: responseTimeData.map(d => d[key]),
+                color: colors[idx],
+                stack: 'response',
+                type: 'area',
+                marker: { enabled: false }
+            }));
+
+            Highcharts.chart('response-time-chart', {
+                chart: {
+                    type: 'area',
+                    backgroundColor: 'transparent',
+                    options3d: {
+                        enabled: true,
+                        alpha: 15,
+                        beta: 15,
+                        depth: 60,
+                        viewDistance: 25
+                    }
+                },
+                title: {
+                    text: 'Response Time per Document',
+                    style: { fontSize: '16px' }
+                },
+                xAxis: {
+                    categories: responseTimeData.map(d => d.hour),
+                    labels: { enabled: false },
+                    title: { text: 'Hour' },
+                    gridLineColor: '#e5e7eb'
+                },
+                yAxis: {
+                    min: 0,
+                    title: { text: null },
+                    gridLineColor: '#e5e7eb'
+                },
+                legend: {
+                    enabled: true,
+                    align: 'center',
+                    verticalAlign: 'bottom',
+                    itemStyle: { fontSize: '13px' }
+                },
+                plotOptions: {
+                    area: {
+                        stacking: 'normal',
+                        depth: 60,
+                        marker: { enabled: false },
+                        lineWidth: 1,
+                        fillOpacity: 0.7
+                    }
+                },
+                tooltip: {
+                    shared: true
+                },
+                series
+            });
+        }
+
+        // Set default chart on page load
+        createChart(responseTimeData1);
+
+        // Tab switch event listeners
+        document.getElementById('tab-success').addEventListener('click', () => {
+            setActiveTab('tab-success');
+            createChart(responseTimeData1);
+        });
+
+        document.getElementById('tab-transactions').addEventListener('click', () => {
+            setActiveTab('tab-transactions');
+            createChart(responseTimeData2);
+        });
+
+        function setActiveTab(id) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active-tab', 'bg-white', 'border-gray-700');
+                btn.classList.add('bg-gray-100', 'border-transparent');
+            });
+            const tab = document.getElementById(id);
+            tab.classList.add('active-tab', 'bg-white', 'border-gray-700');
+            tab.classList.remove('bg-gray-100', 'border-transparent');
+        }
+    </script>
+
+
+    <script src="https://kit.fontawesome.com/ce278ed6db.js" crossorigin="anonymous"></script>
+    <script src="/assets/js/main.js"></script>
+</body>
+
+</html>

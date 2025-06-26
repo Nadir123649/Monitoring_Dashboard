@@ -1,156 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <title>Verification Time (SLA)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Average Response Time</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/highcharts-3d.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 </head>
-<body class="font-sans bg-gray-100">
 
-  <div class="px-4 py-8 mx-auto max-w-7xl">
+<body class="p-6 bg-gray-50">
+  <div class="mx-auto max-w-7xl">
+    <!-- Header -->
     <div class="mb-6">
-      <h1 class="text-2xl font-bold text-gray-800">Verification Time (SLA)</h1>
-      <p class="text-gray-500">Analysis of verification processing times</p>
+      <h1 class="text-2xl font-bold text-gray-800">Average Response Time</h1>
+      <p class="text-sm text-gray-500">Analysis of system response times for document processing</p>
     </div>
 
-    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+    <!-- Tabs -->
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+      <div class="flex gap-2">
+        <button id="tab-success"
+          class="px-4 py-2 font-semibold bg-white border-b-2 border-gray-700 tab-btn active-tab rounded-t-md">Success
+          Rate</button>
+        <button id="tab-transactions"
+          class="px-4 py-2 font-semibold bg-gray-100 border-b-2 border-transparent tab-btn rounded-t-md">Transactions
+          Monitoring</button>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="text-sm font-medium text-gray-700">Define Time Period:</span>
+        <input type="date" class="px-2 py-1 border rounded" />
+        <span class="hidden sm:inline">to</span>
+        <input type="date" class="px-2 py-1 border rounded" />
+      </div>
+    </div>
 
-      <!-- Left KPI Cards -->
-      <div class="flex flex-col gap-6">
-
-        <!-- Average Response Time -->
-        <div class="flex flex-col gap-2 p-6 bg-white rounded-lg shadow">
-          <div class="flex items-center gap-2">
-            <span class="text-4xl font-extrabold text-green-600">186 sec</span>
-            <span class="px-2 py-1 ml-2 text-xs font-semibold text-green-600 bg-green-100 rounded-full">vs 360 sec</span>
-          </div>
-          <div class="mt-1 text-base text-gray-500">Average Response Time per Transaction</div>
-          <div class="w-full h-3 mt-3 bg-gray-200 rounded-full">
-            <div class="h-3 bg-green-500 rounded-full" style="width: 51.67%;"></div>
-          </div>
-          <div class="w-full h-3 mt-3 bg-gray-200 rounded-full">
-            <div class="h-3 bg-green-100 rounded-full" style="width: 51.67%;"></div>
-          </div>
+    <!-- Grid Layout -->
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <!-- KPI Card -->
+      <div class="flex flex-col items-center p-6 bg-white rounded-lg shadow">
+        <div class="flex items-center mb-2">
+          <span class="mr-3 text-4xl font-bold text-green-600">35 sec</span>
+          <span class="px-2 py-1 text-sm font-semibold text-green-700 bg-green-100 rounded">vs 45 sec</span>
         </div>
-
-        <!-- % Response Time vs SLA -->
-        <div class="flex flex-col gap-2 p-6 bg-white rounded-lg shadow">
-          <div class="flex items-center gap-2">
-            <span class="text-4xl font-extrabold text-green-600">55%</span>
-            <span class="px-2 py-1 ml-2 text-xs font-semibold text-green-600 bg-green-100 rounded-full">vs 85%</span>
+        <p class="mb-4 text-gray-500">Average Response Time per ID/ Document</p>
+        <div class="w-full">
+          <div class="h-3 mb-2 bg-gray-200 rounded-full">
+            <div class="h-3 bg-green-400 rounded-full" style="width: 74%;"></div>
           </div>
-          <div class="mt-1 text-base text-gray-500">% Response Time vs SLA</div>
-          <div class="w-full h-3 mt-3 bg-gray-200 rounded-full">
-            <div class="h-3 bg-green-500 rounded-full" style="width: 64.7%;"></div>
+          <div class="h-3 mb-2 bg-gray-200 rounded-full">
+            <div class="h-3 bg-green-200 rounded-full" style="width: 100%;"></div>
           </div>
-          <div class="w-full h-3 mt-3 bg-gray-200 rounded-full">
-            <div class="h-3 bg-green-200 rounded-full" style="width: 64.7%;"></div>
+          <div class="flex justify-between text-xs">
+            <span class="font-semibold text-green-700">74%</span>
+            <span class="text-gray-400">target</span>
           </div>
         </div>
       </div>
 
-      <!-- Right Chart -->
-      <div class="bg-white rounded-lg p-6 shadow flex flex-col justify-center h-[400px]">
-        <div id="verification-chart" class="w-full h-full"></div>
+      <!-- Chart + Legend -->
+      <div class="p-6 bg-white rounded-lg shadow">
+        <div id="response-time-chart" class="w-full h-[350px]"></div>
+        <div class="flex flex-col justify-center gap-3 mt-4 text-center sm:flex-row">
+          <div class="w-full px-3 py-2 text-green-900 bg-green-300 rounded sm:w-auto">
+            <span class="block text-lg font-bold">74%</span>
+            <span class="text-xs">0–50 secs</span>
+          </div>
+          <div class="w-full px-3 py-2 text-yellow-900 bg-yellow-200 rounded sm:w-auto">
+            <span class="block text-lg font-bold">19%</span>
+            <span class="text-xs">50–100 secs</span>
+          </div>
+          <div class="w-full px-3 py-2 text-gray-700 bg-gray-200 rounded sm:w-auto">
+            <span class="block text-lg font-bold">7%</span>
+            <span class="text-xs">Remaining</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- Highcharts Script -->
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const data = [
-        { name: 'More than 10 Minutes', value: 1.5 },
-        { name: 'Between 7 And 10 Minutes', value: 3.55 },
-        { name: 'Between 6 And 7 Minutes', value: 3.25 },
-        { name: 'Between 5 And 6 Minutes', value: 7.23 },
-        { name: 'Between 0 And 5 Minutes', value: 84.47 }
-      ];
+    const responseTimeData1 = Array.from({ length: 120 }, (_, i) => ({
+      hour: i + 1,
+      '0-50': Math.floor(Math.random() * 100),
+      '50-100': Math.floor(Math.random() * 50),
+      '100-150': Math.floor(Math.random() * 30),
+      '150-200': Math.floor(Math.random() * 20),
+      '200-250': Math.floor(Math.random() * 10),
+      '250-300': Math.floor(Math.random() * 5),
+      '300-350': Math.floor(Math.random() * 3),
+      '350-400': Math.floor(Math.random() * 2),
+      '400-450': Math.floor(Math.random() * 1),
+      '450-500': Math.floor(Math.random() * 1)
+    }));
 
-      Highcharts.chart('verification-chart', {
+    const responseTimeData2 = Array.from({ length: 120 }, (_, i) => ({
+      hour: i + 1,
+      '0-50': Math.floor(Math.random() * 100),
+      '50-100': Math.floor(Math.random() * 50),
+      '100-150': Math.floor(Math.random() * 30),
+      '150-200': Math.floor(Math.random() * 20),
+      '200-250': Math.floor(Math.random() * 10),
+      '250-300': Math.floor(Math.random() * 5),
+      '300-350': Math.floor(Math.random() * 3),
+      '350-400': Math.floor(Math.random() * 2),
+      '400-450': Math.floor(Math.random() * 1),
+      '450-500': Math.floor(Math.random() * 1)
+    }));
+
+    const seriesKeys = ['0-50', '50-100', '100-150', '150-200', '200-250', '250-300', '300-350', '350-400', '400-450', '450-500'];
+    const colors = ['#22c55e', '#eab308', '#a3e635', '#fde047', '#38bdf8', '#818cf8', '#f472b6', '#fca5a5', '#a3a3a3', '#d4d4d4'];
+
+    function createChart(responseTimeData) {
+      const series = seriesKeys.map((key, idx) => ({
+        name: key,
+        data: responseTimeData.map(d => d[key]),
+        color: colors[idx],
+        stack: 'response',
+        type: 'area',
+        marker: { enabled: false }
+      }));
+
+      Highcharts.chart('response-time-chart', {
         chart: {
-          type: 'bar',
+          type: 'area',
+          backgroundColor: 'transparent',
           options3d: {
             enabled: true,
             alpha: 15,
             beta: 15,
-            depth: 50,
+            depth: 60,
             viewDistance: 25
-          },
-          backgroundColor: 'transparent',
-          height: 400,
-          style: {
-            fontFamily: 'Inter, sans-serif'
           }
         },
-        title: { text: '' },
+        title: {
+          text: 'Response Time per Document',
+          style: { fontSize: '16px' }
+        },
         xAxis: {
-          categories: data.map(d => d.name),
-          labels: {
-            style: {
-              fontSize: '15px',
-              color: '#64748b'
-            }
-          },
-          gridLineWidth: 1,
+          categories: responseTimeData.map(d => d.hour),
+          labels: { enabled: false },
+          title: { text: 'Hour' },
           gridLineColor: '#e5e7eb'
         },
         yAxis: {
           min: 0,
-          max: 100,
-          title: null,
-          labels: {
-            style: {
-              fontSize: '14px',
-              color: '#64748b'
-            }
-          },
-          gridLineWidth: 1,
+          title: { text: null },
           gridLineColor: '#e5e7eb'
         },
         legend: {
           enabled: true,
           align: 'center',
-          verticalAlign: 'bottom'
+          verticalAlign: 'bottom',
+          itemStyle: { fontSize: '13px' }
         },
         plotOptions: {
-          bar: {
-            depth: 40,
-            groupZPadding: 10,
-            grouping: false,
-            edgeColor: '#60A5FA',
-            edgeWidth: 2,
-            color: '#ffffff',
-            borderColor: '#60A5FA',
-            borderWidth: 2,
-            dataLabels: {
-              enabled: true,
-              format: '{point.y:.2f}',
-              style: {
-                color: '#222',
-                fontWeight: 'bold',
-                fontSize: '15px'
-              },
-              align: 'right',
-              inside: false
-            }
+          area: {
+            stacking: 'normal',
+            depth: 60,
+            marker: { enabled: false },
+            lineWidth: 1,
+            fillOpacity: 0.7
           }
         },
         tooltip: {
-          pointFormat: '<b>{point.y:.2f}%</b>'
+          shared: true
         },
-        series: [{
-          name: '% Rate',
-          data: data.map(d => d.value),
-          color: '#ffffff',
-          borderColor: '#60A5FA',
-          borderWidth: 2
-        }]
+        series
       });
+    }
+
+    // Set default chart on page load
+    createChart(responseTimeData1);
+
+    // Tab switch event listeners
+    document.getElementById('tab-success').addEventListener('click', () => {
+      setActiveTab('tab-success');
+      createChart(responseTimeData1);
     });
+
+    document.getElementById('tab-transactions').addEventListener('click', () => {
+      setActiveTab('tab-transactions');
+      createChart(responseTimeData2);
+    });
+
+    function setActiveTab(id) {
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active-tab', 'bg-white', 'border-gray-700');
+        btn.classList.add('bg-gray-100', 'border-transparent');
+      });
+      const tab = document.getElementById(id);
+      tab.classList.add('active-tab', 'bg-white', 'border-gray-700');
+      tab.classList.remove('bg-gray-100', 'border-transparent');
+    }
   </script>
 
 </body>
+
 </html>
