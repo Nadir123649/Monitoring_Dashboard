@@ -1,96 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Mobile Devices Distribution</title>
+  <meta charset="UTF-8" />
+  <title>Detailed Transactions</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="p-6 bg-gray-100">
-  <div class="max-w-6xl p-6 mx-auto bg-white rounded-lg shadow">
-    <h1 class="mb-1 text-2xl font-bold">Mobile Devices Distribution</h1>
-    <p class="mb-6 text-gray-600">Analysis of mobile devices used in verification process</p>
+<body class="flex items-center justify-center min-h-screen p-6 bg-gray-100">
 
-    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
-      <!-- Android Devices Table -->
-      <div>
-        <h3 class="mb-4 text-lg font-medium text-center">Android Devices (594 total)</h3>
-        <div class="overflow-hidden border border-gray-200 rounded-lg">
-          <table class="min-w-full text-sm divide-y divide-gray-200">
-            <thead class="bg-gray-100">
-              <tr>
-                <th class="px-4 py-3 font-medium tracking-wider text-left text-gray-500 uppercase">Device model</th>
-                <th class="px-4 py-3 font-medium tracking-wider text-left text-gray-500 uppercase"># started</th>
-                <th class="px-4 py-3 font-medium tracking-wider text-left text-gray-500 uppercase">% started</th>
-              </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-              <tr class="bg-white"><td class="px-4 py-3">Redmi 9A</td><td class="px-4 py-3">24</td><td class="px-4 py-3">4.0%</td></tr>
-              <tr class="bg-gray-50"><td class="px-4 py-3">Redmi 9B</td><td class="px-4 py-3">14</td><td class="px-4 py-3">5.0%</td></tr>
-              <tr class="bg-white"><td class="px-4 py-3">Redmi 10X 4G</td><td class="px-4 py-3">22</td><td class="px-4 py-3">3.7%</td></tr>
-              <tr class="bg-gray-50"><td class="px-4 py-3">Redmi Note 9 Pro</td><td class="px-4 py-3">19</td><td class="px-4 py-3">4.0%</td></tr>
-              <tr class="bg-white"><td class="px-4 py-3">Redmi Note 8 Pro</td><td class="px-4 py-3">18</td><td class="px-4 py-3">3.0%</td></tr>
-              <tr class="bg-gray-50"><td class="px-4 py-3">Galaxy A12</td><td class="px-4 py-3">18</td><td class="px-4 py-3">3.0%</td></tr>
-              <tr class="bg-white"><td class="px-4 py-3">Galaxy A22s</td><td class="px-4 py-3">11</td><td class="px-4 py-3">2.5%</td></tr>
-              <tr class="bg-gray-50"><td class="px-4 py-3">Galaxy A21s</td><td class="px-4 py-3">17</td><td class="px-4 py-3">2.9%</td></tr>
-            </tbody>
-          </table>
-        </div>
+  <div class="w-full max-w-4xl p-8 bg-white rounded-lg shadow">
+    <!-- Title and Description -->
+    <h1 class="mb-1 text-2xl font-bold text-gray-800">Detailed Transactions</h1>
+    <p class="mb-6 text-gray-600">Comprehensive analysis of all transactions for the specified time period</p>
+
+    <!-- Content Section -->
+    <div class="flex flex-col items-center justify-center min-h-[500px] w-full">
+      <div class="mt-8 mb-8 text-xl font-medium text-center text-gray-700">
+        Detailed presentation of transactions for the specified time period…
       </div>
 
-      <!-- iOS Devices Table -->
-      <div>
-        <h3 class="mb-4 text-lg font-medium text-center">iOS Devices (268 total)</h3>
-        <div class="overflow-hidden border border-gray-200 rounded-lg">
-          <table class="min-w-full text-sm divide-y divide-gray-200">
-            <thead class="bg-gray-100">
-              <tr>
-                <th class="px-4 py-3 font-medium tracking-wider text-left text-gray-500 uppercase">Device model</th>
-                <th class="px-4 py-3 font-medium tracking-wider text-left text-gray-500 uppercase"># started</th>
-                <th class="px-4 py-3 font-medium tracking-wider text-left text-gray-500 uppercase">% started</th>
-              </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-              <tr class="bg-white"><td class="px-4 py-3">iPhone 11</td><td class="px-4 py-3">46</td><td class="px-4 py-3">17.2%</td></tr>
-              <tr class="bg-gray-50"><td class="px-4 py-3">iPhone 13 Pro Max</td><td class="px-4 py-3">31</td><td class="px-4 py-3">11.6%</td></tr>
-              <tr class="bg-white"><td class="px-4 py-3">iPhone 14 Pro Max</td><td class="px-4 py-3">21</td><td class="px-4 py-3">21.6%</td></tr>
-              <tr class="bg-gray-50"><td class="px-4 py-3">iPhone 12</td><td class="px-4 py-3">28</td><td class="px-4 py-3">10.4%</td></tr>
-              <tr class="bg-white"><td class="px-4 py-3">iPhone 12 Pro Max</td><td class="px-4 py-3">28</td><td class="px-4 py-3">10.4%</td></tr>
-              <tr class="bg-gray-50"><td class="px-4 py-3">iPhone 13 Pro Max</td><td class="px-4 py-3">38</td><td class="px-4 py-3">12.4%</td></tr>
-              <tr class="bg-white"><td class="px-4 py-3">iPhone 13</td><td class="px-4 py-3">21</td><td class="px-4 py-3">7.8%</td></tr>
-              <tr class="bg-gray-50"><td class="px-4 py-3">iPhone 14</td><td class="px-4 py-3">31</td><td class="px-4 py-3">9.8%</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Summary Section -->
-      <div class="mt-4 lg:col-span-2">
-        <div class="p-4 border border-gray-200 rounded-lg bg-gray-50">
-          <h3 class="mb-3 text-lg font-medium">Device Distribution Summary</h3>
-          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div>
-              <div class="text-sm font-medium text-gray-500">Android vs iOS</div>
-              <div class="flex items-center mt-2">
-                <div class="w-full bg-gray-200 rounded-full h-2.5">
-                  <div class="bg-green-500 h-2.5 rounded-full" style="width: 69%"></div>
-                </div>
-                <div class="ml-2 text-sm font-medium">69% / 31%</div>
-              </div>
-            </div>
-            <div>
-              <div class="text-sm font-medium text-gray-500">Top 5 Models</div>
-              <div class="flex items-center mt-2">
-                <div class="w-full bg-gray-200 rounded-full h-2.5">
-                  <div class="bg-blue-500 h-2.5 rounded-full" style="width: 32%"></div>
-                </div>
-                <div class="ml-2 text-sm font-medium">32% of total</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <!-- SVG Placeholder -->
+      <svg width="96" height="96" fill="none" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+        <rect x="24" y="24" width="48" height="60" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="2"/>
+        <rect x="36" y="12" width="48" height="60" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="2"/>
+        <rect x="12" y="36" width="48" height="60" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="2"/>
+        <rect x="36" y="36" width="24" height="6" rx="2" fill="#D1D5DB"/>
+        <rect x="36" y="48" width="24" height="6" rx="2" fill="#D1D5DB"/>
+        <rect x="36" y="60" width="16" height="6" rx="2" fill="#D1D5DB"/>
+      </svg>
     </div>
   </div>
+
 </body>
 </html>
