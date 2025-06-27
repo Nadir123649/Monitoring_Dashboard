@@ -2,33 +2,192 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Detailed Transactions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Success Rate Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/highcharts-3d.js"></script>
 </head>
-<body class="flex items-center justify-center min-h-screen p-6 bg-gray-100">
+<body class="bg-gray-50">
+  <div class="p-6 mx-auto max-w-7xl">
+    
+    <!-- Header -->
+    <div class="flex flex-col items-start justify-between gap-4 mb-6 md:flex-row md:items-center">
+      <div>
+        <h1 class="text-2xl font-bold text-gray-800">Success Rate</h1>
+        <p class="text-gray-500">Analysis of verification success rates</p>
+      </div>
+      <div><!-- TimeFilter -->
+        <input type="date" class="p-2 border rounded"/>
+      </div>
+    </div>
 
-  <div class="w-full max-w-4xl p-8 bg-white rounded-lg shadow">
-    <!-- Title and Description -->
-    <h1 class="mb-1 text-2xl font-bold text-gray-800">Detailed Transactions</h1>
-    <p class="mb-6 text-gray-600">Comprehensive analysis of all transactions for the specified time period</p>
+    <!-- Tabs -->
+    <div id="tab-bar" class="flex mb-6 border-b border-gray-200">
+      <button data-view="view-success" class="px-4 py-2 -mb-px font-medium border-b-2 border-blue-500 tab-btn active">Success Rate</button>
+      <button data-view="view-transactions" class="px-4 py-2 text-gray-500 tab-btn hover:text-gray-700">Transactions Monitoring</button>
+    </div>
 
-    <!-- Content Section -->
-    <div class="flex flex-col items-center justify-center min-h-[500px] w-full">
-      <div class="mt-8 mb-8 text-xl font-medium text-center text-gray-700">
-        Detailed presentation of transactions for the specified time period…
+    <!-- Quick Metrics -->
+    <div class="grid grid-cols-1 gap-6 mb-6 md:grid-cols-2">
+      <!-- Completion Rate -->
+      <div class="flex flex-col p-5 bg-white border-l-4 border-green-500 rounded-lg">
+        <div class="flex-1">
+          <h3 class="text-sm font-medium text-gray-500">Completion Rate</h3>
+          <div class="flex items-baseline gap-2 mt-2">
+            <div class="text-3xl font-bold">71.6%</div>
+            <div class="font-semibold text-green-600">+24%</div>
+          </div>
+        </div>
+        <div class="pt-3 mt-3 border-t border-gray-100">
+          <div class="flex items-center justify-between p-3 -mx-5 -mb-5 bg-gray-50">
+            <span class="text-xs text-gray-500">Avg. Rate</span>
+            <div class="w-3/4 h-2 overflow-hidden bg-green-200 rounded-full">
+              <div class="h-full bg-green-500" style="width:72%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Onboarding Time -->
+      <div class="flex flex-col p-5 bg-white border-l-4 border-blue-500 rounded-lg">
+        <div class="flex-1">
+          <h3 class="text-sm font-medium text-gray-500">Average Onboarding Time</h3>
+          <div class="flex items-baseline gap-2 mt-2">
+            <div class="text-3xl font-bold">35 sec</div>
+            <div class="font-semibold text-green-600">+8%</div>
+          </div>
+        </div>
+        <div class="pt-3 mt-3 border-t border-gray-100">
+          <div class="flex items-center justify-between p-3 -mx-5 -mb-5 bg-gray-50">
+            <span class="text-xs text-gray-500">Avg. Rate</span>
+            <div class="w-3/4 h-2 overflow-hidden bg-blue-200 rounded-full">
+              <div class="h-full bg-blue-500" style="width:35%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <!-- Success View -->
+      <div id="view-success" class="grid-cols-1 gap-6 space-y-6 view-pane rid lg:grid-cols-2">
+        <!-- 3D Pie -->
+        <div class="relative bg-white rounded-3xl p-12 min-h-[550px] overflow-hidden border border-gray-100 transition-all">
+          <div class="absolute inset-0 bg-[length:40px_40px] bg-[linear-gradient(rgba(0,212,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,212,255,0.03)_1px,transparent_1px)] animate-[gridMove_20s_linear_infinite] rounded-3xl"></div>
+          <div class="absolute top-[15%] right-[10%] w-20 h-20 bg-[radial-gradient(circle,rgba(0,212,255,0.2),rgba(0,106,255,0.1))] rounded-full filter blur-3xl animate-[float_6s_ease-in-out_infinite]"></div>
+          <div class="absolute bottom-[20%] left-[15%] w-15 h-15 bg-[radial-gradient(circle,rgba(255,0,110,0.2),rgba(131,56,236,0.1))] rounded-full filter blur-2xl animate-[float_8s_ease-in-out_infinite_reverse]"></div>
+          <div class="absolute inset-0 bg-white/5 backdrop-blur-[30px] rounded-3xl border border-white/5"></div>
+          <div id="pie-chart" class="relative z-10 flex items-center justify-center w-full h-full border rounded-2xl bg-white/5 border-white/5"></div>
+          <div id="pie-legend" class="absolute z-20 grid grid-cols-2 gap-4 transform -translate-x-1/2 bottom-6 left-1/2"></div>
+        </div>
+        <!-- 3D Bar -->
+        <div id="bar-chart" class="bg-white rounded-xl p-6 shadow min-h-[350px]"></div>
       </div>
 
-      <!-- SVG Placeholder -->
-      <svg width="96" height="96" fill="none" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
-        <rect x="24" y="24" width="48" height="60" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="2"/>
-        <rect x="36" y="12" width="48" height="60" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="2"/>
-        <rect x="12" y="36" width="48" height="60" rx="6" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="2"/>
-        <rect x="36" y="36" width="24" height="6" rx="2" fill="#D1D5DB"/>
-        <rect x="36" y="48" width="24" height="6" rx="2" fill="#D1D5DB"/>
-        <rect x="36" y="60" width="16" height="6" rx="2" fill="#D1D5DB"/>
-      </svg>
+      <!-- Transactions View -->
+      <div id="view-transactions" class="view-pane hidden col-span-1 lg:col-span-2 bg-white rounded-xl p-6 flex items-center justify-center min-h-[400px]">
+        <div class="text-center">
+          <h3 class="mb-2 text-xl font-medium text-gray-600">Transaction monitoring data</h3>
+          <p class="text-gray-500">Select a date range to view detailed transaction data</p>
+        </div>
+      </div>
     </div>
   </div>
 
+
+  <script>
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const viewPanes = document.querySelectorAll('.view-pane');
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach(b => b.classList.remove('active', 'border-blue-500'));
+        btn.classList.add('active', 'border-blue-500');
+        const target = btn.dataset.view;
+        viewPanes.forEach(v => v.id === target ? v.classList.remove('hidden') : v.classList.add('hidden'));
+      });
+    });
+
+    const chartPieData = [
+      { name: 'Verification Success', y: 72, colors: ['#00d4ff','#006eff','#0047ff'] },
+      { name: 'Abandoned by Customer', y: 16, colors: ['#ff006e','#8338ec','#3a86ff'] },
+      { name: 'Verification Failure', y: 11, colors: ['#06ffa5','#00d4aa','#0056b3'] },
+      { name: 'Not Started', y: 1, colors: ['#ffbe0b','#fb8500','#ff006e'] }
+    ];
+
+    Highcharts.chart('pie-chart', {
+      chart: { type: 'pie', options3d:{ enabled:true, alpha:35, depth:45 }, backgroundColor:'transparent', height:380 },
+      title: {
+        useHTML:true,
+        text:`<div style="text-align:center;padding:25px;">
+                <div style="font-size:48px;font-weight:900;color:#111;animation:pulse 2s infinite;">100</div>
+                <div style="font-size:11px;color:#222;font-weight:700;text-transform:uppercase;letter-spacing:4px;animation:fadeIn 3s ease-in;">TOTAL DATA POINTS</div>
+              </div>`,
+        align:'center', verticalAlign:'middle', floating:true, y:0
+      },
+      credits: { enabled:false },
+      plotOptions: {
+        pie: {
+          innerSize:'55%', depth:45, borderWidth:1, borderRadius:25, cursor:'pointer',
+          dataLabels:{ enabled:true, format:'{point.percentage:.0f}%', style:{ fontSize:'12px', fontWeight:'900', color:'#111'}, distance:-22 },
+          animation:{ duration:2500 }
+        }
+      },
+      tooltip: {
+        backgroundColor:'white', borderRadius:20, style:{ fontSize:'13px', fontWeight:'600'},
+        formatter: function(){ return `<div style="padding:20px;text-align:center;">
+          <div style="font-weight:900;color:#111;margin-bottom:10px;font-size:15px;text-transform:uppercase;letter-spacing:1px;">
+            ${this.point.name}
+          </div>
+          <div style="color:#222;margin-bottom:6px;">Value: <span style="font-weight:800;color:#111;">${this.y}</span></div>
+          <div style="color:#222;">Share: <span style="font-weight:800;color:#111;">${this.percentage.toFixed(1)}%</span></div>
+        </div>`; }
+      },
+      legend: { enabled:false },
+      series: [{
+        name:'Data',
+        data: chartPieData.map(item => ({
+          name: item.name,
+          y: item.y,
+          color: {
+            linearGradient: { x1:0,y1:0,x2:1,y2:1 },
+            stops: item.colors.map((c,i) => [i/(item.colors.length-1), c])
+          },
+          sliced: true
+        }))
+      }]
+    });
+
+    const legendContainer = document.getElementById('pie-legend');
+    chartPieData.forEach(entry => {
+      const legendBox = document.createElement('div');
+      legendBox.className = 'bg-white/95 backdrop-blur-lg rounded-lg px-4 py-3 flex items-center gap-2 cursor-pointer transition transform hover:-translate-y-1 hover:scale-105';
+      const dot = document.createElement('div');
+      dot.className = 'w-4 h-4 rounded-full animate-pulse';
+      dot.style.background = entry.colors.at(-1);
+      dot.style.boxShadow = `0 0 10px ${entry.colors.at(-1)}80`;
+      const label = document.createElement('span');
+      label.className = 'text-xs font-semibold text-gray-800 uppercase';
+      label.textContent = entry.name;
+      legendBox.append(dot, label);
+      legendContainer.append(legendBox);
+    });
+
+    const failureReasons = ["Unclassified","Document date is older than XXX","The document is not in complete view","User is under 21 years old","Missing mandatory document fields","Possible fraud"];
+    const failurePercentages = [31,11.3,11.5,1.25,0.05,6.08];
+    const failureColors = ['#9E9E9E','#FF9800','#FF9800','#F44336','#F44336','#F44336'];
+
+    Highcharts.chart('bar-chart', {
+      chart: { type:'bar', options3d:{ enabled:true,alpha:15,beta:15,depth:50 }, backgroundColor:'transparent', height:320 },
+      title:{ text:'Failure Reasons', align:'left', style:{ fontSize:'18px', fontWeight:'bold'} },
+      xAxis:{ categories:failureReasons, labels:{ style:{ fontSize:'15px', color:'#64748b'} }, gridLineWidth:1, gridLineColor:'#e5e7eb' },
+      yAxis:{ min:0, max:35, title: { text:null }, labels:{ style:{ fontSize:'14px', color:'#64748b'} }, gridLineWidth:1, gridLineColor:'#e5e7eb' },
+      plotOptions:{ bar:{ depth:40, grouping:false, dataLabels:{ enabled:true, format:'{point.y:.2f}', style:{ color:'#222', fontWeight:'bold', fontSize:'15px'}, align:'right', inside:false } } },
+      tooltip:{ pointFormat:'<b>{point.y:.2f}%</b>' },
+      series:[{ name:'value', data: failurePercentages.map((v,i)=>({ y:v, color: failureColors[i] })) }],
+      credits:{ enabled:false }
+    });
+  </script>
 </body>
 </html>
