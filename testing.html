@@ -2,109 +2,95 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Country Distribution</title>
+  <title>Mobile Devices Distribution</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="p-6 bg-gray-100">
-  <div class="max-w-4xl p-6 mx-auto bg-white rounded shadow">
-    <h1 class="mb-1 text-2xl font-bold">Country Distribution (ID)</h1>
-    <p class="mb-6 text-gray-600">Geographic distribution of identification documents</p>
+  <div class="max-w-6xl p-6 mx-auto bg-white rounded-lg shadow">
+    <h1 class="mb-1 text-2xl font-bold">Mobile Devices Distribution</h1>
+    <p class="mb-6 text-gray-600">Analysis of mobile devices used in verification process</p>
 
-    <div class="mb-6 text-center">
-      <div class="text-4xl font-bold text-gray-700">369</div>
-      <div class="text-xl text-gray-500">Total Approved Verifications</div>
-    </div>
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
+      <!-- Android Devices Table -->
+      <div>
+        <h3 class="mb-4 text-lg font-medium text-center">Android Devices (594 total)</h3>
+        <div class="overflow-hidden border border-gray-200 rounded-lg">
+          <table class="min-w-full text-sm divide-y divide-gray-200">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="px-4 py-3 font-medium tracking-wider text-left text-gray-500 uppercase">Device model</th>
+                <th class="px-4 py-3 font-medium tracking-wider text-left text-gray-500 uppercase"># started</th>
+                <th class="px-4 py-3 font-medium tracking-wider text-left text-gray-500 uppercase">% started</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              <tr class="bg-white"><td class="px-4 py-3">Redmi 9A</td><td class="px-4 py-3">24</td><td class="px-4 py-3">4.0%</td></tr>
+              <tr class="bg-gray-50"><td class="px-4 py-3">Redmi 9B</td><td class="px-4 py-3">14</td><td class="px-4 py-3">5.0%</td></tr>
+              <tr class="bg-white"><td class="px-4 py-3">Redmi 10X 4G</td><td class="px-4 py-3">22</td><td class="px-4 py-3">3.7%</td></tr>
+              <tr class="bg-gray-50"><td class="px-4 py-3">Redmi Note 9 Pro</td><td class="px-4 py-3">19</td><td class="px-4 py-3">4.0%</td></tr>
+              <tr class="bg-white"><td class="px-4 py-3">Redmi Note 8 Pro</td><td class="px-4 py-3">18</td><td class="px-4 py-3">3.0%</td></tr>
+              <tr class="bg-gray-50"><td class="px-4 py-3">Galaxy A12</td><td class="px-4 py-3">18</td><td class="px-4 py-3">3.0%</td></tr>
+              <tr class="bg-white"><td class="px-4 py-3">Galaxy A22s</td><td class="px-4 py-3">11</td><td class="px-4 py-3">2.5%</td></tr>
+              <tr class="bg-gray-50"><td class="px-4 py-3">Galaxy A21s</td><td class="px-4 py-3">17</td><td class="px-4 py-3">2.9%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-    <div class="overflow-hidden border border-gray-200 rounded-lg">
-      <table class="min-w-full text-sm divide-y divide-gray-200">
-        <thead class="bg-gray-100">
-          <tr>
-            <th class="px-6 py-3 font-medium tracking-wider text-left text-gray-500 uppercase">Document country</th>
-            <th class="px-6 py-3 font-medium tracking-wider text-left text-gray-500 uppercase"># verified</th>
-            <th class="px-6 py-3 font-medium tracking-wider text-left text-gray-500 uppercase">% verified</th>
-          </tr>
-        </thead>
-        <tbody id="country-table" class="bg-white divide-y divide-gray-200">
-          <!-- JavaScript will populate rows here -->
-        </tbody>
-      </table>
-    </div>
+      <!-- iOS Devices Table -->
+      <div>
+        <h3 class="mb-4 text-lg font-medium text-center">iOS Devices (268 total)</h3>
+        <div class="overflow-hidden border border-gray-200 rounded-lg">
+          <table class="min-w-full text-sm divide-y divide-gray-200">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="px-4 py-3 font-medium tracking-wider text-left text-gray-500 uppercase">Device model</th>
+                <th class="px-4 py-3 font-medium tracking-wider text-left text-gray-500 uppercase"># started</th>
+                <th class="px-4 py-3 font-medium tracking-wider text-left text-gray-500 uppercase">% started</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              <tr class="bg-white"><td class="px-4 py-3">iPhone 11</td><td class="px-4 py-3">46</td><td class="px-4 py-3">17.2%</td></tr>
+              <tr class="bg-gray-50"><td class="px-4 py-3">iPhone 13 Pro Max</td><td class="px-4 py-3">31</td><td class="px-4 py-3">11.6%</td></tr>
+              <tr class="bg-white"><td class="px-4 py-3">iPhone 14 Pro Max</td><td class="px-4 py-3">21</td><td class="px-4 py-3">21.6%</td></tr>
+              <tr class="bg-gray-50"><td class="px-4 py-3">iPhone 12</td><td class="px-4 py-3">28</td><td class="px-4 py-3">10.4%</td></tr>
+              <tr class="bg-white"><td class="px-4 py-3">iPhone 12 Pro Max</td><td class="px-4 py-3">28</td><td class="px-4 py-3">10.4%</td></tr>
+              <tr class="bg-gray-50"><td class="px-4 py-3">iPhone 13 Pro Max</td><td class="px-4 py-3">38</td><td class="px-4 py-3">12.4%</td></tr>
+              <tr class="bg-white"><td class="px-4 py-3">iPhone 13</td><td class="px-4 py-3">21</td><td class="px-4 py-3">7.8%</td></tr>
+              <tr class="bg-gray-50"><td class="px-4 py-3">iPhone 14</td><td class="px-4 py-3">31</td><td class="px-4 py-3">9.8%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-    <!-- Pagination Controls -->
-    <div class="flex items-center justify-center gap-2 mt-4">
-      <button id="prevPage" class="px-3 py-1 border rounded disabled:opacity-50">Previous</button>
-      <span id="pageInfo" class="mx-2 text-sm">Page 1</span>
-      <button id="nextPage" class="px-3 py-1 border rounded disabled:opacity-50">Next</button>
+      <!-- Summary Section -->
+      <div class="mt-4 lg:col-span-2">
+        <div class="p-4 border border-gray-200 rounded-lg bg-gray-50">
+          <h3 class="mb-3 text-lg font-medium">Device Distribution Summary</h3>
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div>
+              <div class="text-sm font-medium text-gray-500">Android vs iOS</div>
+              <div class="flex items-center mt-2">
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                  <div class="bg-green-500 h-2.5 rounded-full" style="width: 69%"></div>
+                </div>
+                <div class="ml-2 text-sm font-medium">69% / 31%</div>
+              </div>
+            </div>
+            <div>
+              <div class="text-sm font-medium text-gray-500">Top 5 Models</div>
+              <div class="flex items-center mt-2">
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                  <div class="bg-blue-500 h-2.5 rounded-full" style="width: 32%"></div>
+                </div>
+                <div class="ml-2 text-sm font-medium">32% of total</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
-
-  <script>
-    const countries = [
-      { country: 'Greece', count: 351, percentage: 95.1 },
-      { country: 'Romania', count: 6, percentage: 1.6 },
-      { country: 'Bulgaria', count: 4, percentage: 1.1 },
-      { country: 'Spain', count: 2, percentage: 0.5 },
-      { country: 'Croatia', count: 2, percentage: 0.5 },
-      { country: 'Netherlands', count: 1, percentage: 0.3 },
-      { country: 'Estonia', count: 1, percentage: 0.3 },
-      { country: 'Hungary', count: 1, percentage: 0.3 },
-      { country: 'Poland', count: 1, percentage: 0.3 },
-      { country: 'Poland', count: 1, percentage: 0.4 },
-      { country: 'Poland', count: 1, percentage: 0.5 },
-      { country: 'Poland', count: 1, percentage: 0.6 },
-    ];
-
-    let page = 1;
-    const pageSize = 8;
-    const totalPages = Math.ceil(countries.length / pageSize);
-
-    const renderTable = () => {
-      const startIdx = (page - 1) * pageSize;
-      const endIdx = startIdx + pageSize;
-      const paginated = countries.slice(startIdx, endIdx);
-
-      let rows = `
-        <tr class="font-medium bg-gray-50">
-          <td class="px-6 py-4 whitespace-nowrap">Approved verified</td>
-          <td class="px-6 py-4 whitespace-nowrap">369</td>
-          <td class="px-6 py-4 whitespace-nowrap">100%</td>
-        </tr>
-      `;
-
-      paginated.forEach((item, index) => {
-        const rowClass = index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
-        const highlight = (startIdx + index === 0) ? 'text-green-600 font-medium' : '';
-        rows += `
-          <tr class="${rowClass}">
-            <td class="px-6 py-4 whitespace-nowrap">${item.country}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${item.count}</td>
-            <td class="px-6 py-4 whitespace-nowrap ${highlight}">${item.percentage.toFixed(1)}%</td>
-          </tr>
-        `;
-      });
-
-      document.getElementById('country-table').innerHTML = rows;
-      document.getElementById('pageInfo').textContent = `Page ${page} of ${totalPages}`;
-      document.getElementById('prevPage').disabled = page === 1;
-      document.getElementById('nextPage').disabled = page === totalPages;
-    };
-
-    document.getElementById('prevPage').addEventListener('click', () => {
-      if (page > 1) {
-        page--;
-        renderTable();
-      }
-    });
-
-    document.getElementById('nextPage').addEventListener('click', () => {
-      if (page < totalPages) {
-        page++;
-        renderTable();
-      }
-    });
-
-    // Initial render
-    renderTable();
-  </script>
 </body>
 </html>
