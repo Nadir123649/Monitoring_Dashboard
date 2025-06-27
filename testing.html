@@ -1,202 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Average Response Time</title>
+  <meta charset="UTF-8">
+  <title>Country Distribution</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://code.highcharts.com/highcharts.js"></script>
-  <script src="https://code.highcharts.com/highcharts-3d.js"></script>
 </head>
+<body class="p-6 bg-gray-100">
+  <div class="max-w-4xl p-6 mx-auto bg-white rounded shadow">
+    <h1 class="mb-1 text-2xl font-bold">Country Distribution (ID)</h1>
+    <p class="mb-6 text-gray-600">Geographic distribution of identification documents</p>
 
-<body class="p-6 bg-gray-50">
-  <div class="mx-auto max-w-7xl">
-    <!-- Header -->
-    <div class="mb-6">
-      <h1 class="text-2xl font-bold text-gray-800">Average Response Time</h1>
-      <p class="text-sm text-gray-500">Analysis of system response times for document processing</p>
+    <div class="mb-6 text-center">
+      <div class="text-4xl font-bold text-gray-700">369</div>
+      <div class="text-xl text-gray-500">Total Approved Verifications</div>
     </div>
 
-    <!-- Tabs -->
-    <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
-      <div class="flex gap-2">
-        <button id="tab-success"
-          class="px-4 py-2 font-semibold bg-white border-b-2 border-gray-700 tab-btn active-tab rounded-t-md">Success
-          Rate</button>
-        <button id="tab-transactions"
-          class="px-4 py-2 font-semibold bg-gray-100 border-b-2 border-transparent tab-btn rounded-t-md">Transactions
-          Monitoring</button>
-      </div>
-      <div class="flex flex-wrap items-center gap-2">
-        <span class="text-sm font-medium text-gray-700">Define Time Period:</span>
-        <input type="date" class="px-2 py-1 border rounded" />
-        <span class="hidden sm:inline">to</span>
-        <input type="date" class="px-2 py-1 border rounded" />
-      </div>
+    <div class="overflow-hidden border border-gray-200 rounded-lg">
+      <table class="min-w-full text-sm divide-y divide-gray-200">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="px-6 py-3 font-medium tracking-wider text-left text-gray-500 uppercase">Document country</th>
+            <th class="px-6 py-3 font-medium tracking-wider text-left text-gray-500 uppercase"># verified</th>
+            <th class="px-6 py-3 font-medium tracking-wider text-left text-gray-500 uppercase">% verified</th>
+          </tr>
+        </thead>
+        <tbody id="country-table" class="bg-white divide-y divide-gray-200">
+          <!-- JavaScript will populate rows here -->
+        </tbody>
+      </table>
     </div>
 
-    <!-- Grid Layout -->
-    <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-      <!-- KPI Card -->
-      <div class="flex flex-col items-center p-6 bg-white rounded-lg shadow">
-        <div class="flex items-center mb-2">
-          <span class="mr-3 text-4xl font-bold text-green-600">35 sec</span>
-          <span class="px-2 py-1 text-sm font-semibold text-green-700 bg-green-100 rounded">vs 45 sec</span>
-        </div>
-        <p class="mb-4 text-gray-500">Average Response Time per ID/ Document</p>
-        <div class="w-full">
-          <div class="h-3 mb-2 bg-gray-200 rounded-full">
-            <div class="h-3 bg-green-400 rounded-full" style="width: 74%;"></div>
-          </div>
-          <div class="h-3 mb-2 bg-gray-200 rounded-full">
-            <div class="h-3 bg-green-200 rounded-full" style="width: 100%;"></div>
-          </div>
-          <div class="flex justify-between text-xs">
-            <span class="font-semibold text-green-700">74%</span>
-            <span class="text-gray-400">target</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Chart + Legend -->
-      <div class="p-6 bg-white rounded-lg shadow">
-        <div id="response-time-chart" class="w-full h-[350px]"></div>
-        <div class="flex flex-col justify-center gap-3 mt-4 text-center sm:flex-row">
-          <div class="w-full px-3 py-2 text-green-900 bg-green-300 rounded sm:w-auto">
-            <span class="block text-lg font-bold">74%</span>
-            <span class="text-xs">0–50 secs</span>
-          </div>
-          <div class="w-full px-3 py-2 text-yellow-900 bg-yellow-200 rounded sm:w-auto">
-            <span class="block text-lg font-bold">19%</span>
-            <span class="text-xs">50–100 secs</span>
-          </div>
-          <div class="w-full px-3 py-2 text-gray-700 bg-gray-200 rounded sm:w-auto">
-            <span class="block text-lg font-bold">7%</span>
-            <span class="text-xs">Remaining</span>
-          </div>
-        </div>
-      </div>
+    <!-- Pagination Controls -->
+    <div class="flex items-center justify-center gap-2 mt-4">
+      <button id="prevPage" class="px-3 py-1 border rounded disabled:opacity-50">Previous</button>
+      <span id="pageInfo" class="mx-2 text-sm">Page 1</span>
+      <button id="nextPage" class="px-3 py-1 border rounded disabled:opacity-50">Next</button>
     </div>
   </div>
 
-  <!-- Highcharts Script -->
   <script>
-    const responseTimeData1 = Array.from({ length: 120 }, (_, i) => ({
-      hour: i + 1,
-      '0-50': Math.floor(Math.random() * 100),
-      '50-100': Math.floor(Math.random() * 50),
-      '100-150': Math.floor(Math.random() * 30),
-      '150-200': Math.floor(Math.random() * 20),
-      '200-250': Math.floor(Math.random() * 10),
-      '250-300': Math.floor(Math.random() * 5),
-      '300-350': Math.floor(Math.random() * 3),
-      '350-400': Math.floor(Math.random() * 2),
-      '400-450': Math.floor(Math.random() * 1),
-      '450-500': Math.floor(Math.random() * 1)
-    }));
+    const countries = [
+      { country: 'Greece', count: 351, percentage: 95.1 },
+      { country: 'Romania', count: 6, percentage: 1.6 },
+      { country: 'Bulgaria', count: 4, percentage: 1.1 },
+      { country: 'Spain', count: 2, percentage: 0.5 },
+      { country: 'Croatia', count: 2, percentage: 0.5 },
+      { country: 'Netherlands', count: 1, percentage: 0.3 },
+      { country: 'Estonia', count: 1, percentage: 0.3 },
+      { country: 'Hungary', count: 1, percentage: 0.3 },
+      { country: 'Poland', count: 1, percentage: 0.3 },
+      { country: 'Poland', count: 1, percentage: 0.4 },
+      { country: 'Poland', count: 1, percentage: 0.5 },
+      { country: 'Poland', count: 1, percentage: 0.6 },
+    ];
 
-    const responseTimeData2 = Array.from({ length: 120 }, (_, i) => ({
-      hour: i + 1,
-      '0-50': Math.floor(Math.random() * 100),
-      '50-100': Math.floor(Math.random() * 50),
-      '100-150': Math.floor(Math.random() * 30),
-      '150-200': Math.floor(Math.random() * 20),
-      '200-250': Math.floor(Math.random() * 10),
-      '250-300': Math.floor(Math.random() * 5),
-      '300-350': Math.floor(Math.random() * 3),
-      '350-400': Math.floor(Math.random() * 2),
-      '400-450': Math.floor(Math.random() * 1),
-      '450-500': Math.floor(Math.random() * 1)
-    }));
+    let page = 1;
+    const pageSize = 8;
+    const totalPages = Math.ceil(countries.length / pageSize);
 
-    const seriesKeys = ['0-50', '50-100', '100-150', '150-200', '200-250', '250-300', '300-350', '350-400', '400-450', '450-500'];
-    const colors = ['#22c55e', '#eab308', '#a3e635', '#fde047', '#38bdf8', '#818cf8', '#f472b6', '#fca5a5', '#a3a3a3', '#d4d4d4'];
+    const renderTable = () => {
+      const startIdx = (page - 1) * pageSize;
+      const endIdx = startIdx + pageSize;
+      const paginated = countries.slice(startIdx, endIdx);
 
-    function createChart(responseTimeData) {
-      const series = seriesKeys.map((key, idx) => ({
-        name: key,
-        data: responseTimeData.map(d => d[key]),
-        color: colors[idx],
-        stack: 'response',
-        type: 'area',
-        marker: { enabled: false }
-      }));
+      let rows = `
+        <tr class="font-medium bg-gray-50">
+          <td class="px-6 py-4 whitespace-nowrap">Approved verified</td>
+          <td class="px-6 py-4 whitespace-nowrap">369</td>
+          <td class="px-6 py-4 whitespace-nowrap">100%</td>
+        </tr>
+      `;
 
-      Highcharts.chart('response-time-chart', {
-        chart: {
-          type: 'area',
-          backgroundColor: 'transparent',
-          options3d: {
-            enabled: true,
-            alpha: 15,
-            beta: 15,
-            depth: 60,
-            viewDistance: 25
-          }
-        },
-        title: {
-          text: 'Response Time per Document',
-          style: { fontSize: '16px' }
-        },
-        xAxis: {
-          categories: responseTimeData.map(d => d.hour),
-          labels: { enabled: false },
-          title: { text: 'Hour' },
-          gridLineColor: '#e5e7eb'
-        },
-        yAxis: {
-          min: 0,
-          title: { text: null },
-          gridLineColor: '#e5e7eb'
-        },
-        legend: {
-          enabled: true,
-          align: 'center',
-          verticalAlign: 'bottom',
-          itemStyle: { fontSize: '13px' }
-        },
-        plotOptions: {
-          area: {
-            stacking: 'normal',
-            depth: 60,
-            marker: { enabled: false },
-            lineWidth: 1,
-            fillOpacity: 0.7
-          }
-        },
-        tooltip: {
-          shared: true
-        },
-        series
+      paginated.forEach((item, index) => {
+        const rowClass = index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+        const highlight = (startIdx + index === 0) ? 'text-green-600 font-medium' : '';
+        rows += `
+          <tr class="${rowClass}">
+            <td class="px-6 py-4 whitespace-nowrap">${item.country}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${item.count}</td>
+            <td class="px-6 py-4 whitespace-nowrap ${highlight}">${item.percentage.toFixed(1)}%</td>
+          </tr>
+        `;
       });
-    }
 
-    // Set default chart on page load
-    createChart(responseTimeData1);
+      document.getElementById('country-table').innerHTML = rows;
+      document.getElementById('pageInfo').textContent = `Page ${page} of ${totalPages}`;
+      document.getElementById('prevPage').disabled = page === 1;
+      document.getElementById('nextPage').disabled = page === totalPages;
+    };
 
-    // Tab switch event listeners
-    document.getElementById('tab-success').addEventListener('click', () => {
-      setActiveTab('tab-success');
-      createChart(responseTimeData1);
+    document.getElementById('prevPage').addEventListener('click', () => {
+      if (page > 1) {
+        page--;
+        renderTable();
+      }
     });
 
-    document.getElementById('tab-transactions').addEventListener('click', () => {
-      setActiveTab('tab-transactions');
-      createChart(responseTimeData2);
+    document.getElementById('nextPage').addEventListener('click', () => {
+      if (page < totalPages) {
+        page++;
+        renderTable();
+      }
     });
 
-    function setActiveTab(id) {
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('active-tab', 'bg-white', 'border-gray-700');
-        btn.classList.add('bg-gray-100', 'border-transparent');
-      });
-      const tab = document.getElementById(id);
-      tab.classList.add('active-tab', 'bg-white', 'border-gray-700');
-      tab.classList.remove('bg-gray-100', 'border-transparent');
-    }
+    // Initial render
+    renderTable();
   </script>
-
 </body>
-
 </html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+        integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="path/to/line-awesome/css/line-awesome-font-awesome.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Country Distribution</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="h-screen overflow-hidden font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Overlay for Mobile -->
+        <div id="overlay" class="fixed inset-0 z-20 hidden bg-black bg-opacity-50" onclick="closeMobileMenu()"></div>
+
+        <div id="sidebar"
+            class="bg-white border-r border-gray-200 shadow-sm w-[250px] transition-all duration-300 flex flex-col">
+            <div class="flex items-center justify-between p-4 border-b border-gray-200 sidebar-top">
+                <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-circle-user text-[#2563EB] text-xl"></i>
+                    <span class="font-bold text-gray-800 sidebar-label">IDBox™</span>
+                </div>
+                <button onclick="toggleCollapse()" class="p-1 rounded-full hover:bg-gray-100">
+                    <svg id="collapseIcon" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+            </div>
+            <nav class="flex-1 px-3 py-4 overflow-y-auto">
+                <a href="/index.html" title="Dashboard"
+                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
+                    <i class="fa-solid fa-chart-column"></i>
+                    <span class="sidebar-label">Dashboard</span>
+                </a>
+                <div class="relative">
+                    <button onclick="toggleDropdown('monitoring')" title="Service Monitoring"
+                        class="flex items-center justify-between w-full gap-2 px-3 py-2 font-semibold text-gray-700 transition rounded sidebar-item active hover:bg-gray-100">
+                        <span class="flex items-center gap-2">
+                            <i class="fa-regular fa-file text-[#2563EB]"></i>
+                            <span class="sidebar-label text-[#2563EB]">Service Monitoring</span>
+                        </span>
+                        <svg id="dropdownIcon-monitoring" xmlns="http://www.w3.org/2000/svg"
+                            class="w-4 h-4 transition-transform transform" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.292l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.65a.75.75 0 01-1.08 0l-4.25-4.65a.75.75 0 01.02-1.06z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="dropdown-monitoring" class="hidden mt-1 ml-2 space-y-1">
+                        <a href="/overall-success.html"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded sidebar-item active hover:bg-gray-100">
+                            <i class="fa-solid fa-chart-line  ont-semibold text-[#2563EB]"></i>
+                            <span class="ont-semibold text-[#2563EB]"> Overall Success </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"><i
+                                class="fa-regular fa-user"></i>
+                            <span> Abandoned by Customer </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                            <span> Verification Failure</span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-database"></i>
+                            <span> ID Breakdown </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-regular fa-file"></i>
+                            <span> Document Breakdown </span></a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-regular fa-clock"></i>
+                            <span> Video Call Waiting </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-regular fa-clock"></i>
+                            <span> Verification Time </span></a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span> Average Response </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-globe"></i>
+                            <span> Country Distribution </span></a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-mobile-screen"></i>
+                            <span> Mobile Devices </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span> Detailed Transactions </span>
+                        </a>
+                    </div>
+                </div>
+                <a href="#" title="Success Rate"
+                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
+                    <i class="fa-solid fa-chart-column"></i>
+                    <span class="sidebar-label">Success Rate</span>
+                </a>
+                <a href="#" title="Transactions"
+                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
+                    <i class="fa-regular fa-file"></i>
+                    <span class="sidebar-label">Transactions</span>
+                </a>
+                <a href="/settings.html" title="Settings"
+                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded hover:bg-gray-100">
+                    <i class="fa-solid fa-gear "></i>
+                    <span class="sidebar-label">Settings</span>
+                </a>
+                <a href="#" title="Logout"
+                    class="flex items-center gap-2 px-3 py-2 mt-4 text-red-500 transition rounded sidebar-item hover:bg-red-100">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span class="sidebar-label">Logout</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main content -->
+        <div class="flex flex-col flex-1 h-full overflow-hidden">
+            <!-- Mobile Header -->
+            <header class="flex items-center justify-between px-4 py-3 bg-white border-b md:hidden">
+                <div class="flex items-center gap-2">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor">
+                        <circle cx="12" cy="12" r="10" stroke-width="2" />
+                    </svg>
+                    <span class="font-semibold text-gray-800">IDBox™</span>
+                </div>
+                <button onclick="openMobileMenu()" class="p-1 rounded hover:bg-gray-100">
+                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </header>
+
+            <main class="flex-1 p-6 overflow-y-auto font-sans bg-gray-50">
+
+                <div class="">
+                    <div class="flex flex-col items-start justify-between gap-4 mb-6 md:flex-row md:items-center">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-800">Country Distribution (ID)</h1>
+                            <p class="text-gray-500">Analysis of verification processing times</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-sm font-medium text-gray-700">Define Time Period:</span>
+                            <input type="date" class="px-3 py-1 text-sm border rounded" />
+                            <span class="text-gray-500">To</span>
+                            <input type="date" class="px-3 py-1 text-sm border rounded" />
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 bg-white rounded shadow ">
+
+                    <div class="mb-6 text-center">
+                        <div class="text-4xl font-bold text-gray-700">369</div>
+                        <div class="text-xl text-gray-500">Total Approved Verifications</div>
+                    </div>
+
+                    <div class="overflow-hidden border border-gray-200 rounded-lg">
+                        <table class="min-w-full text-sm divide-y divide-gray-200">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="px-6 py-3 font-medium tracking-wider text-left text-gray-500 uppercase">
+                                        Document country</th>
+                                    <th class="px-6 py-3 font-medium tracking-wider text-left text-gray-500 uppercase">#
+                                        verified</th>
+                                    <th class="px-6 py-3 font-medium tracking-wider text-left text-gray-500 uppercase">%
+                                        verified</th>
+                                </tr>
+                            </thead>
+                            <tbody id="country-table" class="bg-white divide-y divide-gray-200">
+                                <!-- JavaScript will populate rows here -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination Controls -->
+                    <div class="flex items-center justify-center gap-2 mt-4">
+                        <button id="prevPage" class="px-3 py-1 border rounded disabled:opacity-50">Previous</button>
+                        <span id="pageInfo" class="mx-2 text-sm">Page 1</span>
+                        <button id="nextPage" class="px-3 py-1 border rounded disabled:opacity-50">Next</button>
+                    </div>
+                </div>
+
+
+            </main>
+
+            <!-- Footer -->
+            <footer class="bg-white border-t border-gray-200 footer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-regular fa-circle-user text-[#2563EB] text-xl"></i>
+                        <span class="text-sm font-semibold">IDBox™ Service Monitoring</span>
+                        <span class="text-xs leading-normal text-gray-500">v.2.1</span>
+                    </div>
+                    <div class="text-sm text-gray-500">
+                        © <span id="year"></span> Intelli Group All rights reserved
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Highcharts Script -->
+
+    <script>
+        const countries = [
+            { country: 'Greece', count: 351, percentage: 95.1 },
+            { country: 'Romania', count: 6, percentage: 1.6 },
+            { country: 'Bulgaria', count: 4, percentage: 1.1 },
+            { country: 'Spain', count: 2, percentage: 0.5 },
+            { country: 'Croatia', count: 2, percentage: 0.5 },
+            { country: 'Netherlands', count: 1, percentage: 0.3 },
+            { country: 'Estonia', count: 1, percentage: 0.3 },
+            { country: 'Hungary', count: 1, percentage: 0.3 },
+            { country: 'Poland', count: 1, percentage: 0.3 },
+            { country: 'Poland', count: 1, percentage: 0.4 },
+            { country: 'Poland', count: 1, percentage: 0.5 },
+            { country: 'Poland', count: 1, percentage: 0.6 },
+        ];
+
+        let page = 1;
+        const pageSize = 8;
+        const totalPages = Math.ceil(countries.length / pageSize);
+
+        const renderTable = () => {
+            const startIdx = (page - 1) * pageSize;
+            const endIdx = startIdx + pageSize;
+            const paginated = countries.slice(startIdx, endIdx);
+
+            let rows = `
+        <tr class="font-medium bg-gray-50">
+          <td class="px-6 py-4 whitespace-nowrap">Approved verified</td>
+          <td class="px-6 py-4 whitespace-nowrap">369</td>
+          <td class="px-6 py-4 whitespace-nowrap">100%</td>
+        </tr>
+      `;
+
+            paginated.forEach((item, index) => {
+                const rowClass = index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+                const highlight = (startIdx + index === 0) ? 'text-green-600 font-medium' : '';
+                rows += `
+          <tr class="${rowClass}">
+            <td class="px-6 py-4 whitespace-nowrap">${item.country}</td>
+            <td class="px-6 py-4 whitespace-nowrap">${item.count}</td>
+            <td class="px-6 py-4 whitespace-nowrap ${highlight}">${item.percentage.toFixed(1)}%</td>
+          </tr>
+        `;
+            });
+
+            document.getElementById('country-table').innerHTML = rows;
+            document.getElementById('pageInfo').textContent = `Page ${page} of ${totalPages}`;
+            document.getElementById('prevPage').disabled = page === 1;
+            document.getElementById('nextPage').disabled = page === totalPages;
+        };
+
+        document.getElementById('prevPage').addEventListener('click', () => {
+            if (page > 1) {
+                page--;
+                renderTable();
+            }
+        });
+
+        document.getElementById('nextPage').addEventListener('click', () => {
+            if (page < totalPages) {
+                page++;
+                renderTable();
+            }
+        });
+
+        // Initial render
+        renderTable();
+    </script>
+
+    <script src="https://kit.fontawesome.com/ce278ed6db.js" crossorigin="anonymous"></script>
+    <script src="/assets/js/main.js"></script>
+</body>
+
+</html>
