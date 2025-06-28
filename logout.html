@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logging Out</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sonner@1.0.1/umd/sonner.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sonner@1.0.1/umd/sonner.min.css" />
+</head>
+
+<body class="flex items-center justify-center min-h-screen bg-gray-50">
+
+  <div class="text-center">
+    <h2 class="mb-2 text-xl font-semibold">Logging out...</h2>
+    <p class="text-gray-500">Please wait while we log you out.</p>
+  </div>
+
+  <script>
+    // Wait for DOM
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        window.sonner?.toast?.success("You have been successfully logged out") ||
+          console.log("You have been successfully logged out");
+
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 1000); // Extra 1s after toast
+      }, 1000); // Simulate logout delay
+    });
+  </script>
+
+</body>
+
+</html>
