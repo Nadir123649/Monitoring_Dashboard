@@ -69,10 +69,10 @@
                 </a>
                 <div class="relative">
                     <button onclick="toggleDropdown('monitoring')" title="Service Monitoring"
-                        class="flex items-center justify-between w-full gap-2 px-3 py-2 font-semibold text-gray-700 transition rounded sidebar-item active hover:bg-gray-100">
+                        class="flex items-center justify-between w-full gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
                         <span class="flex items-center gap-2">
-                            <i class="fa-regular fa-file text-[#2563EB]"></i>
-                            <span class="sidebar-label text-[#2563EB]">Service Monitoring</span>
+                            <i class="fa-regular fa-file"></i>
+                            <span class="sidebar-label">Service Monitoring</span>
                         </span>
                         <svg id="dropdownIcon-monitoring" xmlns="http://www.w3.org/2000/svg"
                             class="w-4 h-4 transition-transform transform" viewBox="0 0 20 20" fill="currentColor">
@@ -83,82 +83,81 @@
                     </button>
                     <div id="dropdown-monitoring" class="hidden mt-1 ml-2 space-y-1">
                         <a href="/overall-success.html"
-                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded sidebar-item active hover:bg-gray-100">
-                            <i class="fa-solid fa-chart-line  ont-semibold text-[#2563EB]"></i>
-                            <span class="ont-semibold text-[#2563EB]"> Overall Success </span>
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span> Overall Success </span>
                         </a>
-                        <a href="#"
+                        <a href="/abandoned-by-customer.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"><i
                                 class="fa-regular fa-user"></i>
                             <span> Abandoned by Customer </span>
                         </a>
-                        <a href="#"
+                        <a href="/verification-failure.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
                             <i class="fa-solid fa-circle-xmark"></i>
                             <span> Verification Failure</span>
                         </a>
-                        <a href="#"
+                        <a href="/id-breakdown.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
                             <i class="fa-solid fa-database"></i>
                             <span> ID Breakdown </span>
                         </a>
-                        <a href="#"
+                        <a href="/document-breakdown.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
                             <i class="fa-regular fa-file"></i>
                             <span> Document Breakdown </span></a>
-                        <a href="#"
+                        <a href="/video-call-waiting.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
                             <i class="fa-regular fa-clock"></i>
                             <span> Video Call Waiting </span>
                         </a>
-                        <a href="#"
+                        <a href="/verification-time.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
                             <i class="fa-regular fa-clock"></i>
                             <span> Verification Time </span></a>
-                        <a href="#"
+                        <a href="/average-response-time.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
                             <i class="fa-solid fa-chart-line"></i>
                             <span> Average Response </span>
                         </a>
-                        <a href="#"
+                        <a href="/country-distribution.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
                             <i class="fa-solid fa-globe"></i>
                             <span> Country Distribution </span></a>
-                        <a href="#"
+                        <a href="/mobile-devices.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
                             <i class="fa-solid fa-mobile-screen"></i>
                             <span> Mobile Devices </span>
                         </a>
-                        <a href="#"
+                        <a href="/detailed-transactions.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
                             <i class="fa-solid fa-chart-line"></i>
                             <span> Detailed Transactions </span>
                         </a>
                     </div>
                 </div>
-                <a href="#" title="Success Rate"
-                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
-                    <i class="fa-solid fa-chart-column"></i>
-                    <span class="sidebar-label">Success Rate</span>
+                <a href="/success-rate.html" title="Success Rate"
+                    class="flex items-center gap-2 px-3 py-2 font-semibold transition bg-gray-200 rounded hover:bg-gray-100 sidebar-item active">
+                    <i class="fa-solid fa-chart-column text-[#2563EB]"></i>
+                    <span class="text-[#2563EB] sidebar-label">Success Rate</span>
                 </a>
-                <a href="#" title="Transactions"
+                <a href="/transactions.html" title="Transactions"
                     class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
                     <i class="fa-regular fa-file"></i>
                     <span class="sidebar-label">Transactions</span>
                 </a>
                 <a href="/settings.html" title="Settings"
-                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded hover:bg-gray-100">
-                    <i class="fa-solid fa-gear "></i>
+                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
+                    <i class="fa-solid fa-gear"></i>
                     <span class="sidebar-label">Settings</span>
                 </a>
                 <a href="#" title="Logout"
-                    class="flex items-center gap-2 px-3 py-2 mt-4 text-red-500 transition rounded sidebar-item hover:bg-red-100">
+                    class="flex items-center gap-2 px-3 py-2 mt-4 text-red-500 transition rounded sidebar-item hover:bg-gray-100">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     <span class="sidebar-label">Logout</span>
                 </a>
             </nav>
         </div>
-
         <!-- Main content -->
         <div class="flex flex-col flex-1 h-full overflow-hidden">
             <!-- Mobile Header -->

@@ -108,82 +108,81 @@
                     </button>
                     <div id="dropdown-monitoring" class="hidden mt-1 ml-2 space-y-1">
                         <a href="/overall-success.html"
-                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded sidebar-item active hover:bg-gray-100">
-                            <i class="fa-solid fa-chart-line  ont-semibold text-[#2563EB]"></i>
-                            <span class="ont-semibold text-[#2563EB]"> Overall Success </span>
-                        </a>
-                        <a href="#"
-                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"><i
-                                class="fa-regular fa-user"></i>
-                            <span> Abandoned by Customer </span>
-                        </a>
-                        <a href="#"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
-                            <i class="fa-solid fa-circle-xmark"></i>
-                            <span> Verification Failure</span>
+                            <i class="fa-solid fa-chart-line "></i>
+                            <span class="font-semibold "> Overall Success </span>
                         </a>
-                        <a href="#"
+                        <a href="/abandoned-by-customer.html"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"><i
+                                class="font-semibold fa-regular fa-user"></i>
+                            <span class="font-semibold"> Abandoned by Customer </span>
+                        </a>
+                        <a href="/verification-failure.html"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded sidebar-item active hover:bg-gray-100">
+                            <i class="fa-solid fa-circle-xmark text-[#2563EB] font-semibold"></i>
+                            <span class="text-[#2563EB] font-semibold"> Verification Failure</span>
+                        </a>
+                        <a href="/id-breakdown.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
                             <i class="fa-solid fa-database"></i>
                             <span> ID Breakdown </span>
                         </a>
-                        <a href="#"
+                        <a href="/document-breakdown.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
                             <i class="fa-regular fa-file"></i>
                             <span> Document Breakdown </span></a>
-                        <a href="#"
+                        <a href="/video-call-waiting.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
                             <i class="fa-regular fa-clock"></i>
                             <span> Video Call Waiting </span>
                         </a>
-                        <a href="#"
+                        <a href="/verification-time.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
                             <i class="fa-regular fa-clock"></i>
                             <span> Verification Time </span></a>
-                        <a href="#"
+                        <a href="/average-response-time.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
                             <i class="fa-solid fa-chart-line"></i>
                             <span> Average Response </span>
                         </a>
-                        <a href="#"
+                        <a href="/country-distribution.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
                             <i class="fa-solid fa-globe"></i>
                             <span> Country Distribution </span></a>
-                        <a href="#"
+                        <a href="/mobile-devices.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
                             <i class="fa-solid fa-mobile-screen"></i>
                             <span> Mobile Devices </span>
                         </a>
-                        <a href="#"
+                        <a href="/detailed-transactions.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
                             <i class="fa-solid fa-chart-line"></i>
                             <span> Detailed Transactions </span>
                         </a>
                     </div>
                 </div>
-                <a href="#" title="Success Rate"
+                <a href="/success-rate.html" title="Success Rate"
                     class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
                     <i class="fa-solid fa-chart-column"></i>
                     <span class="sidebar-label">Success Rate</span>
                 </a>
-                <a href="#" title="Transactions"
+                <a href="/transactions.html" title="Transactions"
                     class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
                     <i class="fa-regular fa-file"></i>
                     <span class="sidebar-label">Transactions</span>
                 </a>
                 <a href="/settings.html" title="Settings"
-                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded hover:bg-gray-100">
-                    <i class="fa-solid fa-gear "></i>
+                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
+                    <i class="fa-solid fa-gear"></i>
                     <span class="sidebar-label">Settings</span>
                 </a>
                 <a href="#" title="Logout"
-                    class="flex items-center gap-2 px-3 py-2 mt-4 text-red-500 transition rounded sidebar-item hover:bg-red-100">
+                    class="flex items-center gap-2 px-3 py-2 mt-4 text-red-500 transition rounded sidebar-item hover:bg-gray-100">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     <span class="sidebar-label">Logout</span>
                 </a>
             </nav>
         </div>
-
         <!-- Main content -->
         <div class="flex flex-col flex-1 h-full overflow-hidden">
             <!-- Mobile Header -->
@@ -232,18 +231,18 @@
                             </a>
                         </div>
                         <!-- Main Content -->
-                        <div class="flex flex-col items-center gap-6 md:flex-row ">
+                        <div class="relative flex flex-col items-center gap-6 md:flex-row ">
 
                             <!-- Bar Chart Card -->
                             <div
-                                class="bg-white rounded-xl p-4 md:p-8 shadow hover:shadow-lg hover:scale-[1.02] transition transform flex justify-center w-full md:w-2/5 min-h-[550px]">
-                                <div id="bard-chart" class="w-full "></div>
+                                class="bg-white rounded-xl p-4 md:p-8 shadow hover:shadow-lg hover:scale-[1.02] transition transform flex justify-center w-full md:w-2/5 min-h-[550px] items-center">
+                                <div id="bard-chart" class="w-full text-left"></div>
                             </div>
 
                             <!-- Pie Chart Card -->
                             <div
                                 class="relative bg-white rounded-[40px] p-6 flex-1 min-h-[550px] justify-normal items-center overflow-hidden border border-transparent transition transform">
-                                <!-- Animated grid background -->
+                                Animated grid background
                                 <div
                                     class="absolute inset-0 bg-[length:40px_40px] bg-[linear-gradient(rgba(0,212,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,212,255,0.03)_1px,transparent_1px)] rounded-[40px] animate-[gridMove_20s_linear_infinite]">
                                 </div>
@@ -367,22 +366,6 @@
                 name: 'Data', data: pieData.map(d => ({ name: d.name, y: d.value, color: { linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 }, stops: d.colors.map((c, i) => [i / (d.colors.length - 1), c]) }, sliced: true }))
             }],
             credits: { enabled: false }
-        });
-
-        // Render custom legend boxes
-        const legendRoot = document.querySelector('.relative > div:last-child');
-        pieData.forEach((d, colIndex) => {
-            const leg = document.createElement('div');
-            leg.className = 'bg-white/95 backdrop-blur-lg rounded-lg px-4 py-3 flex items-center gap-2 cursor-pointer transition transform';
-            leg.onmouseenter = () => leg.classList.add('scale-105'), leg.onmouseleave = () => leg.classList.remove('scale-105');
-            const dot = document.createElement('div');
-            dot.className = 'w-3 h-3 rounded-full animate-pulse';
-            dot.style.background = d.colors[2];
-            const label = document.createElement('span');
-            label.className = 'text-xs font-semibold text-gray-800 uppercase';
-            label.textContent = d.name;
-            leg.append(dot, label);
-            legendRoot.append(leg);
         });
     </script>
 
