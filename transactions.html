@@ -1,275 +1,395 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./tailwind.config.js" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
-      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link
-      rel="stylesheet"
-      href="path/to/line-awesome/css/line-awesome-font-awesome.min.css"
-    />
-    <link rel="stylesheet" href="./assets/css/main.css" />
-    <title>Transactions Page</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
 
-  <body class="h-screen overflow-hidden font-sans">
-    <div class="flex h-screen overflow-hidden">
-      <!-- Overlay for Mobile -->
-      <div
-        id="overlay"
-        class="fixed inset-0 z-20 hidden bg-black bg-opacity-50"
-        onclick="closeMobileMenu()"
-      ></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="path/to/line-awesome/css/line-awesome-font-awesome.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>Transaction Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes float {
 
-      <div
-        id="sidebar"
-        class="bg-white border-r border-gray-200 shadow-sm w-[250px] transition-all duration-300 flex flex-col"
-      >
-        <div
-          class="flex items-center justify-between p-4 border-b border-gray-200 sidebar-top"
-        >
+      0%,
+      100% {
+        transform: translateY(0) rotate(0);
+      }
+
+      50% {
+        transform: translateY(-20px) rotate(180deg);
+      }
+    }
+
+    @keyframes gridMove {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      100% {
+        transform: translate(40px, 40px);
+      }
+    }
+  </style>
+</head>
+
+<body class="h-screen overflow-hidden font-sans">
+  <div class="flex h-screen overflow-hidden">
+    <!-- Overlay for Mobile -->
+    <div id="overlay" class="fixed inset-0 z-20 hidden bg-black bg-opacity-50" onclick="closeMobileMenu()"></div>
+
+    <div id="sidebar"
+      class="bg-white border-r border-gray-200 shadow-sm w-[250px] transition-all duration-300 flex flex-col">
+      <div class="flex items-center justify-between p-4 border-b border-gray-200 sidebar-top">
+        <div class="flex items-center gap-2">
+          <i class="fa-regular fa-circle-user text-[#2563EB] text-xl"></i>
+          <span class="font-bold text-gray-800 sidebar-label">IDBox™</span>
+        </div>
+        <button onclick="toggleCollapse()" class="p-1 rounded-full hover:bg-gray-100">
+          <svg id="collapseIcon" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+      </div>
+      <nav class="flex-1 px-3 py-4 overflow-y-auto">
+        <a href="/index.html" title="Dashboard"
+          class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
+          <i class="fa-solid fa-chart-column"></i>
+          <span class="sidebar-label">Dashboard</span>
+        </a>
+        <div class="relative">
+          <button onclick="toggleDropdown('monitoring')" title="Service Monitoring"
+            class="flex items-center justify-between w-full gap-2 px-3 py-2 font-semibold text-gray-700 transition rounded sidebar-item active hover:bg-gray-100">
+            <span class="flex items-center gap-2">
+              <i class="fa-regular fa-file text-[#2563EB]"></i>
+              <span class="sidebar-label text-[#2563EB]">Service Monitoring</span>
+            </span>
+            <svg id="dropdownIcon-monitoring" xmlns="http://www.w3.org/2000/svg"
+              class="w-4 h-4 transition-transform transform" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd"
+                d="M5.23 7.21a.75.75 0 011.06.02L10 11.292l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.65a.75.75 0 01-1.08 0l-4.25-4.65a.75.75 0 01.02-1.06z"
+                clip-rule="evenodd" />
+            </svg>
+          </button>
+          <div id="dropdown-monitoring" class="hidden mt-1 ml-2 space-y-1">
+            <a href="/overall-success.html"
+              class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded sidebar-item active hover:bg-gray-100">
+              <i class="fa-solid fa-chart-line  ont-semibold text-[#2563EB]"></i>
+              <span class="ont-semibold text-[#2563EB]"> Overall Success </span>
+            </a>
+            <a href="#" class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"><i
+                class="fa-regular fa-user"></i>
+              <span> Abandoned by Customer </span>
+            </a>
+            <a href="#" class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+              <i class="fa-solid fa-circle-xmark"></i>
+              <span> Verification Failure</span>
+            </a>
+            <a href="#" class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+              <i class="fa-solid fa-database"></i>
+              <span> ID Breakdown </span>
+            </a>
+            <a href="#" class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+              <i class="fa-regular fa-file"></i>
+              <span> Document Breakdown </span></a>
+            <a href="#" class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+              <i class="fa-regular fa-clock"></i>
+              <span> Video Call Waiting </span>
+            </a>
+            <a href="#" class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+              <i class="fa-regular fa-clock"></i>
+              <span> Verification Time </span></a>
+            <a href="#" class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+              <i class="fa-solid fa-chart-line"></i>
+              <span> Average Response </span>
+            </a>
+            <a href="#" class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+              <i class="fa-solid fa-globe"></i>
+              <span> Country Distribution </span></a>
+            <a href="#" class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+              <i class="fa-solid fa-mobile-screen"></i>
+              <span> Mobile Devices </span>
+            </a>
+            <a href="#" class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+              <i class="fa-solid fa-chart-line"></i>
+              <span> Detailed Transactions </span>
+            </a>
+          </div>
+        </div>
+        <a href="#" title="Success Rate"
+          class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
+          <i class="fa-solid fa-chart-column"></i>
+          <span class="sidebar-label">Success Rate</span>
+        </a>
+        <a href="#" title="Transactions"
+          class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
+          <i class="fa-regular fa-file"></i>
+          <span class="sidebar-label">Transactions</span>
+        </a>
+        <a href="/settings.html" title="Settings"
+          class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded hover:bg-gray-100">
+          <i class="fa-solid fa-gear "></i>
+          <span class="sidebar-label">Settings</span>
+        </a>
+        <a href="#" title="Logout"
+          class="flex items-center gap-2 px-3 py-2 mt-4 text-red-500 transition rounded sidebar-item hover:bg-red-100">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span class="sidebar-label">Logout</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Main content -->
+    <div class="flex flex-col flex-1 h-full overflow-hidden">
+      <!-- Mobile Header -->
+      <header class="flex items-center justify-between px-4 py-3 bg-white border-b md:hidden">
+        <div class="flex items-center gap-2">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor">
+            <circle cx="12" cy="12" r="10" stroke-width="2" />
+          </svg>
+          <span class="font-semibold text-gray-800">IDBox™</span>
+        </div>
+        <button onclick="openMobileMenu()" class="p-1 rounded hover:bg-gray-100">
+          <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </header>
+
+      <main class="flex-1 p-6 overflow-y-auto font-sans bg-gray-50">
+
+        <div class="">
+          <div class="flex flex-col items-start justify-between gap-4 mb-6 md:flex-row md:items-center">
+            <div>
+              <h1 class="text-2xl font-bold text-gray-800">Transactions</h1>
+              <p class="text-gray-500">Monitoring and analysis of transactions</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium text-gray-700">Define Time Period:</span>
+              <input type="date" class="px-3 py-1 text-sm border rounded" />
+              <span class="text-gray-500">To</span>
+              <input type="date" class="px-3 py-1 text-sm border rounded" />
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <div class="flex mb-6 space-x-4 border-b border-gray-200">
+            <button id="tab-success" class="px-4 py-2 text-sm font-medium text-blue-600 border-b-2 border-blue-600">
+              Success Rate
+            </button>
+            <button id="tab-monitoring" class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-blue-600">
+              Transactions Monitoring
+            </button>
+          </div>
+
+          <!-- Metric Cards -->
+          <div class="grid grid-cols-1 gap-6 mt-5 mb-6 md:grid-cols-2">
+            <!-- Card 1 -->
+            <div class="border-l-4 border-l-[#2196F3] p-5 flex flex-col min-h-[140px] bg-white rounded-xl shadow-sm">
+              <div class="flex-1">
+                <h3 id="stat-title-1" class="font-medium text-gray-500 text-md"></h3>
+                <div class="flex items-baseline gap-2 mt-2">
+                  <div id="stat-value-1" class="text-md text-[#020817] font-normal"></div>
+                </div>
+                <div id="stat-target-1" class="text-md text-[#020817] font-normal"></div>
+              </div>
+              <div class="pt-3 mt-3 border-t border-gray-100">
+                <div class="flex items-center justify-between p-3 mt-2 -mx-5 -mb-5 bg-gray-50">
+                  <span class="text-xs text-gray-500">Avg. Rate</span>
+                  <div class="w-3/4 h-2 overflow-hidden bg-blue-100 rounded-full">
+                    <div id="progress-1" class="h-full bg-[#2196F3]" style="width: 0%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="border-l-4 border-l-yellow-500 p-5 flex flex-col min-h-[140px] bg-white rounded-xl shadow-sm">
+              <div class="flex-1">
+                <h3 id="stat-title-2" class="font-medium text-gray-500 text-md"></h3>
+                <div class="flex items-baseline gap-2 mt-2">
+                  <div id="stat-value-2" class="text-md text-[#020817] font-normal"></div>
+                </div>
+                <div id="stat-target-2" class="text-md text-[#020817] font-normal"></div>
+              </div>
+              <div class="pt-3 mt-3 border-t border-gray-100">
+                <div class="flex items-center justify-between p-3 mt-2 -mx-5 -mb-5 bg-gray-50">
+                  <span class="mr-2 text-xs text-gray-500">SLA Compliance</span>
+                  <div class="w-3/4 h-2 overflow-hidden bg-yellow-100 rounded-full">
+                    <div id="progress-2" class="h-full bg-[#FF9800]" style="width: 0%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts -->
+          <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <div class="bg-white p-6 rounded-xl shadow min-h-[320px]">
+              <div id="chart1" style="height: 320px;"></div>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow min-h-[320px]">
+              <div id="chart2" style="height: 320px;"></div>
+            </div>
+          </div>
+
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="bg-white border-t border-gray-200 footer">
+        <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
             <i class="fa-regular fa-circle-user text-[#2563EB] text-xl"></i>
-            <span class="font-bold text-gray-800 sidebar-label">IDBox™</span>
+            <span class="text-sm font-semibold">IDBox™ Service Monitoring</span>
+            <span class="text-xs leading-normal text-gray-500">v.2.1</span>
           </div>
-          <button
-            onclick="toggleCollapse()"
-            class="p-1 rounded-full hover:bg-gray-100"
-          >
-            <svg
-              id="collapseIcon"
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-5 h-5 text-gray-500"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </button>
+          <div class="text-sm text-gray-500">
+            © <span id="year"></span> Intelli Group All rights reserved
+          </div>
         </div>
-        <nav class="flex-1 px-3 py-4 overflow-y-auto">
-          <a
-            href="/index.html"
-            title="Dashboard"
-            class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100"
-          >
-            <i class="fa-solid fa-chart-column"></i>
-            <span class="sidebar-label">Dashboard</span>
-          </a>
-          <div class="relative">
-            <button
-              onclick="toggleDropdown('monitoring')"
-              title="Service Monitoring"
-              class="flex items-center justify-between w-full gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100"
-            >
-              <span class="flex items-center gap-2">
-                <i class="fa-regular fa-file"></i>
-                <span class="sidebar-label">Service Monitoring</span>
-              </span>
-              <svg
-                id="dropdownIcon-monitoring"
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-4 h-4 transition-transform transform"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M5.23 7.21a.75.75 0 011.06.02L10 11.292l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.65a.75.75 0 01-1.08 0l-4.25-4.65a.75.75 0 01.02-1.06z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </button>
-            <div id="dropdown-monitoring" class="hidden mt-1 ml-2 space-y-1">
-              <a
-                href="#"
-                class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"
-              >
-                <i class="fa-solid fa-chart-line"></i>
-                <span> Overall Success </span>
-              </a>
-              <a
-                href="#"
-                class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"
-                ><i class="fa-regular fa-user"></i>
-                <span> Abandoned by Customer </span>
-              </a>
-              <a
-                href="#"
-                class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"
-              >
-                <i class="fa-solid fa-circle-xmark"></i>
-                <span> Verification Failure</span>
-              </a>
-              <a
-                href="#"
-                class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"
-              >
-                <i class="fa-solid fa-database"></i>
-                <span> ID Breakdown </span>
-              </a>
-              <a
-                href="#"
-                class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"
-              >
-                <i class="fa-regular fa-file"></i>
-                <span> Document Breakdown </span></a
-              >
-              <a
-                href="#"
-                class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"
-              >
-                <i class="fa-regular fa-clock"></i>
-                <span> Video Call Waiting </span>
-              </a>
-              <a
-                href="#"
-                class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"
-              >
-                <i class="fa-regular fa-clock"></i>
-                <span> Verification Time </span></a
-              >
-              <a
-                href="#"
-                class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"
-              >
-                <i class="fa-solid fa-chart-line"></i>
-                <span> Average Response </span>
-              </a>
-              <a
-                href="#"
-                class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"
-              >
-                <i class="fa-solid fa-globe"></i>
-                <span> Country Distribution </span></a
-              >
-              <a
-                href="#"
-                class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"
-              >
-                <i class="fa-solid fa-mobile-screen"></i>
-                <span> Mobile Devices </span>
-              </a>
-              <a
-                href="#"
-                class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"
-              >
-                <i class="fa-solid fa-chart-line"></i>
-                <span> Detailed Transactions </span>
-              </a>
-            </div>
-          </div>
-          <a
-            href="#"
-            title="Success Rate"
-            class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100"
-          >
-            <i class="fa-solid fa-chart-column"></i>
-            <span class="sidebar-label">Success Rate</span>
-          </a>
-          <a
-            href="#"
-            title="Transactions"
-            class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100"
-          >
-            <i class="fa-regular fa-file"></i>
-            <span class="sidebar-label">Transactions</span>
-          </a>
-          <a
-            href="/settings.html"
-            title="Settings"
-            class="flex items-center gap-2 px-3 py-2 font-semibold text-gray-700 transition rounded sidebar-item active hover:bg-gray-100"
-          >
-            <i class="fa-solid fa-gear text-[#2563EB]"></i>
-            <span class="sidebar-label text-[#2563EB]">Settings</span>
-          </a>
-          <a
-            href="#"
-            title="Logout"
-            class="flex items-center gap-2 px-3 py-2 mt-4 text-red-500 transition rounded sidebar-item hover:bg-red-100"
-          >
-            <i class="fa-solid fa-right-from-bracket"></i>
-            <span class="sidebar-label">Logout</span>
-          </a>
-        </nav>
-      </div>
-
-      <!-- Main content -->
-      <div class="flex flex-col flex-1 h-full overflow-hidden">
-        <!-- Mobile Header -->
-        <header
-          class="flex items-center justify-between px-4 py-3 bg-white border-b md:hidden"
-        >
-          <div class="flex items-center gap-2">
-            <svg
-              class="w-6 h-6 text-blue-600"
-              fill="none"
-              stroke="currentColor"
-            >
-              <circle cx="12" cy="12" r="10" stroke-width="2" />
-            </svg>
-            <span class="font-semibold text-gray-800">IDBox™</span>
-          </div>
-          <button
-            onclick="openMobileMenu()"
-            class="p-1 rounded hover:bg-gray-100"
-          >
-            <svg
-              class="w-6 h-6 text-gray-700"
-              fill="none"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
-        </header>
-
-        <main class="flex-1 overflow-y-auto bg-gray-50">
-
-          
-        </main>
-
-        <!-- Footer -->
-        <footer class="bg-white border-t border-gray-200 footer">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <i class="fa-regular fa-circle-user text-[#2563EB] text-xl"></i>
-              <span class="text-sm font-semibold"
-                >IDBox™ Service Monitoring</span
-              >
-              <span class="text-xs leading-normal text-gray-500">v.2.1</span>
-            </div>
-            <div class="text-sm text-gray-500">
-              © <span id="year"></span> Intelli Group All rights reserved
-            </div>
-          </div>
-        </footer>
-      </div>
+      </footer>
     </div>
-    <script
-      src="https://kit.fontawesome.com/ce278ed6db.js"
-      crossorigin="anonymous"
-    ></script>
-    <script src="/assets/js/main.js"></script>
-  </body>
+  </div>
+
+  <script>
+    const chartData = {
+      "success": {
+        stat1: { title: "Average Response Time per Transaction", value: "186 sec", target: "vs 360 sec", progress: 52 },
+        stat2: { title: "% Response Time vs SLA", value: "55%", target: "vs 85%", progress: 55 },
+        chart1: {
+          title: "Response Time Distribution",
+          categories: ["Between 0 And 5 Minutes", "Between 5 And 6 Minutes", "Between 6 And 7 Minutes", "Between 7 And 10 Minutes", "More than 10 Minutes"],
+          data: [84.47, 7.23, 3.25, 3.55, 1.5],
+          colors: ["#2196F3", "#4CAF50", "#FF9800", "#FF9800", "#F44336"]
+        },
+        chart2: {
+          title: "Document Types",
+          categories: ["Tax Document", "Passport", "Police ID", "Student ID", "Military ID"],
+          data: [3134, 3434, 23946, 39, 243],
+          colors: ["#2196F3", "#4CAF50", "#FF9800", "#9E9E9E", "#F44336"]
+        }
+      },
+      "monitoring": {
+        stat1: { title: "Avg Txn Time", value: "152 sec", target: "vs 320 sec", progress: 65 },
+        stat2: { title: "% SLA Hit", value: "63%", target: "vs 90%", progress: 63 },
+        chart1: {
+          title: "Updated Time Distribution",
+          categories: ["< 5min", "5-10min", "10-15min", "15-20min", "> 20min"],
+          data: [72, 18, 5, 3, 2],
+          colors: ["#0284C7", "#10B981", "#F59E0B", "#F59E0B", "#EF4444"]
+        },
+        chart2: {
+          title: "Updated Document Stats",
+          categories: ["License", "Utility Bill", "Driving ID", "NADRA Card", "School ID"],
+          data: [2534, 4134, 17450, 139, 543],
+          colors: ["#0284C7", "#10B981", "#F59E0B", "#9CA3AF", "#EF4444"]
+        }
+      }
+    };
+
+    let chart1, chart2;
+
+    const chartOptions = (title, categories, data, colors) => ({
+      chart: {
+        type: 'bar',
+        options3d: { enabled: true, alpha: 15, beta: 15, depth: 50 },
+        backgroundColor: 'transparent'
+      },
+      title: { text: title, align: 'left', style: { fontSize: '18px', fontWeight: 'bold' } },
+      xAxis: {
+        categories,
+        labels: { style: { fontSize: '15px', color: '#64748b' } },
+        gridLineWidth: 1,
+        gridLineColor: '#e5e7eb'
+      },
+      yAxis: {
+        min: 0,
+        title: { text: null },
+        labels: { style: { fontSize: '14px', color: '#64748b' } },
+        gridLineWidth: 1,
+        gridLineColor: '#e5e7eb'
+      },
+      legend: { enabled: false },
+      plotOptions: {
+        bar: {
+          depth: 40,
+          dataLabels: {
+            enabled: true,
+            format: '{point.y}',
+            style: { color: '#222', fontWeight: 'bold', fontSize: '15px' },
+            align: 'right',
+            inside: false
+          }
+        }
+      },
+      tooltip: { pointFormat: '<b>{point.y}</b>' },
+      series: [{
+        data: data.map((y, i) => ({ y, color: colors[i] }))
+      }]
+    });
+
+    function renderCharts(tabKey) {
+      const d = chartData[tabKey];
+
+      document.getElementById("stat-title-1").textContent = d.stat1.title;
+      document.getElementById("stat-value-1").textContent = d.stat1.value;
+      document.getElementById("stat-target-1").textContent = d.stat1.target;
+      document.getElementById("progress-1").style.width = d.stat1.progress + "%";
+
+      document.getElementById("stat-title-2").textContent = d.stat2.title;
+      document.getElementById("stat-value-2").textContent = d.stat2.value;
+      document.getElementById("stat-target-2").textContent = d.stat2.target;
+      document.getElementById("progress-2").style.width = d.stat2.progress + "%";
+
+      chart1.update(chartOptions(d.chart1.title, d.chart1.categories, d.chart1.data, d.chart1.colors));
+      chart2.update(chartOptions(d.chart2.title, d.chart2.categories, d.chart2.data, d.chart2.colors));
+    }
+
+    document.getElementById("tab-success").addEventListener("click", () => {
+      renderCharts("success");
+      toggleTabs("tab-success", "tab-monitoring");
+    });
+
+    document.getElementById("tab-monitoring").addEventListener("click", () => {
+      renderCharts("monitoring");
+      toggleTabs("tab-monitoring", "tab-success");
+    });
+
+    function toggleTabs(activeId, inactiveId) {
+      document.getElementById(activeId).classList.add("text-blue-600", "border-b-2", "border-blue-600");
+      document.getElementById(inactiveId).classList.remove("text-blue-600", "border-b-2", "border-blue-600");
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      chart1 = Highcharts.chart("chart1", chartOptions(
+        chartData.success.chart1.title,
+        chartData.success.chart1.categories,
+        chartData.success.chart1.data,
+        chartData.success.chart1.colors
+      ));
+
+      chart2 = Highcharts.chart("chart2", chartOptions(
+        chartData.success.chart2.title,
+        chartData.success.chart2.categories,
+        chartData.success.chart2.data,
+        chartData.success.chart2.colors
+      ));
+
+      renderCharts("success");
+    });
+  </script>
+  <script src="https://kit.fontawesome.com/ce278ed6db.js" crossorigin="anonymous"></script>
+  <script src="/assets/js/main.js"></script>
+</body>
+
 </html>

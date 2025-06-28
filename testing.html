@@ -1,193 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Success Rate Dashboard</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <title>Transactions Dashboard</title>
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50">
-  <div class="p-6 mx-auto max-w-7xl">
-    
-    <!-- Header -->
-    <div class="flex flex-col items-start justify-between gap-4 mb-6 md:flex-row md:items-center">
+
+<body class="p-8 font-sans text-gray-800 bg-gray-50">
+  <div class="mx-auto max-w-7xl">
+    <div class="flex flex-col items-start justify-between mb-6 md:flex-row md:items-center">
       <div>
-        <h1 class="text-2xl font-bold text-gray-800">Success Rate</h1>
-        <p class="text-gray-500">Analysis of verification success rates</p>
+        <h1 class="text-2xl font-bold text-gray-800">Transactions</h1>
+        <p class="text-gray-500">Monitoring and analysis of transactions</p>
       </div>
-      <div><!-- TimeFilter -->
-        <input type="date" class="p-2 border rounded"/>
+      <div class="flex items-center space-x-2">
+        <span class="text-sm text-gray-600">Define Time Period:</span>
+        <input type="date" class="px-2 py-1 text-sm border rounded" />
+        <input type="date" class="px-2 py-1 text-sm border rounded" />
       </div>
     </div>
 
     <!-- Tabs -->
-    <div id="tab-bar" class="flex mb-6 border-b border-gray-200">
-      <button data-view="view-success" class="px-4 py-2 -mb-px font-medium border-b-2 border-blue-500 tab-btn active">Success Rate</button>
-      <button data-view="view-transactions" class="px-4 py-2 text-gray-500 tab-btn hover:text-gray-700">Transactions Monitoring</button>
+    <div class="flex mb-6 space-x-4 border-b border-gray-200">
+      <button id="tab-success"
+        class="px-4 py-2 text-sm font-medium text-blue-600 border-b-2 border-blue-600 tab-btn">Success Rate</button>
+      <button id="tab-monitoring"
+        class="px-4 py-2 text-sm font-medium text-gray-500 tab-btn hover:text-blue-600">Transactions Monitoring</button>
     </div>
 
-    <!-- Quick Metrics -->
+    <!-- Stats -->
     <div class="grid grid-cols-1 gap-6 mb-6 md:grid-cols-2">
-      <!-- Completion Rate -->
-      <div class="flex flex-col p-5 bg-white border-l-4 border-green-500 rounded-lg">
-        <div class="flex-1">
-          <h3 class="text-sm font-medium text-gray-500">Completion Rate</h3>
-          <div class="flex items-baseline gap-2 mt-2">
-            <div class="text-3xl font-bold">71.6%</div>
-            <div class="font-semibold text-green-600">+24%</div>
-          </div>
+      <div class="p-5 bg-white rounded shadow">
+        <h3 class="mb-1 text-sm font-semibold" id="stat-title-1">Average Response Time per Transaction</h3>
+        <div class="text-xl font-bold" id="stat-value-1">186 sec</div>
+        <div class="text-sm text-gray-500" id="stat-target-1">vs 360 sec</div>
+        <div class="flex justify-between mt-4 text-xs text-gray-500">
+          <span>Current</span><span>Target</span>
         </div>
-        <div class="pt-3 mt-3 border-t border-gray-100">
-          <div class="flex items-center justify-between p-3 -mx-5 -mb-5 bg-gray-50">
-            <span class="text-xs text-gray-500">Avg. Rate</span>
-            <div class="w-3/4 h-2 overflow-hidden bg-green-200 rounded-full">
-              <div class="h-full bg-green-500" style="width:72%"></div>
-            </div>
-          </div>
+        <div class="h-2 overflow-hidden bg-blue-100 rounded">
+          <div id="progress-1" class="h-full bg-blue-500" style="width: 52%;"></div>
         </div>
       </div>
-      <!-- Onboarding Time -->
-      <div class="flex flex-col p-5 bg-white border-l-4 border-blue-500 rounded-lg">
-        <div class="flex-1">
-          <h3 class="text-sm font-medium text-gray-500">Average Onboarding Time</h3>
-          <div class="flex items-baseline gap-2 mt-2">
-            <div class="text-3xl font-bold">35 sec</div>
-            <div class="font-semibold text-green-600">+8%</div>
-          </div>
+      <div class="p-5 bg-white rounded shadow">
+        <h3 class="mb-1 text-sm font-semibold" id="stat-title-2">% Response Time vs SLA</h3>
+        <div class="text-xl font-bold" id="stat-value-2">55%</div>
+        <div class="text-sm text-gray-500" id="stat-target-2">vs 85%</div>
+        <div class="flex justify-between mt-4 text-xs text-gray-500">
+          <span>Current</span><span>Target</span>
         </div>
-        <div class="pt-3 mt-3 border-t border-gray-100">
-          <div class="flex items-center justify-between p-3 -mx-5 -mb-5 bg-gray-50">
-            <span class="text-xs text-gray-500">Avg. Rate</span>
-            <div class="w-3/4 h-2 overflow-hidden bg-blue-200 rounded-full">
-              <div class="h-full bg-blue-500" style="width:35%"></div>
-            </div>
-          </div>
+        <div class="h-2 overflow-hidden bg-orange-100 rounded">
+          <div id="progress-2" class="h-full bg-orange-500" style="width: 55%;"></div>
         </div>
       </div>
     </div>
 
     <!-- Charts -->
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-      <!-- Success View -->
-      <div id="view-success" class="grid-cols-1 gap-6 space-y-6 view-pane rid lg:grid-cols-2">
-        <!-- 3D Pie -->
-        <div class="relative bg-white rounded-3xl p-12 min-h-[550px] overflow-hidden border border-gray-100 transition-all">
-          <div class="absolute inset-0 bg-[length:40px_40px] bg-[linear-gradient(rgba(0,212,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,212,255,0.03)_1px,transparent_1px)] animate-[gridMove_20s_linear_infinite] rounded-3xl"></div>
-          <div class="absolute top-[15%] right-[10%] w-20 h-20 bg-[radial-gradient(circle,rgba(0,212,255,0.2),rgba(0,106,255,0.1))] rounded-full filter blur-3xl animate-[float_6s_ease-in-out_infinite]"></div>
-          <div class="absolute bottom-[20%] left-[15%] w-15 h-15 bg-[radial-gradient(circle,rgba(255,0,110,0.2),rgba(131,56,236,0.1))] rounded-full filter blur-2xl animate-[float_8s_ease-in-out_infinite_reverse]"></div>
-          <div class="absolute inset-0 bg-white/5 backdrop-blur-[30px] rounded-3xl border border-white/5"></div>
-          <div id="pie-chart" class="relative z-10 flex items-center justify-center w-full h-full border rounded-2xl bg-white/5 border-white/5"></div>
-          <div id="pie-legend" class="absolute z-20 grid grid-cols-2 gap-4 transform -translate-x-1/2 bottom-6 left-1/2"></div>
-        </div>
-        <!-- 3D Bar -->
-        <div id="bar-chart" class="bg-white rounded-xl p-6 shadow min-h-[350px]"></div>
+      <div class="bg-white p-6 rounded-xl shadow min-h-[350px]">
+        <div id="chart1"></div>
       </div>
-
-      <!-- Transactions View -->
-      <div id="view-transactions" class="view-pane hidden col-span-1 lg:col-span-2 bg-white rounded-xl p-6 flex items-center justify-center min-h-[400px]">
-        <div class="text-center">
-          <h3 class="mb-2 text-xl font-medium text-gray-600">Transaction monitoring data</h3>
-          <p class="text-gray-500">Select a date range to view detailed transaction data</p>
-        </div>
+      <div class="bg-white p-6 rounded-xl shadow min-h-[350px]">
+        <div id="chart2"></div>
       </div>
     </div>
   </div>
 
-
   <script>
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const viewPanes = document.querySelectorAll('.view-pane');
-
-    tabButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        tabButtons.forEach(b => b.classList.remove('active', 'border-blue-500'));
-        btn.classList.add('active', 'border-blue-500');
-        const target = btn.dataset.view;
-        viewPanes.forEach(v => v.id === target ? v.classList.remove('hidden') : v.classList.add('hidden'));
-      });
-    });
-
-    const chartPieData = [
-      { name: 'Verification Success', y: 72, colors: ['#00d4ff','#006eff','#0047ff'] },
-      { name: 'Abandoned by Customer', y: 16, colors: ['#ff006e','#8338ec','#3a86ff'] },
-      { name: 'Verification Failure', y: 11, colors: ['#06ffa5','#00d4aa','#0056b3'] },
-      { name: 'Not Started', y: 1, colors: ['#ffbe0b','#fb8500','#ff006e'] }
-    ];
-
-    Highcharts.chart('pie-chart', {
-      chart: { type: 'pie', options3d:{ enabled:true, alpha:35, depth:45 }, backgroundColor:'transparent', height:380 },
-      title: {
-        useHTML:true,
-        text:`<div style="text-align:center;padding:25px;">
-                <div style="font-size:48px;font-weight:900;color:#111;animation:pulse 2s infinite;">100</div>
-                <div style="font-size:11px;color:#222;font-weight:700;text-transform:uppercase;letter-spacing:4px;animation:fadeIn 3s ease-in;">TOTAL DATA POINTS</div>
-              </div>`,
-        align:'center', verticalAlign:'middle', floating:true, y:0
-      },
-      credits: { enabled:false },
-      plotOptions: {
-        pie: {
-          innerSize:'55%', depth:45, borderWidth:1, borderRadius:25, cursor:'pointer',
-          dataLabels:{ enabled:true, format:'{point.percentage:.0f}%', style:{ fontSize:'12px', fontWeight:'900', color:'#111'}, distance:-22 },
-          animation:{ duration:2500 }
+    const chartData = {
+      "success": {
+        stat1: { title: "Average Response Time per Transaction", value: "186 sec", target: "vs 360 sec", progress: 52 },
+        stat2: { title: "% Response Time vs SLA", value: "55%", target: "vs 85%", progress: 55 },
+        chart1: {
+          title: "Response Time Distribution",
+          categories: ["Between 0 And 5 Minutes", "Between 5 And 6 Minutes", "Between 6 And 7 Minutes", "Between 7 And 10 Minutes", "More than 10 Minutes"],
+          data: [84.47, 7.23, 3.25, 3.55, 1.5],
+          colors: ["#2196F3", "#4CAF50", "#FF9800", "#FF9800", "#F44336"]
+        },
+        chart2: {
+          title: "Document Types",
+          categories: ["Tax Document", "Passport", "Police ID", "Student ID", "Military ID"],
+          data: [3134, 3434, 23946, 39, 243],
+          colors: ["#2196F3", "#4CAF50", "#FF9800", "#9E9E9E", "#F44336"]
         }
       },
-      tooltip: {
-        backgroundColor:'white', borderRadius:20, style:{ fontSize:'13px', fontWeight:'600'},
-        formatter: function(){ return `<div style="padding:20px;text-align:center;">
-          <div style="font-weight:900;color:#111;margin-bottom:10px;font-size:15px;text-transform:uppercase;letter-spacing:1px;">
-            ${this.point.name}
-          </div>
-          <div style="color:#222;margin-bottom:6px;">Value: <span style="font-weight:800;color:#111;">${this.y}</span></div>
-          <div style="color:#222;">Share: <span style="font-weight:800;color:#111;">${this.percentage.toFixed(1)}%</span></div>
-        </div>`; }
-      },
-      legend: { enabled:false },
-      series: [{
-        name:'Data',
-        data: chartPieData.map(item => ({
-          name: item.name,
-          y: item.y,
-          color: {
-            linearGradient: { x1:0,y1:0,x2:1,y2:1 },
-            stops: item.colors.map((c,i) => [i/(item.colors.length-1), c])
-          },
-          sliced: true
-        }))
-      }]
+      "monitoring": {
+        stat1: { title: "Avg Txn Time", value: "152 sec", target: "vs 320 sec", progress: 65 },
+        stat2: { title: "% SLA Hit", value: "63%", target: "vs 90%", progress: 63 },
+        chart1: {
+          title: "Updated Time Distribution",
+          categories: ["< 5min", "5-10min", "10-15min", "15-20min", "> 20min"],
+          data: [72, 18, 5, 3, 2],
+          colors: ["#0284C7", "#10B981", "#F59E0B", "#F59E0B", "#EF4444"]
+        },
+        chart2: {
+          title: "Updated Document Stats",
+          categories: ["License", "Utility Bill", "Driving ID", "NADRA Card", "School ID"],
+          data: [2534, 4134, 17450, 139, 543],
+          colors: ["#0284C7", "#10B981", "#F59E0B", "#9CA3AF", "#EF4444"]
+        }
+      }
+    };
+
+    let chart1, chart2;
+
+    function renderCharts(tabKey) {
+      const d = chartData[tabKey];
+
+      // Update stats
+      document.getElementById("stat-title-1").textContent = d.stat1.title;
+      document.getElementById("stat-value-1").textContent = d.stat1.value;
+      document.getElementById("stat-target-1").textContent = d.stat1.target;
+      document.getElementById("progress-1").style.width = d.stat1.progress + "%";
+
+      document.getElementById("stat-title-2").textContent = d.stat2.title;
+      document.getElementById("stat-value-2").textContent = d.stat2.value;
+      document.getElementById("stat-target-2").textContent = d.stat2.target;
+      document.getElementById("progress-2").style.width = d.stat2.progress + "%";
+
+      chart1.update({
+        title: { text: d.chart1.title },
+        xAxis: { categories: d.chart1.categories },
+        series: [{ data: d.chart1.data.map((y, i) => ({ y, color: d.chart1.colors[i] })) }]
+      });
+
+      chart2.update({
+        title: { text: d.chart2.title },
+        xAxis: { categories: d.chart2.categories },
+        series: [{ data: d.chart2.data.map((y, i) => ({ y, color: d.chart2.colors[i] })) }]
+      });
+    }
+
+    document.getElementById("tab-success").addEventListener("click", () => {
+      renderCharts("success");
+      document.getElementById("tab-success").classList.add("text-blue-600", "border-b-2", "border-blue-600");
+      document.getElementById("tab-monitoring").classList.remove("text-blue-600", "border-b-2", "border-blue-600");
     });
 
-    const legendContainer = document.getElementById('pie-legend');
-    chartPieData.forEach(entry => {
-      const legendBox = document.createElement('div');
-      legendBox.className = 'bg-white/95 backdrop-blur-lg rounded-lg px-4 py-3 flex items-center gap-2 cursor-pointer transition transform hover:-translate-y-1 hover:scale-105';
-      const dot = document.createElement('div');
-      dot.className = 'w-4 h-4 rounded-full animate-pulse';
-      dot.style.background = entry.colors.at(-1);
-      dot.style.boxShadow = `0 0 10px ${entry.colors.at(-1)}80`;
-      const label = document.createElement('span');
-      label.className = 'text-xs font-semibold text-gray-800 uppercase';
-      label.textContent = entry.name;
-      legendBox.append(dot, label);
-      legendContainer.append(legendBox);
+    document.getElementById("tab-monitoring").addEventListener("click", () => {
+      renderCharts("monitoring");
+      document.getElementById("tab-monitoring").classList.add("text-blue-600", "border-b-2", "border-blue-600");
+      document.getElementById("tab-success").classList.remove("text-blue-600", "border-b-2", "border-blue-600");
     });
 
-    const failureReasons = ["Unclassified","Document date is older than XXX","The document is not in complete view","User is under 21 years old","Missing mandatory document fields","Possible fraud"];
-    const failurePercentages = [31,11.3,11.5,1.25,0.05,6.08];
-    const failureColors = ['#9E9E9E','#FF9800','#FF9800','#F44336','#F44336','#F44336'];
+    document.addEventListener("DOMContentLoaded", () => {
+      const chartOptions = (title, categories, data, colors) => ({
+        chart: { type: 'bar', options3d: { enabled: true, alpha: 15, beta: 15, depth: 50 }, backgroundColor: 'transparent' },
+        title: { text: title, align: 'left', style: { fontSize: '18px', fontWeight: 'bold' } },
+        xAxis: { categories, labels: { style: { fontSize: '15px', color: '#64748b' } }, gridLineWidth: 1, gridLineColor: '#e5e7eb' },
+        yAxis: { min: 0, title: { text: null }, labels: { style: { fontSize: '14px', color: '#64748b' } }, gridLineWidth: 1, gridLineColor: '#e5e7eb' },
+        legend: { enabled: false },
+        plotOptions: {
+          bar: {
+            depth: 40,
+            groupZPadding: 10,
+            grouping: false,
+            dataLabels: {
+              enabled: true,
+              format: '{point.y}',
+              style: { color: '#222', fontWeight: 'bold', fontSize: '15px' },
+              align: 'right',
+              inside: false
+            }
+          }
+        },
+        tooltip: { pointFormat: '<b>{point.y}</b>' },
+        series: [{ data: data.map((y, i) => ({ y, color: colors[i] })) }]
+      });
 
-    Highcharts.chart('bar-chart', {
-      chart: { type:'bar', options3d:{ enabled:true,alpha:15,beta:15,depth:50 }, backgroundColor:'transparent', height:320 },
-      title:{ text:'Failure Reasons', align:'left', style:{ fontSize:'18px', fontWeight:'bold'} },
-      xAxis:{ categories:failureReasons, labels:{ style:{ fontSize:'15px', color:'#64748b'} }, gridLineWidth:1, gridLineColor:'#e5e7eb' },
-      yAxis:{ min:0, max:35, title: { text:null }, labels:{ style:{ fontSize:'14px', color:'#64748b'} }, gridLineWidth:1, gridLineColor:'#e5e7eb' },
-      plotOptions:{ bar:{ depth:40, grouping:false, dataLabels:{ enabled:true, format:'{point.y:.2f}', style:{ color:'#222', fontWeight:'bold', fontSize:'15px'}, align:'right', inside:false } } },
-      tooltip:{ pointFormat:'<b>{point.y:.2f}%</b>' },
-      series:[{ name:'value', data: failurePercentages.map((v,i)=>({ y:v, color: failureColors[i] })) }],
-      credits:{ enabled:false }
+      chart1 = Highcharts.chart("chart1", chartOptions(
+        chartData.success.chart1.title,
+        chartData.success.chart1.categories,
+        chartData.success.chart1.data,
+        chartData.success.chart1.colors
+      ));
+
+      chart2 = Highcharts.chart("chart2", chartOptions(
+        chartData.success.chart2.title,
+        chartData.success.chart2.categories,
+        chartData.success.chart2.data,
+        chartData.success.chart2.colors
+      ));
     });
   </script>
 </body>
+
 </html>
