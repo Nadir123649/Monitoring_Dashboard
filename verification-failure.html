@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+        integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="path/to/line-awesome/css/line-awesome-font-awesome.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <title>Verification Failure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.7;
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(40px, 40px);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="h-screen overflow-hidden font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Overlay for Mobile -->
+        <div id="overlay" class="fixed inset-0 z-20 hidden bg-black bg-opacity-50" onclick="closeMobileMenu()"></div>
+
+        <div id="sidebar"
+            class="bg-white border-r border-gray-200 shadow-sm w-[250px] transition-all duration-300 flex flex-col">
+            <div class="flex items-center justify-between p-4 border-b border-gray-200 sidebar-top">
+                <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-circle-user text-[#2563EB] text-xl"></i>
+                    <span class="font-bold text-gray-800 sidebar-label">IDBox™</span>
+                </div>
+                <button onclick="toggleCollapse()" class="p-1 rounded-full hover:bg-gray-100">
+                    <svg id="collapseIcon" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+            </div>
+            <nav class="flex-1 px-3 py-4 overflow-y-auto">
+                <a href="/index.html" title="Dashboard"
+                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
+                    <i class="fa-solid fa-chart-column"></i>
+                    <span class="sidebar-label">Dashboard</span>
+                </a>
+                <div class="relative">
+                    <button onclick="toggleDropdown('monitoring')" title="Service Monitoring"
+                        class="flex items-center justify-between w-full gap-2 px-3 py-2 font-semibold text-gray-700 transition rounded sidebar-item active hover:bg-gray-100">
+                        <span class="flex items-center gap-2">
+                            <i class="fa-regular fa-file text-[#2563EB]"></i>
+                            <span class="sidebar-label text-[#2563EB]">Service Monitoring</span>
+                        </span>
+                        <svg id="dropdownIcon-monitoring" xmlns="http://www.w3.org/2000/svg"
+                            class="w-4 h-4 transition-transform transform" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.292l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.65a.75.75 0 01-1.08 0l-4.25-4.65a.75.75 0 01.02-1.06z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div id="dropdown-monitoring" class="hidden mt-1 ml-2 space-y-1">
+                        <a href="/overall-success.html"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded sidebar-item active hover:bg-gray-100">
+                            <i class="fa-solid fa-chart-line  ont-semibold text-[#2563EB]"></i>
+                            <span class="ont-semibold text-[#2563EB]"> Overall Success </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"><i
+                                class="fa-regular fa-user"></i>
+                            <span> Abandoned by Customer </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                            <span> Verification Failure</span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-database"></i>
+                            <span> ID Breakdown </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-regular fa-file"></i>
+                            <span> Document Breakdown </span></a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-regular fa-clock"></i>
+                            <span> Video Call Waiting </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-regular fa-clock"></i>
+                            <span> Verification Time </span></a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span> Average Response </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-globe"></i>
+                            <span> Country Distribution </span></a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-mobile-screen"></i>
+                            <span> Mobile Devices </span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span> Detailed Transactions </span>
+                        </a>
+                    </div>
+                </div>
+                <a href="#" title="Success Rate"
+                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
+                    <i class="fa-solid fa-chart-column"></i>
+                    <span class="sidebar-label">Success Rate</span>
+                </a>
+                <a href="#" title="Transactions"
+                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
+                    <i class="fa-regular fa-file"></i>
+                    <span class="sidebar-label">Transactions</span>
+                </a>
+                <a href="/settings.html" title="Settings"
+                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded hover:bg-gray-100">
+                    <i class="fa-solid fa-gear "></i>
+                    <span class="sidebar-label">Settings</span>
+                </a>
+                <a href="#" title="Logout"
+                    class="flex items-center gap-2 px-3 py-2 mt-4 text-red-500 transition rounded sidebar-item hover:bg-red-100">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span class="sidebar-label">Logout</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main content -->
+        <div class="flex flex-col flex-1 h-full overflow-hidden">
+            <!-- Mobile Header -->
+            <header class="flex items-center justify-between px-4 py-3 bg-white border-b md:hidden">
+                <div class="flex items-center gap-2">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor">
+                        <circle cx="12" cy="12" r="10" stroke-width="2" />
+                    </svg>
+                    <span class="font-semibold text-gray-800">IDBox™</span>
+                </div>
+                <button onclick="openMobileMenu()" class="p-1 rounded hover:bg-gray-100">
+                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </header>
+
+            <main class="flex-1 p-6 overflow-y-auto font-sans bg-gray-50">
+
+                <div class="max-w-screen-xl mx-auto">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-900">Verification Failure</h1>
+                            <p class="text-sm text-gray-600">Analysis of verification failure reasons
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-sm font-medium text-gray-700">Define Time Period:</span>
+                            <input type="date" class="px-3 py-1 text-sm border rounded" />
+                            <span class="text-gray-500">To</span>
+                            <input type="date" class="px-3 py-1 text-sm border rounded" />
+                        </div>
+                    </div>
+
+                    <div class="bg-white shadow main-div rounded-2xl ">
+                        <!-- Tabs -->
+                        <div class="flex gap-2 mb-6">
+                            <button
+                                class="px-6 py-2 font-semibold text-blue-600 bg-white border-b-2 border-blue-600 rounded-t-lg shadow">
+                                Success Rate
+                            </button>
+                            <a href="#"
+                                class="px-6 py-2 text-gray-500 bg-gray-100 border-b-2 border-transparent rounded-t-lg hover:text-blue-600">
+                                Transactions Monitoring
+                            </a>
+                        </div>
+                        <!-- Main Content -->
+                        <div class="flex flex-col items-center gap-6 md:flex-row ">
+
+
+                            <!-- Bar Chart Card -->
+                            <div
+                                class="bg-white rounded-xl p-4 md:p-8 shadow hover:shadow-lg hover:scale-[1.02] transition transform flex justify-center w-full md:w-2/5 min-h-[550px]">
+                                <div id="bard-chart" class="w-full "></div>
+                            </div>
+
+                            <!-- Pie Chart Card -->
+                            <div
+                                class="relative bg-white rounded-[40px] p-6 flex-1 min-h-[550px] justify-normal items-center overflow-hidden border border-transparent transition transform">
+                                <!-- Animated grid background -->
+                                <div
+                                    class="absolute inset-0 bg-[length:40px_40px] bg-[linear-gradient(rgba(0,212,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,212,255,0.03)_1px,transparent_1px)] rounded-[40px] animate-[gridMove_20s_linear_infinite]">
+                                </div>
+                                <!-- Orbs -->
+                                <div
+                                    class="absolute top-[15%] right-[10%] w-20 h-20 bg-[radial-gradient(circle,rgba(0,212,255,0.2),rgba(0,106,255,0.1))] rounded-full blur-[20px] animate-[float_6s_ease-in-out_infinite]">
+                                </div>
+                                <div
+                                    class="absolute bottom-[20%] left-[15%] w-15 h-15 bg-[radial-gradient(circle,rgba(255,0,110,0.2),rgba(131,56,236,0.1))] rounded-full blur-[15px] animate-[float_8s_ease-in-out_infinite_reverse]">
+                                </div>
+                                <!-- Glass overlay -->
+                                <div
+                                    class="absolute inset-0 bg-white/5 backdrop-blur-[30px] rounded-[40px] border border-white/5">
+                                </div>
+                                <!-- Pie Chart Container -->
+                                <div id="pies-chart"
+                                    class="relative z-10 w-full rounded-[30px] bg-white/5 border border-white/5"></div>
+                                <!-- Legend -->
+                                <div
+                                    class="absolute z-20 grid grid-cols-2 gap-4 transform -translate-x-1/2 bottom-6 left-1/2">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <footer class="bg-white border-t border-gray-200 footer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-regular fa-circle-user text-[#2563EB] text-xl"></i>
+                        <span class="text-sm font-semibold">IDBox™ Service Monitoring</span>
+                        <span class="text-xs leading-normal text-gray-500">v.2.1</span>
+                    </div>
+                    <div class="text-sm text-gray-500">
+                        © <span id="year"></span> Intelli Group All rights reserved
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // Gradient stops used by FutureGradients
+        const FG = [
+            ['#00d4ff', '#006eff', '#0047ff'],
+            ['#ff006e', '#8338ec', '#3a86ff'],
+            ['#06ffa5', '#00d4aa', '#0056b3'],
+            ['#ffbe0b', '#fb8500', '#ff006e']
+        ];
+        // Data
+        const barData = [
+            { reason: 'Unclassified', percentage: 31.09, count: 9665 },
+            { reason: 'User is under 21 years old', percentage: 1.25, count: 389 },
+            { reason: 'Document date is older than XXX', percentage: 11.29, count: 3510 },
+            { reason: 'Expired Document', percentage: 8.20, count: 2552 },
+            { reason: 'Missing mandatory document files', percentage: 0.05, count: 16 },
+            { reason: 'Possible fraud', percentage: 6.08, count: 1891 },
+            { reason: 'The document is not in complete view', percentage: 11.59, count: 3602 },
+            { reason: 'All necessary data are not visible', percentage: 2.66, count: 828 },
+        ];
+        const pieData = [
+            { name: 'Verification Success', value: 72, colors: FG[0] },
+            { name: 'Abandoned by Customer', value: 16, colors: FG[1] },
+            { name: 'Verification Failure', value: 11, colors: FG[2] },
+            { name: 'Not Started', value: 1, colors: FG[3] },
+        ];
+
+        function thousand(x) { return x.toLocaleString(); }
+
+        // Configure Bar Chart
+        Highcharts.chart('bard-chart', {
+            chart: { type: 'bar', options3d: { enabled: true, alpha: 10, beta: 15, depth: 50 }, backgroundColor: 'transparent', height: 420 },
+            xAxis: {
+                categories: barData.map(d => d.reason.length > 28 ? d.reason.slice(0, 28) + '...' : d.reason),
+                labels: { style: { fontSize: '14px', fontWeight: '500' } }
+            },
+            yAxis: {
+                min: 0, max: 35, labels: { formatter() { return this.value + '%'; } },
+                gridLineDashStyle: 'Dash'
+            },
+            plotOptions: {
+                series: {
+                    depth: 40,
+                    dataLabels: { enabled: true, inside: true, style: { fontSize: '13px', fontWeight: 'bold' }, formatter() { return this.series.name === 'percentage' ? this.y + '%' : thousand(this.y); } }
+                }
+            },
+            series: [
+                { name: 'percentage', data: barData.map(d => d.percentage), color: '#FACC15', borderRadius: 5 },
+                { name: 'count', data: barData.map(d => d.count), color: '#A3A3A3', borderRadius: 5 }
+            ],
+            legend: {
+                align: 'center', verticalAlign: 'bottom', layout: 'horizontal',
+                labelFormatter() { if (this.name === 'percentage') return 'Failure Rate %'; if (this.name === 'count') return 'Count'; return this.name; }
+            }
+        });
+
+        // Configure Pie Chart
+        Highcharts.chart('pies-chart', {
+            chart: { type: 'pie', options3d: { enabled: true, alpha: 35, beta: 0, depth: 45 }, backgroundColor: 'transparent', height: 380, animation: { duration: 2500, easing: 'easeOutElastic' } },
+            title: {
+                useHTML: true, floating: true, align: 'center', verticalAlign: 'middle', y: 0,
+                text: `<div style="text-align:center;padding:25px;">
+                <div style="font-size:48px;font-weight:900;color:#111;animation:pulse 2s infinite;">${pieData.reduce((s, d) => s + d.value, 0)}</div>
+                <div style="font-size:11px;color:#222;font-weight:700;text-transform:uppercase;letter-spacing:4px;animation:fadeIn 3s ease-in;">TOTAL TRANSACTIONS</div>
+              </div>`
+            },
+            plotOptions: {
+                pie: {
+                    innerSize: '55%', depth: 45, borderRadius: 25, slicedOffset: 12, allowPointSelect: true,
+                    dataLabels: { enabled: true, format: '{point.percentage:.0f}%', style: { fontSize: '12px', fontWeight: '900', color: '#111' }, distance: -22 }
+                }
+            },
+            tooltip: {
+                backgroundColor: 'white', borderRadius: 20, shadow: { color: 'rgba(0,212,255,0.3)', offsetY: 10, opacity: 0.3, width: 25 },
+                formatter() { return `<div style="padding:20px;text-align:center;"><div style="font-weight:900;color:#111;font-size:15px;text-transform:uppercase;letter-spacing:1px;">${this.point.name}</div><div style="color:#222;margin-bottom:6px;">Value: <span style="font-weight:800;color:#111;">${this.y.toLocaleString()}</span></div><div style="color:#222;">Share: <span style="font-weight:800;color:#111;">${this.percentage.toFixed(1)}%</span></div></div>` }
+            },
+            series: [{
+                name: 'Data', data: pieData.map(d => ({ name: d.name, y: d.value, color: { linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 }, stops: d.colors.map((c, i) => [i / (d.colors.length - 1), c]) }, sliced: true }))
+            }],
+            credits: { enabled: false }
+        });
+
+        // Render custom legend boxes
+        const legendRoot = document.querySelector('.relative > div:last-child');
+        pieData.forEach((d, colIndex) => {
+            const leg = document.createElement('div');
+            leg.className = 'bg-white/95 backdrop-blur-lg rounded-lg px-4 py-3 flex items-center gap-2 cursor-pointer transition transform';
+            leg.onmouseenter = () => leg.classList.add('scale-105'), leg.onmouseleave = () => leg.classList.remove('scale-105');
+            const dot = document.createElement('div');
+            dot.className = 'w-3 h-3 rounded-full animate-pulse';
+            dot.style.background = d.colors[2];
+            const label = document.createElement('span');
+            label.className = 'text-xs font-semibold text-gray-800 uppercase';
+            label.textContent = d.name;
+            leg.append(dot, label);
+            legendRoot.append(leg);
+        });
+    </script>
+
+
+    <script src="https://kit.fontawesome.com/ce278ed6db.js" crossorigin="anonymous"></script>
+    <script src="/assets/js/main.js"></script>
+</body>
+
+</html>
