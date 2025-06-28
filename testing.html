@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Response Time Distribution</title>
+  <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+  <style>
+    body { font-family: Inter, sans-serif; }
+  </style>
+</head>
+<body class="p-8 bg-gray-50">
+
+  <div class="max-w-4xl mx-auto">
+    <div
+      id="responseBarChart"
+      class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 flex items-center justify-center min-h-[350px]">
+    </div>
+  </div>
+
+  <script>
+    const data = [
+      { name: "Between 0 And 5 Minutes", value: 84.47, color: "#2196F3" },
+      { name: "Between 5 And 6 Minutes", value: 7.23, color: "#4CAF50" },
+      { name: "Between 6 And 7 Minutes", value: 3.25, color: "#FF9800" },
+      { name: "Between 7 And 10 Minutes", value: 3.55, color: "#FF9800" },
+      { name: "More than 10 Minutes", value: 1.5, color: "#F44336" }
+    ];
+
+    Highcharts.chart('responseBarChart', {
+      chart: {
+        type: 'bar',
+        options3d: { enabled: true, alpha: 15, beta: 15, depth: 50, viewDistance: 25 },
+        backgroundColor: 'transparent',
+        height: 320
+      },
+      title: {
+        text: 'Response Time Distribution',
+        align: 'left',
+        style: { fontSize: '18px', fontWeight: '600', color: '#1e293b' },
+        margin: 24
+      },
+      credits: { enabled: false },
+      xAxis: {
+        categories: data.map(d => d.name),
+        labels: {
+          style: { fontSize: '13px', color: '#64748b', fontWeight: '500' },
+          useHTML: true,
+          formatter: function() {
+            return `<span style="max-width:160px;display:inline-block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${this.value}</span>`;
+          }
+        },
+        gridLineWidth: 0,
+        lineColor: '#e2e8f0',
+        tickLength: 0
+      },
+      yAxis: {
+        min: 0,
+        max: 100,
+        title: { text: null },
+        labels: {
+          style: { fontSize: '13px', color: '#64748b', fontWeight: '500' },
+          formatter: function() { return this.value + '%'; }
+        },
+        gridLineWidth: 1,
+        gridLineColor: '#e2e8f0',
+        lineColor: '#e2e8f0',
+        tickLength: 0
+      },
+      legend: { enabled: false },
+      plotOptions: {
+        bar: {
+          depth: 40,
+          grouping: false,
+          borderRadius: 4,
+          states: { hover: { brightness: 0.1 } },
+          dataLabels: {
+            enabled: true,
+            format: '{y:.1f}%',
+            style: { fontSize: '12px', fontWeight: '500', color: '#1e293b', textOutline: 'none' },
+            align: 'center',
+            verticalAlign: 'top',
+            y: -10
+          }
+        }
+      },
+      tooltip: {
+        backgroundColor: 'rgba(255,255,255,0.95)',
+        borderWidth: 0,
+        borderRadius: 8,
+        shadow: true,
+        style: { fontSize: '14px', color: '#1e293b' },
+        formatter: function() {
+          return `<b>${this.x}</b><br/>${this.y.toFixed(1)}%`;
+        }
+      },
+      series: [{
+        name: 'Response Time',
+        data: data.map(d => ({ y: d.value, color: d.color })),
+        animation: { duration: 1000 }
+      }],
+      animation: { duration: 1000 }
+    });
+  </script>
+</body>
+</html>
