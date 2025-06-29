@@ -335,46 +335,6 @@ a {
   font-family: "JetBrains Mono", system-ui, sans-serif !important;
 }
 
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-20px) rotate(180deg);
-  }
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0) rotate(0);
-  }
-
-  50% {
-    transform: translateY(-20px) rotate(180deg);
-  }
-}
-
-@keyframes gridMove {
-  0% {
-    transform: translate(0, 0);
-  }
-
-  100% {
-    transform: translate(40px, 40px);
-  }
-}
 .time-period-container {
   display: flex;
   align-items: center;
@@ -445,7 +405,6 @@ a {
   cursor: pointer;
 }
 
-/* Hide the placeholder when the input has a value or is focused */
 .date-wrapper input[type="date"]:not(:placeholder-shown) + .placeholder-text,
 .date-wrapper input[type="date"]:focus + .placeholder-text {
   display: none;
@@ -474,7 +433,37 @@ a {
   }
 }
 
-/* Responsive padding and layout for smaller screens */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+  }
+}
+
+@keyframes gridMove {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(40px, 40px);
+  }
+}
+
 @media (max-width: 768px) {
   .chart-container {
     padding: 1rem;

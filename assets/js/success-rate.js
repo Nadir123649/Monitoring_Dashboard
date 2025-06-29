@@ -186,3 +186,54 @@ Highcharts.chart("failureBarCharts", {
   ],
   credits: { enabled: false },
 });
+
+function openMobileMenu() {
+  document.getElementById("sidebar").classList.add("fixed", "left-0", "top-0");
+  document.getElementById("overlay").classList.remove("hidden");
+}
+
+function closeMobileMenu() {
+  document.getElementById("sidebar").classList.remove("fixed");
+  document.getElementById("overlay").classList.add("hidden");
+}
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+let collapsed = false;
+let dropdownOpen = {};
+
+function toggleCollapse() {
+  const sidebar = document.getElementById("sidebar");
+  const icon = document.getElementById("collapseIcon");
+  const labels = document.querySelectorAll(".sidebar-label");
+
+  collapsed = !collapsed;
+
+  // toggle width
+  sidebar.classList.toggle("w-[250px]");
+  sidebar.classList.toggle("w-[70px]");
+
+  // toggle text label visibility
+  labels.forEach((label) => {
+    if (collapsed) {
+      label.classList.add("hidden");
+    } else {
+      label.classList.remove("hidden");
+    }
+  });
+
+  // rotate icon
+  if (icon) icon.classList.toggle("rotate-180");
+}
+
+function toggleDropdown(name) {
+  const dropdown = document.getElementById("dropdown-" + name);
+  const icon = document.getElementById("dropdownIcon-" + name);
+  if (dropdown.classList.contains("hidden")) {
+    dropdown.classList.remove("hidden");
+    icon.classList.add("rotate-180");
+  } else {
+    dropdown.classList.add("hidden");
+    icon.classList.remove("rotate-180");
+  }
+}
