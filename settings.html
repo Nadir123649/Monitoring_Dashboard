@@ -21,7 +21,7 @@
         <!-- Overlay for Mobile -->
         <div id="overlay" class="fixed inset-0 z-20 hidden bg-black bg-opacity-50" onclick="closeMobileMenu()"></div>
         <div id="sidebar"
-            class="bg-white border-r border-gray-200 shadow-sm w-[250px] transition-all duration-300 flex flex-col">
+            class="bg-white border-r border-gray-200 shadow-sm w-[250px] transition-all duration-300 flex flex-col overflow-hidden">
             <div class="flex items-center justify-between p-4 border-b border-gray-200 sidebar-top">
                 <div class="flex items-center gap-2">
                     <i class="fa-regular fa-circle-user text-[#2563EB] text-xl"></i>
@@ -54,7 +54,7 @@
                                 clip-rule="evenodd" />
                         </svg>
                     </button>
-                    <div id="dropdown-monitoring" class="hidden mt-1 ml-2 space-y-1">
+                    <div id="dropdown-monitoring" class="hidden mt-1 ml-2 space-y-1 overflow-hidden whitespace-nowrap">
                         <a href="/overall-success.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
                             <i class="fa-solid fa-chart-line"></i>

@@ -17,6 +17,7 @@ function toggleCollapse() {
   const sidebar = document.getElementById("sidebar");
   const icon = document.getElementById("collapseIcon");
   const labels = document.querySelectorAll(".sidebar-label");
+  const dropdowns = document.querySelectorAll("[id^='dropdown-']");
 
   collapsed = !collapsed;
 
@@ -24,7 +25,7 @@ function toggleCollapse() {
   sidebar.classList.toggle("w-[250px]");
   sidebar.classList.toggle("w-[70px]");
 
-  // toggle text label visibility
+  // toggle label visibility
   labels.forEach((label) => {
     if (collapsed) {
       label.classList.add("hidden");
@@ -33,21 +34,39 @@ function toggleCollapse() {
     }
   });
 
+  // hide dropdowns if collapsed
+  dropdowns.forEach((dropdown) => {
+    if (collapsed) {
+      dropdown.classList.add("hidden");
+    } else {
+      const id = dropdown.id.replace("dropdown-", "");
+      if (dropdownOpen[id]) {
+        dropdown.classList.remove("hidden");
+      }
+    }
+  });
+
   // rotate icon
   if (icon) icon.classList.toggle("rotate-180");
 }
 
 function toggleDropdown(name) {
+  if (collapsed) return; // disable dropdown toggle when collapsed
+
   const dropdown = document.getElementById("dropdown-" + name);
   const icon = document.getElementById("dropdownIcon-" + name);
-  if (dropdown.classList.contains("hidden")) {
-    dropdown.classList.remove("hidden");
-    icon.classList.add("rotate-180");
-  } else {
-    dropdown.classList.add("hidden");
-    icon.classList.remove("rotate-180");
-  }
+  const isOpen = !dropdown.classList.contains("hidden");
+
+  // track open state
+  dropdownOpen[name] = !isOpen;
+
+  // toggle visibility
+  dropdown.classList.toggle("hidden");
+
+  // rotate arrow icon
+  if (icon) icon.classList.toggle("rotate-180");
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const fromDateInput = document.getElementById("from-date");
@@ -149,57 +168,91 @@ Highcharts.chart("bar-charted", {
   credits: { enabled: false },
 });
 
+const chartPieData = [
+  {
+    name: "Verification Success",
+    y: 72,
+    colors: ["#00d4ff", "#006eff", "#0047ff"],
+  },
+  {
+    name: "Abandoned by Customer",
+    y: 16,
+    colors: ["#ff006e", "#8338ec", "#3a86ff"],
+  },
+  {
+    name: "Verification Failure",
+    y: 11,
+    colors: ["#06ffa5", "#00d4aa", "#0056b3"],
+  },
+  { name: "Not Started", y: 1, colors: ["#ffbe0b", "#fb8500", "#ff006e"] },
+];
 
-  const chartPieData = [
-            { name: 'Verification Success', y: 72, colors: ['#00d4ff', '#006eff', '#0047ff'] },
-            { name: 'Abandoned by Customer', y: 16, colors: ['#ff006e', '#8338ec', '#3a86ff'] },
-            { name: 'Verification Failure', y: 11, colors: ['#06ffa5', '#00d4aa', '#0056b3'] },
-            { name: 'Not Started', y: 1, colors: ['#ffbe0b', '#fb8500', '#ff006e'] }
-        ];
-
-        Highcharts.chart('pie-charted', {
-            chart: { type: 'pie', options3d: { enabled: true, alpha: 35, depth: 45 }, backgroundColor: 'transparent', height: 380 },
-            title: {
-                useHTML: true,
-                text: `<div style="text-align:center;padding:25px;">
+Highcharts.chart("pie-charted", {
+  chart: {
+    type: "pie",
+    options3d: { enabled: true, alpha: 35, depth: 45 },
+    backgroundColor: "transparent",
+    height: 380,
+  },
+  title: {
+    useHTML: true,
+    text: `<div style="text-align:center;padding:25px;">
                 <div style="font-size:48px;font-weight:900;color:#111;animation:pulse 2s infinite;">100</div>
                 <div style="font-size:11px;color:#222;font-weight:700;text-transform:uppercase;letter-spacing:4px;animation:fadeIn 3s ease-in;">TOTAL DATA POINTS</div>
               </div>`,
-                align: 'center', verticalAlign: 'middle', floating: true, y: 0
-            },
-            credits: { enabled: false },
-            plotOptions: {
-                pie: {
-                    innerSize: '55%', depth: 45, borderWidth: 1, borderRadius: 25, cursor: 'pointer',
-                    dataLabels: { enabled: true, format: '{point.percentage:.0f}%', style: { fontSize: '12px', fontWeight: '900', color: '#111' }, distance: -22 },
-                    animation: { duration: 2500 }
-                }
-            },
-            tooltip: {
-                backgroundColor: 'white', borderRadius: 20, style: { fontSize: '13px', fontWeight: '600' },
-                formatter: function () {
-                    return `<div style="padding:20px;text-align:center;">
+    align: "center",
+    verticalAlign: "middle",
+    floating: true,
+    y: 0,
+  },
+  credits: { enabled: false },
+  plotOptions: {
+    pie: {
+      innerSize: "55%",
+      depth: 45,
+      borderWidth: 1,
+      borderRadius: 25,
+      cursor: "pointer",
+      dataLabels: {
+        enabled: true,
+        format: "{point.percentage:.0f}%",
+        style: { fontSize: "12px", fontWeight: "900", color: "#111" },
+        distance: -22,
+      },
+      animation: { duration: 2500 },
+    },
+  },
+  tooltip: {
+    backgroundColor: "white",
+    borderRadius: 20,
+    style: { fontSize: "13px", fontWeight: "600" },
+    formatter: function () {
+      return `<div style="padding:20px;text-align:center;">
           <div style="font-weight:900;color:#111;margin-bottom:10px;font-size:15px;text-transform:uppercase;letter-spacing:1px;">
             ${this.point.name}
           </div>
-          <div style="color:#222;margin-bottom:6px;">Value: <span style="font-weight:800;color:#111;">${this.y}</span></div>
-          <div style="color:#222;">Share: <span style="font-weight:800;color:#111;">${this.percentage.toFixed(1)}%</span></div>
+          <div style="color:#222;margin-bottom:6px;">Value: <span style="font-weight:800;color:#111;">${
+            this.y
+          }</span></div>
+          <div style="color:#222;">Share: <span style="font-weight:800;color:#111;">${this.percentage.toFixed(
+            1
+          )}%</span></div>
         </div>`;
-                }
-            },
-            legend: { enabled: false },
-            series: [{
-                name: 'Data',
-                data: chartPieData.map(item => ({
-                    name: item.name,
-                    y: item.y,
-                    color: {
-                        linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
-                        stops: item.colors.map((c, i) => [i / (item.colors.length - 1), c])
-                    },
-                    sliced: true
-                }))
-            }]
-        });
-
-      
+    },
+  },
+  legend: { enabled: false },
+  series: [
+    {
+      name: "Data",
+      data: chartPieData.map((item) => ({
+        name: item.name,
+        y: item.y,
+        color: {
+          linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+          stops: item.colors.map((c, i) => [i / (item.colors.length - 1), c]),
+        },
+        sliced: true,
+      })),
+    },
+  ],
+});
