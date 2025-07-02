@@ -198,7 +198,6 @@ function closeMobileMenu() {
 }
 
 document.getElementById("year").textContent = new Date().getFullYear();
-
 let collapsed = false;
 let dropdownOpen = {};
 
@@ -206,6 +205,7 @@ function toggleCollapse() {
   const sidebar = document.getElementById("sidebar");
   const icon = document.getElementById("collapseIcon");
   const labels = document.querySelectorAll(".sidebar-label");
+  const dropdowns = document.querySelectorAll("[id^='dropdown-']");
 
   collapsed = !collapsed;
 
@@ -213,7 +213,7 @@ function toggleCollapse() {
   sidebar.classList.toggle("w-[250px]");
   sidebar.classList.toggle("w-[70px]");
 
-  // toggle text label visibility
+  // toggle label visibility
   labels.forEach((label) => {
     if (collapsed) {
       label.classList.add("hidden");
@@ -222,18 +222,36 @@ function toggleCollapse() {
     }
   });
 
+  // hide dropdowns if collapsed
+  dropdowns.forEach((dropdown) => {
+    if (collapsed) {
+      dropdown.classList.add("hidden");
+    } else {
+      const id = dropdown.id.replace("dropdown-", "");
+      if (dropdownOpen[id]) {
+        dropdown.classList.remove("hidden");
+      }
+    }
+  });
+
   // rotate icon
   if (icon) icon.classList.toggle("rotate-180");
 }
 
 function toggleDropdown(name) {
+  if (collapsed) return; // disable dropdown toggle when collapsed
+
   const dropdown = document.getElementById("dropdown-" + name);
   const icon = document.getElementById("dropdownIcon-" + name);
-  if (dropdown.classList.contains("hidden")) {
-    dropdown.classList.remove("hidden");
-    icon.classList.add("rotate-180");
-  } else {
-    dropdown.classList.add("hidden");
-    icon.classList.remove("rotate-180");
-  }
+  const isOpen = !dropdown.classList.contains("hidden");
+
+  // track open state
+  dropdownOpen[name] = !isOpen;
+
+  // toggle visibility
+  dropdown.classList.toggle("hidden");
+
+  // rotate arrow icon
+  if (icon) icon.classList.toggle("rotate-180");
 }
+
