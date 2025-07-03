@@ -1,4 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const categories = [
+    "More than 5 Minutes",
+    "Between 0 And 5 Minutes",
+    "More than 5 Minutes",
+    "Between 0 And 5 Minutes",
+    "testing ",
+    "testing",
+  ];
+  const chartHeight = categories.length > 2 ? categories.length * 60 : 350;
+
   Highcharts.chart("video-waiting-chart", {
     chart: {
       type: "bar",
@@ -10,16 +20,20 @@ document.addEventListener("DOMContentLoaded", function () {
         viewDistance: 25,
       },
       backgroundColor: "transparent",
-      height: 350,
+      height: chartHeight,
       style: { fontFamily: "Inter, sans-serif" },
     },
     title: { text: "" },
     xAxis: {
-      categories: ["More than 5 Minutes", "Between 0 And 5 Minutes"],
+      categories: categories,
       labels: {
         style: {
-          fontSize: "16px",
+          fontSize: "clamp(12px, 1.5vw, 16px)",
           color: "#64748b",
+        },
+        useHTML: true,
+        formatter: function () {
+          return `<div style="max-width:180px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${this.value}</div>`;
         },
       },
       gridLineWidth: 1,
@@ -31,8 +45,11 @@ document.addEventListener("DOMContentLoaded", function () {
       title: null,
       labels: {
         style: {
-          fontSize: "14px",
+          fontSize: "clamp(11px, 1.5vw, 14px)",
           color: "#64748b",
+        },
+        formatter: function () {
+          return this.value + "%";
         },
       },
       gridLineWidth: 1,
@@ -42,10 +59,13 @@ document.addEventListener("DOMContentLoaded", function () {
       enabled: true,
       align: "center",
       verticalAlign: "bottom",
+      itemStyle: {
+        fontSize: "clamp(11px, 1.5vw, 14px)",
+      },
     },
     plotOptions: {
       bar: {
-        depth: 40,
+        depth: 50,
         groupZPadding: 10,
         grouping: false,
         edgeColor: "#60A5FA",
@@ -59,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
           style: {
             color: "#222",
             fontWeight: "bold",
-            fontSize: "16px",
+            fontSize: "clamp(11px, 1.5vw, 16px)",
           },
           align: "right",
           inside: false,
@@ -72,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
     series: [
       {
         name: "% Rate",
-        data: [5.03, 94.97],
+        data: [5.03, 94.97, 999, 949, 899, 849],
         color: "#ffffff",
         borderColor: "#60A5FA",
         borderWidth: 2,
