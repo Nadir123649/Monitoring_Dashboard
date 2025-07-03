@@ -3,6 +3,12 @@ const customBarData = [
   { stage: "Upload ID", val1: 3688, val2: 17, val3: 0 },
   { stage: "Register", val1: 15, val2: 1, val3: 0 },
   { stage: "Info Page", val1: 1624, val2: 16, val3: 52 },
+  { stage: "Upload Documents", val1: 2023, val2: 208, val3: 0 },
+  { stage: "Upload ID", val1: 3688, val2: 17, val3: 0 },
+  { stage: "Register", val1: 15, val2: 1, val3: 0 },
+  { stage: "Info Page", val1: 1624, val2: 16, val3: 52 },
+  { stage: "Upload Documents", val1: 2023, val2: 208, val3: 0 },
+  { stage: "Upload ID", val1: 3688, val2: 17, val3: 0 },
 ];
 
 const customGradients = [
@@ -45,23 +51,37 @@ const customPieData = [
 
 const customTotal = customPieData.reduce((s, d) => s + d.value, 0);
 
+const barCount = customBarData.length;
+const dynamicBarHeight = 35;
+const dynamicHeight = barCount > 10 ? barCount * dynamicBarHeight : 400;
+
 Highcharts.chart("bar-containersd", {
   chart: {
     type: "bar",
     options3d: { enabled: true, alpha: 10, beta: 15, depth: 50 },
     backgroundColor: "transparent",
-    height: 400,
+    height: dynamicHeight,
   },
+  title: { text: "" },
+  credits: { enabled: false },
   xAxis: {
     categories: customBarData.map((d) => d.stage),
-    labels: { style: { fontSize: "16px" } },
+    labels: {
+      style: { fontSize: "clamp(12px, 1.5vw, 16px)" },
+      useHTML: true,
+      formatter: function () {
+        return `<div style="max-width:160px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${this.value}</div>`;
+      },
+    },
     lineWidth: 0,
     tickLength: 0,
     gridLineWidth: 0,
   },
   yAxis: {
     min: 0,
-    labels: { style: { fontSize: "14px" } },
+    labels: {
+      style: { fontSize: "clamp(11px, 1.5vw, 14px)" },
+    },
     lineWidth: 0,
     tickLength: 0,
     gridLineWidth: 0,
@@ -69,10 +89,15 @@ Highcharts.chart("bar-containersd", {
   plotOptions: {
     series: {
       depth: 40,
+      borderRadius: 5,
       dataLabels: {
         enabled: true,
         inside: true,
-        style: { fontSize: "14px", fontWeight: "bold", color: "#333" },
+        style: {
+          fontSize: "clamp(10px, 1.5vw, 14px)",
+          fontWeight: "bold",
+          color: "#333",
+        },
         formatter() {
           return Highcharts.numberFormat(this.y, 0, ".", ".");
         },
@@ -83,30 +108,25 @@ Highcharts.chart("bar-containersd", {
     align: "center",
     verticalAlign: "bottom",
     layout: "horizontal",
-    itemStyle: { fontSize: "14px" },
+    itemStyle: { fontSize: "clamp(11px, 1.5vw, 14px)" },
   },
   series: [
     {
       name: "Val1",
       data: customBarData.map((d) => d.val1),
       color: "#B0B0B0",
-      borderRadius: 5,
     },
     {
       name: "Val2",
       data: customBarData.map((d) => d.val2),
       color: "#888888",
-      borderRadius: 5,
     },
     {
       name: "Val3",
       data: customBarData.map((d) => d.val3),
       color: "#222222",
-      borderRadius: 5,
     },
   ],
-  title: { text: "" },
-  credits: { enabled: false },
 });
 
 Highcharts.chart("pie-containersd", {
