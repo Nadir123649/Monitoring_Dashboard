@@ -86,7 +86,8 @@
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded sidebar-item active hover:bg-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="w-4 h-4 lucide lucide-square-activity text-[#2563EB] font-semibold"
+                                stroke-linejoin="round"
+                                class="w-4 h-4 lucide lucide-square-activity text-[#2563EB] font-semibold"
                                 data-lov-id="src\components\Sidebar\Sidebar.tsx:53:16" data-lov-name="ActivitySquare"
                                 data-component-path="src\components\Sidebar\Sidebar.tsx" data-component-line="53"
                                 data-component-file="Sidebar.tsx" data-component-name="ActivitySquare"
@@ -407,16 +408,15 @@
                 </div>
             </main>
 
-            <!-- Footer -->
-            <footer class="bg-white border-t border-gray-200 footer">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-2">
+            <footer class="px-4 py-3 bg-white border-t border-gray-200 footer">
+                <div class="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center">
+                    <div class="flex flex-wrap items-center gap-2">
                         <i class="fa-regular fa-circle-user text-[#2563EB] text-xl"></i>
                         <span class="text-sm font-semibold">IDBox™ Service Monitoring</span>
-                        <span class="text-xs leading-normal text-gray-500">v.2.1</span>
+                        <span class="text-xs text-gray-500">v.2.1</span>
                     </div>
-                    <div class="text-sm text-gray-500">
-                        © <span id="year"></span> Intelli Group All rights reserved
+                    <div class="text-sm text-left text-gray-500 md:text-right">
+                        © <span id="year"></span> Intelli Group. All rights reserved.
                     </div>
                 </div>
             </footer>
