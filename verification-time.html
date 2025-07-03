@@ -178,7 +178,8 @@
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded sidebar-item active hover:bg-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="w-4 h-4 lucide lucide-clock [#2563EB]  text-[#2563EB] font-semibold"
+                                stroke-linejoin="round"
+                                class="w-4 h-4 lucide lucide-clock [#2563EB]  text-[#2563EB] font-semibold"
                                 data-lov-id="src\components\Sidebar\Sidebar.tsx:78:16" data-lov-name="Clock"
                                 data-component-path="src\components\Sidebar\Sidebar.tsx" data-component-line="78"
                                 data-component-file="Sidebar.tsx" data-component-name="Clock"
@@ -333,11 +334,22 @@
                             <h1 class="text-2xl font-bold text-gray-800">Verification Time (SLA)</h1>
                             <p class="text-gray-500">Analysis of verification processing times</p>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-sm font-medium text-gray-700">Define Time Period:</span>
-                            <input type="date" class="px-3 py-1 text-sm border rounded" />
-                            <span class="text-gray-500">To</span>
-                            <input type="date" class="px-3 py-1 text-sm border rounded" />
+                        <div class="time-period-container">
+                            <label>Define Time Period:</label>
+                            <div class="date-inputs">
+                                <div class="date-wrapper">
+                                    <input type="date" id="from-date" />
+                                    <label for="from-date" class="placeholder-text">From</label>
+                                    <span class="calendar-icon"></span>
+                                </div>
+                                <div class="date-wrapper">
+                                    <input type="date" id="to-date" />
+                                    <label for="to-date" class="placeholder-text">To</label>
+                                    <span class="calendar-icon"></span>
+                                </div>
+                            </div>
+                            <!-- Search Button -->
+                            <button id="search-btn" class="search-button">Search</button>
                         </div>
                     </div>
 
