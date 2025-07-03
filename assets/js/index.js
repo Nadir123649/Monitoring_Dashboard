@@ -118,7 +118,19 @@ const data = [
   { name: "Between 6 And 7 Minutes", value: 3.25, color: "#FF9800" },
   { name: "Between 7 And 10 Minutes", value: 3.55, color: "#FF9800" },
   { name: "More than 10 Minutes", value: 1.5, color: "#F44336" },
+  { name: "Between 0 And 5 Minutes", value: 84.47, color: "#2196F3" },
+  { name: "Between 5 And 6 Minutes", value: 7.23, color: "#4CAF50" },
+  { name: "Between 6 And 7 Minutes", value: 3.25, color: "#FF9800" },
+  { name: "Between 7 And 10 Minutes", value: 3.55, color: "#FF9800" },
+  { name: "More than 10 Minutes", value: 1.5, color: "#F44336" },
+  { name: "Between 0 And 5 Minutes", value: 84.47, color: "#2196F3" },
+  { name: "Between 5 And 6 Minutes", value: 7.23, color: "#4CAF50" },
+  { name: "Between 6 And 7 Minutes", value: 3.25, color: "#FF9800" },
 ];
+
+const maxBarCount = 10;
+const barHeight = 35;
+const dynamicHeight = data.length > maxBarCount ? data.length * barHeight : 320;
 
 Highcharts.chart("responseBarChartww", {
   chart: {
@@ -131,22 +143,33 @@ Highcharts.chart("responseBarChartww", {
       viewDistance: 25,
     },
     backgroundColor: "transparent",
-    height: 320,
+    height: dynamicHeight,
+    style: {
+      overflow: "auto",
+    },
   },
   title: {
     text: "Response Time Distribution",
     align: "left",
-    style: { fontSize: "18px", fontWeight: "600", color: "#1e293b" },
+    style: {
+      fontSize: "clamp(14px, 2vw, 18px)", // responsive font
+      fontWeight: "600",
+      color: "#1e293b",
+    },
     margin: 24,
   },
   credits: { enabled: false },
   xAxis: {
     categories: data.map((d) => d.name),
     labels: {
-      style: { fontSize: "13px", color: "#64748b", fontWeight: "500" },
+      style: {
+        fontSize: "clamp(10px, 1.5vw, 13px)",
+        color: "#64748b",
+        fontWeight: "500",
+      },
       useHTML: true,
       formatter: function () {
-        return `<span style="max-width:160px;display:inline-block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${this.value}</span>`;
+        return `<div style="max-width:160px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${this.value}</div>`;
       },
     },
     gridLineWidth: 0,
@@ -158,7 +181,11 @@ Highcharts.chart("responseBarChartww", {
     max: 100,
     title: { text: null },
     labels: {
-      style: { fontSize: "13px", color: "#64748b", fontWeight: "500" },
+      style: {
+        fontSize: "clamp(10px, 1.5vw, 13px)",
+        color: "#64748b",
+        fontWeight: "500",
+      },
       formatter: function () {
         return this.value + "%";
       },
@@ -179,7 +206,7 @@ Highcharts.chart("responseBarChartww", {
         enabled: true,
         format: "{y:.1f}%",
         style: {
-          fontSize: "12px",
+          fontSize: "clamp(10px, 1.5vw, 12px)",
           fontWeight: "500",
           color: "#1e293b",
           textOutline: "none",
