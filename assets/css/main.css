@@ -436,6 +436,7 @@ a {
   box-sizing: border-box;
   padding: 24px;
 }
+
 @media (max-width: 768px) {
   #sidebar {
     position: fixed;
@@ -450,13 +451,7 @@ a {
     left: 0;
   }
 }
-@media (min-width: 768px) {
-  .sidebar.open {
-    position: static !important;
-    left: auto !important;
-    top: auto !important;
-  }
-}
+
 
 @media (max-width: 768px) {
   .chart-container {

@@ -186,22 +186,66 @@ Highcharts.chart("failureBarCharts", {
   ],
   credits: { enabled: false },
 });
-
 function openMobileMenu() {
-  document.getElementById("sidebar").classList.add("fixed", "left-0", "top-0");
+  if (window.innerWidth >= 768) return; // Prevent on desktop
+
+  const sidebar = document.getElementById("sidebar");
+  sidebar.classList.remove("w-[70px]");
+  sidebar.classList.add("w-[250px]");
+
+  sidebar.classList.add("open");
   document.getElementById("overlay").classList.remove("hidden");
 }
 
+// Close sidebar on sidebar arrow click (collapseIcon)
+document.getElementById("collapseIcon").addEventListener("click", function (e) {
+  if (window.innerWidth < 768) {
+    // On mobile, just close the sidebar (don't collapse)
+    closeMobileMenu();
+  } else {
+    // Only collapse on desktop
+    toggleCollapse();
+  }
+});
+
 function closeMobileMenu() {
-  document.getElementById("sidebar").classList.remove("fixed");
+  const sidebar = document.getElementById("sidebar");
+
+  sidebar.classList.remove("open");
+
+  // Remove fixed/mobile specific styles
+  sidebar.classList.remove("fixed", "left-0", "top-0");
+
+  // Restore correct width based on collapse state
+  if (collapsed) {
+    sidebar.classList.remove("w-[250px]");
+    sidebar.classList.add("w-[70px]");
+  } else {
+    sidebar.classList.add("w-[250px]");
+    sidebar.classList.remove("w-[70px]");
+  }
+
   document.getElementById("overlay").classList.add("hidden");
 }
+// Optional: close sidebar if user clicks a nav link on mobile
+const navLinks = document.querySelectorAll("#sidebar a");
+navLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    if (window.innerWidth < 768) {
+      closeMobileMenu();
+    }
+  });
+});
 
 document.getElementById("year").textContent = new Date().getFullYear();
+
 let collapsed = false;
 let dropdownOpen = {};
 
 function toggleCollapse() {
+  // 🚫 Prevent collapsing on mobile devices
+  if (window.innerWidth < 768) return;
+
   const sidebar = document.getElementById("sidebar");
   const icon = document.getElementById("collapseIcon");
   const labels = document.querySelectorAll(".sidebar-label");
@@ -209,11 +253,11 @@ function toggleCollapse() {
 
   collapsed = !collapsed;
 
-  // toggle width
+  // toggle sidebar width
   sidebar.classList.toggle("w-[250px]");
   sidebar.classList.toggle("w-[70px]");
 
-  // toggle label visibility
+  // show/hide text labels in sidebar
   labels.forEach((label) => {
     if (collapsed) {
       label.classList.add("hidden");
@@ -222,7 +266,7 @@ function toggleCollapse() {
     }
   });
 
-  // hide dropdowns if collapsed
+  // toggle dropdown visibility
   dropdowns.forEach((dropdown) => {
     if (collapsed) {
       dropdown.classList.add("hidden");
@@ -234,7 +278,7 @@ function toggleCollapse() {
     }
   });
 
-  // rotate icon
+  // rotate arrow icon
   if (icon) icon.classList.toggle("rotate-180");
 }
 
@@ -254,4 +298,3 @@ function toggleDropdown(name) {
   // rotate arrow icon
   if (icon) icon.classList.toggle("rotate-180");
 }
-

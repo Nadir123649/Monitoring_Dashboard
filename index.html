@@ -25,13 +25,13 @@
     <div id="overlay" class="fixed inset-0 z-20 hidden bg-black bg-opacity-50" onclick="closeMobileMenu()"></div>
 
     <div id="sidebar"
-      class="bg-white border-r border-gray-200 shadow-sm w-[250px] transition-all duration-300 flex flex-col  overflow-hidden sidebar ">
+      class="sidebar bg-white border-r border-gray-200 shadow-sm w-[250px] transition-all duration-300 flex flex-col  overflow-hidden ">
       <div class="flex items-center justify-between p-4 border-b border-gray-200 sidebar-top">
         <div class="flex items-center gap-2">
           <i class="fa-regular fa-circle-user text-[#2563EB] text-xl"></i>
           <span class="font-bold text-gray-800 sidebar-label">IDBox™</span>
         </div>
-        <button onclick="toggleCollapse()" class="p-1 rounded-full hover:bg-gray-100">
+        <button id="collapseBtn" class="p-1 rounded-full hover:bg-gray-100">
           <svg id="collapseIcon" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" fill="none"
             viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
