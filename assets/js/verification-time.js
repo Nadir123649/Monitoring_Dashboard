@@ -4,8 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
     { name: "Between 7 And 10 Minutes", value: 3.55 },
     { name: "Between 6 And 7 Minutes", value: 3.25 },
     { name: "Between 5 And 6 Minutes", value: 7.23 },
-    { name: "Between 0 And 5 Minutes", value: 84.47 },
   ];
+
+  const chartHeight = data.length > 5 ? data.length * 50 : 400;
 
   Highcharts.chart("verification-chart", {
     chart: {
@@ -18,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
         viewDistance: 25,
       },
       backgroundColor: "transparent",
-      height: 400,
+      height: chartHeight,
       style: {
         fontFamily: "Inter, sans-serif",
       },
@@ -28,8 +29,12 @@ document.addEventListener("DOMContentLoaded", function () {
       categories: data.map((d) => d.name),
       labels: {
         style: {
-          fontSize: "15px",
+          fontSize: "clamp(12px, 1.5vw, 15px)",
           color: "#64748b",
+        },
+        useHTML: true,
+        formatter: function () {
+          return `<div style="max-width:180px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${this.value}</div>`;
         },
       },
       gridLineWidth: 1,
@@ -41,8 +46,11 @@ document.addEventListener("DOMContentLoaded", function () {
       title: null,
       labels: {
         style: {
-          fontSize: "14px",
+          fontSize: "clamp(11px, 1.5vw, 14px)",
           color: "#64748b",
+        },
+        formatter: function () {
+          return this.value + "%";
         },
       },
       gridLineWidth: 1,
@@ -52,6 +60,9 @@ document.addEventListener("DOMContentLoaded", function () {
       enabled: true,
       align: "center",
       verticalAlign: "bottom",
+      itemStyle: {
+        fontSize: "clamp(11px, 1.5vw, 14px)",
+      },
     },
     plotOptions: {
       bar: {
@@ -69,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
           style: {
             color: "#222",
             fontWeight: "bold",
-            fontSize: "15px",
+            fontSize: "clamp(11px, 1.5vw, 15px)",
           },
           align: "right",
           inside: false,
