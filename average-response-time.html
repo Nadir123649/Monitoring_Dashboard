@@ -363,11 +363,22 @@
                                     class="px-4 py-2 font-semibold bg-gray-100 border-b-2 border-transparent tab-btn rounded-t-md">Transactions
                                     Monitoring</button>
                             </div>
-                            <div class="flex flex-wrap items-center gap-2">
-                                <span class="text-sm font-medium text-gray-700">Define Time Period:</span>
-                                <input type="date" class="px-2 py-1 border rounded" />
-                                <span class="hidden sm:inline">to</span>
-                                <input type="date" class="px-2 py-1 border rounded" />
+                            <div class="time-period-container">
+                                <label>Define Time Period:</label>
+                                <div class="date-inputs">
+                                    <div class="date-wrapper">
+                                        <input type="date" id="from-date" />
+                                        <label for="from-date" class="placeholder-text">From</label>
+                                        <span class="calendar-icon"></span>
+                                    </div>
+                                    <div class="date-wrapper">
+                                        <input type="date" id="to-date" />
+                                        <label for="to-date" class="placeholder-text">To</label>
+                                        <span class="calendar-icon"></span>
+                                    </div>
+                                </div>
+                                <!-- Search Button -->
+                                <button id="search-btn" class="search-button">Search</button>
                             </div>
                         </div>
 
@@ -400,17 +411,17 @@
                                 <div id="response-time-chart" class="w-full h-[350px]"></div>
                                 <div
                                     class="flex flex-col flex-wrap items-stretch justify-center w-full px-2 mt-4 sm:flex-row sm:gap-4">
-                                    <div
+                                    <div id="box-0-50"
                                         class="w-full  text-green-900 bg-green-300 sm:w-auto flex flex-col items-center px-3 py-2 rounded ${item.color} w-full text-center break-words mb-2 sm:mb-0 sm:w-auto sm:flex-1">
                                         <span class="text-lg font-bold">74%</span>
                                         <span class="text-xs">0–50 secs</span>
                                     </div>
-                                    <div
+                                    <div  id="box-50-100"
                                         class="flex flex-col items-center w-full px-3 py-2 mb-2 text-center text-yellow-900 break-words bg-yellow-200 rounded sm:w-auto sm:mb-0 sm:flex-1">
                                         <span class="text-lg font-bold">19%</span>
                                         <span class="text-xs">50–100 secs</span>
                                     </div>
-                                    <div
+                                    <div id="box-remaining"
                                         class="flex flex-col items-center w-full px-3 py-2 mb-2 text-center text-gray-700 break-words bg-gray-200 rounded sm:w-auto sm:mb-0 sm:flex-1">
                                         <span class="text-lg font-bold">7%</span>
                                         <span class="text-xs">Remaining</span>

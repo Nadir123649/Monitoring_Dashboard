@@ -142,12 +142,41 @@ function setActiveTab(id) {
 document.getElementById("tab-success").addEventListener("click", () => {
   setActiveTab("tab-success");
   updateChartData(responseTimeData1);
+  updatePercentageBoxes(responseTimeData1);
 });
 
 document.getElementById("tab-transactions").addEventListener("click", () => {
   setActiveTab("tab-transactions");
   updateChartData(responseTimeData2);
+  updatePercentageBoxes(responseTimeData2);
 });
 
 // Initialize chart
 initChart(responseTimeData1);
+updatePercentageBoxes(responseTimeData1);
+
+function updatePercentageBoxes(data) {
+  let total = 0;
+  let bucket0_50 = 0;
+  let bucket50_100 = 0;
+
+  data.forEach((row) => {
+    for (let key in row) {
+      if (key !== "hour") total += row[key];
+    }
+    bucket0_50 += row["0-50"];
+    bucket50_100 += row["50-100"];
+  });
+
+  const remaining = total - (bucket0_50 + bucket50_100);
+
+  const p0 = ((bucket0_50 / total) * 100).toFixed(1);
+  const p50 = ((bucket50_100 / total) * 100).toFixed(1);
+  const prem = ((remaining / total) * 100).toFixed(1);
+
+  document.querySelector("#box-0-50 span.text-lg").textContent = `${p0}%`;
+  document.querySelector("#box-50-100 span.text-lg").textContent = `${p50}%`;
+  document.querySelector(
+    "#box-remaining span.text-lg"
+  ).textContent = `${prem}%`;
+}
