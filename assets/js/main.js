@@ -67,19 +67,19 @@ function toggleDropdown(name) {
   if (icon) icon.classList.toggle("rotate-180");
 }
 
+document.getElementById("search-btn").addEventListener("click", function () {
+  const fromDate = document.getElementById("from-date").value;
+  const toDate = document.getElementById("to-date").value;
 
-document.addEventListener("DOMContentLoaded", () => {
-  const fromDateInput = document.getElementById("from-date");
-  const toDateInput = document.getElementById("to-date");
+  if (!fromDate || !toDate) {
+    alert("Please select both 'From' and 'To' dates.");
+    return;
+  }
 
-  // Handle date selection
-  fromDateInput.addEventListener("change", (e) => {
-    console.log("From Date selected:", e.target.value);
-  });
+  // Trigger your API call or data fetch logic here
+  console.log("Fetching data from", fromDate, "to", toDate);
 
-  toDateInput.addEventListener("change", (e) => {
-    console.log("To Date selected:", e.target.value);
-  });
+  // Example: fetchData(fromDate, toDate);
 });
 
 const legendContainer = document.getElementById("pie-legendss");

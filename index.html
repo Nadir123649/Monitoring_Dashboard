@@ -25,7 +25,7 @@
     <div id="overlay" class="fixed inset-0 z-20 hidden bg-black bg-opacity-50" onclick="closeMobileMenu()"></div>
 
     <div id="sidebar"
-    class="bg-white border-r border-gray-200 shadow-sm w-[250px] transition-all duration-300 flex flex-col overflow-hidden">
+      class="bg-white border-r border-gray-200 shadow-sm w-[250px] transition-all duration-300 flex flex-col overflow-hidden">
       <div class="flex items-center justify-between p-4 border-b border-gray-200 sidebar-top">
         <div class="flex items-center gap-2">
           <i class="fa-regular fa-circle-user text-[#2563EB] text-xl"></i>
@@ -41,14 +41,36 @@
       <nav class="flex-1 px-3 py-4 overflow-y-auto">
         <a href="/index.html" title="Dashboard"
           class="flex items-center gap-2 px-3 py-2 font-semibold transition bg-gray-200 rounded hover:bg-gray-100 sidebar-item active">
-          <i class="fa-solid fa-chart-column text-[#2563EB]"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="w-5 h-5 lucide lucide-chart-column text-[#2563EB]"
+            data-lov-id="src\components\Sidebar\Sidebar.tsx:40:12" data-lov-name="BarChart3"
+            data-component-path="src\components\Sidebar\Sidebar.tsx" data-component-line="40"
+            data-component-file="Sidebar.tsx" data-component-name="BarChart3"
+            data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+            <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+            <path d="M18 17V9"></path>
+            <path d="M13 17V5"></path>
+            <path d="M8 17v-3"></path>
+          </svg>
           <span class="text-[#2563EB] sidebar-label">Dashboard</span>
         </a>
         <div class="relative">
           <button onclick="toggleDropdown('monitoring')" title="Service Monitoring"
             class="flex items-center justify-between w-full gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
             <span class="flex items-center gap-2">
-              <i class="fa-regular fa-file"></i>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="w-5 h-5 lucide lucide-file-text" data-lov-id="src\components\Sidebar\Sidebar.tsx:45:12"
+                data-lov-name="FileText" data-component-path="src\components\Sidebar\Sidebar.tsx"
+                data-component-line="45" data-component-file="Sidebar.tsx" data-component-name="FileText"
+                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                <path d="M10 9H8"></path>
+                <path d="M16 13H8"></path>
+                <path d="M16 17H8"></path>
+              </svg>
               <span class="sidebar-label">Service Monitoring</span>
             </span>
             <svg id="dropdownIcon-monitoring" xmlns="http://www.w3.org/2000/svg"
@@ -115,22 +137,61 @@
         </div>
         <a href="/success-rate.html" title="Success Rate"
           class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
-          <i class="fa-solid fa-chart-column"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="w-5 h-5 lucide lucide-chart-no-axes-column" data-lov-id="src\components\Sidebar\Sidebar.tsx:109:12"
+            data-lov-name="BarChart2" data-component-path="src\components\Sidebar\Sidebar.tsx" data-component-line="109"
+            data-component-file="Sidebar.tsx" data-component-name="BarChart2"
+            data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+            <line x1="18" x2="18" y1="20" y2="10"></line>
+            <line x1="12" x2="12" y1="20" y2="4"></line>
+            <line x1="6" x2="6" y1="20" y2="14"></line>
+          </svg>
           <span class="sidebar-label">Success Rate</span>
         </a>
         <a href="/transactions.html" title="Transactions"
           class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
-          <i class="fa-regular fa-file"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="w-5 h-5 lucide lucide-file-text" data-lov-id="src\components\Sidebar\Sidebar.tsx:114:12"
+            data-lov-name="FileText" data-component-path="src\components\Sidebar\Sidebar.tsx" data-component-line="114"
+            data-component-file="Sidebar.tsx" data-component-name="FileText"
+            data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+            <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+            <path d="M10 9H8"></path>
+            <path d="M16 13H8"></path>
+            <path d="M16 17H8"></path>
+          </svg>
           <span class="sidebar-label">Transactions</span>
         </a>
         <a href="/settings.html" title="Settings"
           class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
-          <i class="fa-solid fa-gear"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="w-5 h-5 lucide lucide-settings" data-lov-id="src\components\Sidebar\Sidebar.tsx:119:12"
+            data-lov-name="Settings" data-component-path="src\components\Sidebar\Sidebar.tsx" data-component-line="119"
+            data-component-file="Sidebar.tsx" data-component-name="Settings"
+            data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+            <path
+              d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z">
+            </path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
           <span class="sidebar-label">Settings</span>
         </a>
         <a href="/logout.html" title="Logout"
           class="flex items-center gap-2 px-3 py-2 mt-4 text-red-500 transition rounded sidebar-item hover:bg-gray-100">
-          <i class="fa-solid fa-right-from-bracket"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="w-5 h-5 lucide lucide-log-out" data-lov-id="src\components\Sidebar\Sidebar.tsx:222:14"
+            data-lov-name="LogOut" data-component-path="src\components\Sidebar\Sidebar.tsx" data-component-line="222"
+            data-component-file="Sidebar.tsx" data-component-name="LogOut"
+            data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" x2="9" y1="12" y2="12"></line>
+          </svg>
           <span class="sidebar-label">Logout</span>
         </a>
       </nav>
@@ -166,14 +227,18 @@
               <label>Define Time Period:</label>
               <div class="date-inputs">
                 <div class="date-wrapper">
-                  <input type="date" id="from-date" /><label for="from-date" class="placeholder-text">From</label><span
-                    class="calendar-icon"></span>
+                  <input type="date" id="from-date" />
+                  <label for="from-date" class="placeholder-text">From</label>
+                  <span class="calendar-icon"></span>
                 </div>
                 <div class="date-wrapper">
-                  <input type="date" id="to-date" /><label for="to-date" class="placeholder-text">To</label><span
-                    class="calendar-icon"></span>
+                  <input type="date" id="to-date" />
+                  <label for="to-date" class="placeholder-text">To</label>
+                  <span class="calendar-icon"></span>
                 </div>
               </div>
+              <!-- Search Button -->
+              <button id="search-btn" class="search-button">Search</button>
             </div>
           </div>
           <!-- Metric Cards -->

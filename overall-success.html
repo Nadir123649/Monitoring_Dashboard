@@ -24,7 +24,7 @@
         <div id="overlay" class="fixed inset-0 z-20 hidden bg-black bg-opacity-50" onclick="closeMobileMenu()"></div>
 
         <div id="sidebar"
-     class="bg-white border-r border-gray-200 shadow-sm w-[250px] transition-all duration-300 flex flex-col overflow-hidden">
+            class="bg-white border-r border-gray-200 shadow-sm w-[250px] transition-all duration-300 flex flex-col overflow-hidden">
             <div class="flex items-center justify-between p-4 border-b border-gray-200 sidebar-top">
                 <div class="flex items-center gap-2">
                     <i class="fa-regular fa-circle-user text-[#2563EB] text-xl"></i>
@@ -159,11 +159,22 @@
                             <h1 class="text-2xl font-bold text-gray-900">Overall Success</h1>
                             <p class="text-sm text-gray-600">Metrics related to verification success rates</p>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-sm font-medium text-gray-700">Define Time Period:</span>
-                            <input type="date" class="px-3 py-1 text-sm border rounded" />
-                            <span class="text-gray-500">To</span>
-                            <input type="date" class="px-3 py-1 text-sm border rounded" />
+                        <div class="time-period-container">
+                            <label>Define Time Period:</label>
+                            <div class="date-inputs">
+                                <div class="date-wrapper">
+                                    <input type="date" id="from-date" />
+                                    <label for="from-date" class="placeholder-text">From</label>
+                                    <span class="calendar-icon"></span>
+                                </div>
+                                <div class="date-wrapper">
+                                    <input type="date" id="to-date" />
+                                    <label for="to-date" class="placeholder-text">To</label>
+                                    <span class="calendar-icon"></span>
+                                </div>
+                            </div>
+                            <!-- Search Button -->
+                            <button id="search-btn" class="search-button">Search</button>
                         </div>
                     </div>
                     <div class="flex justify-between gap-6 p-6 bg-white shadow main-div rounded-2xl">
