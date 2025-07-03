@@ -38,19 +38,44 @@
             </div>
             <nav class="flex-1 px-3 py-4 overflow-y-auto">
                 <a href="/index.html" title="Dashboard"
-                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
-                    <i class="fa-solid fa-chart-column"></i>
-                    <span class="sidebar-label">Dashboard</span>
+                    class="flex items-center gap-2 px-3 py-2 transition rounded hover:bg-gray-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="w-5 h-5 lucide lucide-chart-column"
+                        data-lov-id="src\components\Sidebar\Sidebar.tsx:40:12" data-lov-name="BarChart3"
+                        data-component-path="src\components\Sidebar\Sidebar.tsx" data-component-line="40"
+                        data-component-file="Sidebar.tsx" data-component-name="BarChart3"
+                        data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                        <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+                        <path d="M18 17V9"></path>
+                        <path d="M13 17V5"></path>
+                        <path d="M8 17v-3"></path>
+                    </svg>
+                    <span>Dashboard</span>
                 </a>
                 <div class="relative">
                     <button onclick="toggleDropdown('monitoring')" title="Service Monitoring"
                         class="flex items-center justify-between w-full gap-2 px-3 py-2 font-semibold text-gray-700 transition rounded sidebar-item active hover:bg-gray-100">
-                        <span class="flex items-center gap-2">
-                            <i class="fa-regular fa-file text-[#2563EB]"></i>
+                         <span class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="w-5 h-5 lucide lucide-file-text text-[#2563EB]"
+                                data-lov-id="src\components\Sidebar\Sidebar.tsx:45:12" data-lov-name="FileText"
+                                data-component-path="src\components\Sidebar\Sidebar.tsx" data-component-line="45"
+                                data-component-file="Sidebar.tsx" data-component-name="FileText"
+                                data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                <path d="M10 9H8"></path>
+                                <path d="M16 13H8"></path>
+                                <path d="M16 17H8"></path>
+                            </svg>
                             <span class="sidebar-label text-[#2563EB]">Service Monitoring</span>
                         </span>
+                        </span>
                         <svg id="dropdownIcon-monitoring" xmlns="http://www.w3.org/2000/svg"
-                            class="w-4 h-4 transition-transform transform" viewBox="0 0 20 20" fill="currentColor">
+                            class="w-4 h-4 transition-transform transform sidebar-label" viewBox="0 0 20 20"
+                            fill="currentColor">
                             <path fill-rule="evenodd"
                                 d="M5.23 7.21a.75.75 0 011.06.02L10 11.292l3.71-4.06a.75.75 0 111.08 1.04l-4.25 4.65a.75.75 0 01-1.08 0l-4.25-4.65a.75.75 0 01.02-1.06z"
                                 clip-rule="evenodd" />
@@ -59,78 +84,225 @@
                     <div id="dropdown-monitoring" class="hidden mt-1 ml-2 space-y-1 overflow-hidden whitespace-nowrap">
                         <a href="/overall-success.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
-                            <i class="fa-solid fa-chart-line "></i>
-                            <span class="font-semibold "> Overall Success </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="w-4 h-4 lucide lucide-square-activity"
+                                data-lov-id="src\components\Sidebar\Sidebar.tsx:53:16" data-lov-name="ActivitySquare"
+                                data-component-path="src\components\Sidebar\Sidebar.tsx" data-component-line="53"
+                                data-component-file="Sidebar.tsx" data-component-name="ActivitySquare"
+                                data-component-content="%7B%22className%22%3A%22h-4%20w-4%22%7D">
+                                <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                                <path d="M17 12h-2l-2 5-2-10-2 5H7"></path>
+                            </svg>
+                            <span> Overall Success </span>
                         </a>
                         <a href="/abandoned-by-customer.html"
-                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100"><i
-                                class="font-semibold fa-regular fa-user"></i>
-                            <span class="font-semibold"> Abandoned by Customer </span>
+                            class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="w-4 h-4 lucide lucide-user-x"
+                                data-lov-id="src\components\Sidebar\Sidebar.tsx:58:16" data-lov-name="UserX"
+                                data-component-path="src\components\Sidebar\Sidebar.tsx" data-component-line="58"
+                                data-component-file="Sidebar.tsx" data-component-name="UserX"
+                                data-component-content="%7B%22className%22%3A%22h-4%20w-4%22%7D">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <line x1="17" x2="22" y1="8" y2="13"></line>
+                                <line x1="22" x2="17" y1="8" y2="13"></line>
+                            </svg>
+                            <span> Abandoned by Customer </span>
                         </a>
                         <a href="/verification-failure.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
-                            <i class="fa-solid fa-circle-xmark "></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="w-4 h-4 lucide lucide-octagon-x"
+                                data-lov-id="src\components\Sidebar\Sidebar.tsx:63:16" data-lov-name="XOctagon"
+                                data-component-path="src\components\Sidebar\Sidebar.tsx" data-component-line="63"
+                                data-component-file="Sidebar.tsx" data-component-name="XOctagon"
+                                data-component-content="%7B%22className%22%3A%22h-4%20w-4%22%7D">
+                                <path d="m15 9-6 6"></path>
+                                <path
+                                    d="M2.586 16.726A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2h6.624a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586z">
+                                </path>
+                                <path d="m9 9 6 6"></path>
+                            </svg>
                             <span> Verification Failure</span>
                         </a>
                         <a href="/id-breakdown.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
-                            <i class="fa-solid fa-database "></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="w-4 h-4 lucide lucide-database"
+                                data-lov-id="src\components\Sidebar\Sidebar.tsx:68:16" data-lov-name="Database"
+                                data-component-path="src\components\Sidebar\Sidebar.tsx" data-component-line="68"
+                                data-component-file="Sidebar.tsx" data-component-name="Database"
+                                data-component-content="%7B%22className%22%3A%22h-4%20w-4%22%7D">
+                                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                                <path d="M3 5V19A9 3 0 0 0 21 19V5"></path>
+                                <path d="M3 12A9 3 0 0 0 21 12"></path>
+                            </svg>
                             <span> ID Breakdown </span>
                         </a>
                         <a href="/document-breakdown.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
-                            <i class="fa-regular fa-file "></i>
-                            <span> Document Breakdown </span>
-                        </a>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="w-4 h-4 lucide lucide-file-text"
+                                data-lov-id="src\components\Sidebar\Sidebar.tsx:73:16" data-lov-name="FileText"
+                                data-component-path="src\components\Sidebar\Sidebar.tsx" data-component-line="73"
+                                data-component-file="Sidebar.tsx" data-component-name="FileText"
+                                data-component-content="%7B%22className%22%3A%22h-4%20w-4%22%7D">
+                                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                                <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                                <path d="M10 9H8"></path>
+                                <path d="M16 13H8"></path>
+                                <path d="M16 17H8"></path>
+                            </svg>
+                            <span> Document Breakdown </span></a>
                         <a href="/video-call-waiting.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
-                            <i class="fa-regular fa-clock "></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="w-4 h-4 lucide lucide-clock"
+                                data-lov-id="src\components\Sidebar\Sidebar.tsx:78:16" data-lov-name="Clock"
+                                data-component-path="src\components\Sidebar\Sidebar.tsx" data-component-line="78"
+                                data-component-file="Sidebar.tsx" data-component-name="Clock"
+                                data-component-content="%7B%22className%22%3A%22h-4%20w-4%22%7D">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
                             <span> Video Call Waiting </span>
                         </a>
                         <a href="/verification-time.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
-                            <i class="fa-regular fa-clock "></i>
-                            <span> Verification Time </span>
-                        </a>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="w-4 h-4 lucide lucide-clock"
+                                data-lov-id="src\components\Sidebar\Sidebar.tsx:78:16" data-lov-name="Clock"
+                                data-component-path="src\components\Sidebar\Sidebar.tsx" data-component-line="78"
+                                data-component-file="Sidebar.tsx" data-component-name="Clock"
+                                data-component-content="%7B%22className%22%3A%22h-4%20w-4%22%7D">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span> Verification Time </span></a>
                         <a href="/average-response-time.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
-                            <i class="fa-solid fa-chart-line "></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="w-4 h-4 lucide lucide-trending-up"
+                                data-lov-id="src\components\Sidebar\Sidebar.tsx:88:16" data-lov-name="TrendingUp"
+                                data-component-path="src\components\Sidebar\Sidebar.tsx" data-component-line="88"
+                                data-component-file="Sidebar.tsx" data-component-name="TrendingUp"
+                                data-component-content="%7B%22className%22%3A%22h-4%20w-4%22%7D">
+                                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                                <polyline points="16 7 22 7 22 13"></polyline>
+                            </svg>
                             <span> Average Response </span>
                         </a>
                         <a href="/country-distribution.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded sidebar-item active hover:bg-gray-100">
-                            <i class="fa-solid fa-globe text-[#2563EB] font-semibold"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="w-4 h-4 lucide lucide-globe text-[#2563EB] font-semibold"
+                                data-lov-id="src\components\Sidebar\Sidebar.tsx:93:16" data-lov-name="Globe"
+                                data-component-path="src\components\Sidebar\Sidebar.tsx" data-component-line="93"
+                                data-component-file="Sidebar.tsx" data-component-name="Globe"
+                                data-component-content="%7B%22className%22%3A%22h-4%20w-4%22%7D">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                                <path d="M2 12h20"></path>
+                            </svg>
                             <span class="text-[#2563EB] font-semibold"> Country Distribution </span></a>
                         <a href="/mobile-devices.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
-                            <i class="fa-solid fa-mobile-screen"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="w-4 h-4 lucide lucide-smartphone"
+                                data-lov-id="src\components\Sidebar\Sidebar.tsx:98:16" data-lov-name="Smartphone"
+                                data-component-path="src\components\Sidebar\Sidebar.tsx" data-component-line="98"
+                                data-component-file="Sidebar.tsx" data-component-name="Smartphone"
+                                data-component-content="%7B%22className%22%3A%22h-4%20w-4%22%7D">
+                                <rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect>
+                                <path d="M12 18h.01"></path>
+                            </svg>
                             <span> Mobile Devices </span>
                         </a>
                         <a href="/detailed-transactions.html"
                             class="flex items-center gap-2 px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-100">
-                            <i class="fa-solid fa-chart-line"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="w-4 h-4 lucide lucide-square-activity"
+                                data-lov-id="src\components\Sidebar\Sidebar.tsx:103:16" data-lov-name="ActivitySquare"
+                                data-component-path="src\components\Sidebar\Sidebar.tsx" data-component-line="103"
+                                data-component-file="Sidebar.tsx" data-component-name="ActivitySquare"
+                                data-component-content="%7B%22className%22%3A%22h-4%20w-4%22%7D">
+                                <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                                <path d="M17 12h-2l-2 5-2-10-2 5H7"></path>
+                            </svg>
                             <span> Detailed Transactions </span>
                         </a>
                     </div>
                 </div>
                 <a href="/success-rate.html" title="Success Rate"
                     class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
-                    <i class="fa-solid fa-chart-column"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="w-5 h-5 lucide lucide-chart-no-axes-column"
+                        data-lov-id="src\components\Sidebar\Sidebar.tsx:109:12" data-lov-name="BarChart2"
+                        data-component-path="src\components\Sidebar\Sidebar.tsx" data-component-line="109"
+                        data-component-file="Sidebar.tsx" data-component-name="BarChart2"
+                        data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                        <line x1="18" x2="18" y1="20" y2="10"></line>
+                        <line x1="12" x2="12" y1="20" y2="4"></line>
+                        <line x1="6" x2="6" y1="20" y2="14"></line>
+                    </svg>
                     <span class="sidebar-label">Success Rate</span>
                 </a>
                 <a href="/transactions.html" title="Transactions"
                     class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
-                    <i class="fa-regular fa-file"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="w-5 h-5 lucide lucide-file-text" data-lov-id="src\components\Sidebar\Sidebar.tsx:114:12"
+                        data-lov-name="FileText" data-component-path="src\components\Sidebar\Sidebar.tsx"
+                        data-component-line="114" data-component-file="Sidebar.tsx" data-component-name="FileText"
+                        data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                        <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                        <path d="M10 9H8"></path>
+                        <path d="M16 13H8"></path>
+                        <path d="M16 17H8"></path>
+                    </svg>
                     <span class="sidebar-label">Transactions</span>
                 </a>
                 <a href="/settings.html" title="Settings"
                     class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
-                    <i class="fa-solid fa-gear"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="w-5 h-5 lucide lucide-settings" data-lov-id="src\components\Sidebar\Sidebar.tsx:119:12"
+                        data-lov-name="Settings" data-component-path="src\components\Sidebar\Sidebar.tsx"
+                        data-component-line="119" data-component-file="Sidebar.tsx" data-component-name="Settings"
+                        data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                        <path
+                            d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z">
+                        </path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
                     <span class="sidebar-label">Settings</span>
                 </a>
                 <a href="/logout.html" title="Logout"
                     class="flex items-center gap-2 px-3 py-2 mt-4 text-red-500 transition rounded sidebar-item hover:bg-gray-100">
-                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="w-5 h-5 lucide lucide-log-out" data-lov-id="src\components\Sidebar\Sidebar.tsx:222:14"
+                        data-lov-name="LogOut" data-component-path="src\components\Sidebar\Sidebar.tsx"
+                        data-component-line="222" data-component-file="Sidebar.tsx" data-component-name="LogOut"
+                        data-component-content="%7B%22className%22%3A%22h-5%20w-5%22%7D">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" x2="9" y1="12" y2="12"></line>
+                    </svg>
                     <span class="sidebar-label">Logout</span>
                 </a>
             </nav>
