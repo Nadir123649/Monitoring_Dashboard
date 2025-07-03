@@ -436,6 +436,67 @@ a {
   box-sizing: border-box;
   padding: 24px;
 }
+@media (max-width: 768px) {
+  #sidebar {
+    position: fixed;
+    top: 0;
+    left: -270px;
+    height: 100%;
+    z-index: 30;
+    transition: left 0.3s ease;
+  }
+
+  #sidebar.open {
+    left: 0;
+  }
+}
+@media (min-width: 768px) {
+  .sidebar.open {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .chart-container {
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+
+  .legend-item {
+    font-size: 12px;
+    padding: 10px 16px;
+  }
+
+  #chart {
+    height: 300px;
+  }
+
+  #barChartContainer {
+    height: 280px;
+  }
+  .time-period-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 0 !important;
+  }
+
+  .date-inputs {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .date-wrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #search-btn {
+    width: 100%;
+  }
+}
 
 @keyframes pulse {
   0%,
@@ -478,49 +539,5 @@ a {
 
   100% {
     transform: translate(40px, 40px);
-  }
-}
-
-@media (max-width: 768px) {
-  .chart-container {
-    padding: 1rem;
-    border-radius: 1rem;
-  }
-
-  .legend-item {
-    font-size: 12px;
-    padding: 10px 16px;
-  }
-
-  #chart {
-    height: 300px;
-  }
-
-  #barChartContainer {
-    height: 280px;
-  }
-}
-
-/* ✅ Mobile responsive adjustment */
-@media (max-width: 768px) {
-  .time-period-container {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 0 !important;
-  }
-
-  .date-inputs {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .date-wrapper {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  #search-btn {
-    width: 100%;
   }
 }
