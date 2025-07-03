@@ -327,28 +327,35 @@
 
             <main class="flex-1 p-6 overflow-y-auto font-sans bg-gray-50">
                 <div>
-                    <div class="flex flex-col items-start justify-between gap-4 mb-6 md:flex-row md:items-center">
+                    <div class="flex flex-col gap-6 mb-6 md:flex-row md:items-center md:justify-between">
+                        <!-- Left Section: Heading -->
                         <div>
                             <h1 class="text-2xl font-bold text-gray-800">Detailed Transactions</h1>
-                            <p class="text-gray-500">Comprehensive analysis of all transactions for the specified time
-                            </p>
+                            <p class="text-gray-500">Comprehensive analysis of all transactions for the specified time</p>
                         </div>
-                        <div class="time-period-container">
-                            <label>Define Time Period:</label>
-                            <div class="date-inputs">
-                                <div class="date-wrapper">
-                                    <input type="date" id="from-date" />
+
+                        <!-- Right Section: Date Range Picker -->
+                        <div class="w-full time-period-container md:w-auto">
+                            <label class="hidden mb-2 md:block md:mb-1">Define Time Period:</label>
+
+                            <!-- Dates Wrapper -->
+                            <div class="flex flex-row flex-wrap gap-3 date-inputs sm:flex-row sm:items-center">
+                                <div class="w-full date-wrapper sm:w-auto">
+                                    <input type="date" id="from-date" class="w-full sm:w-auto" />
                                     <label for="from-date" class="placeholder-text">From</label>
                                     <span class="calendar-icon"></span>
                                 </div>
-                                <div class="date-wrapper">
-                                    <input type="date" id="to-date" />
+                                <div class="w-full date-wrapper sm:w-auto">
+                                    <input type="date" id="to-date" class="w-full sm:w-auto" />
                                     <label for="to-date" class="placeholder-text">To</label>
                                     <span class="calendar-icon"></span>
                                 </div>
                             </div>
+
                             <!-- Search Button -->
-                            <button id="search-btn" class="search-button">Search</button>
+                            <button id="search-btn" class="mt-2 search-button sm:mt-3 md:mt-0">
+                                Search
+                            </button>
                         </div>
                     </div>
                 </div>

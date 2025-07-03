@@ -346,28 +346,33 @@ a {
 .text-fonts {
   font-family: "JetBrains Mono", system-ui, sans-serif !important;
 }
-
+/* Keep your existing styles... */
 .time-period-container {
   display: flex;
   align-items: center;
   gap: 10px;
   color: #1a202c;
   padding: 10px;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
 .time-period-container label {
   font-size: 16px;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .date-inputs {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap; /* Wrap inputs on smaller screens */
 }
 
 .date-wrapper {
   position: relative;
   display: inline-block;
+  width: 100%;
+  max-width: 150px;
 }
 
 .date-wrapper input[type="date"] {
@@ -377,7 +382,7 @@ a {
   border-radius: 6px;
   background-color: #fff;
   cursor: pointer;
-  width: 150px;
+  width: 100%;
   position: relative;
   z-index: 2;
   background-color: white;
@@ -387,6 +392,18 @@ a {
   outline: none;
   border-color: #3182ce;
   box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.2);
+}
+
+.date-wrapper input[type="date"]::-webkit-calendar-picker-indicator {
+  position: relative;
+  z-index: 3;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.date-wrapper input[type="date"]:not(:placeholder-shown) + .placeholder-text,
+.date-wrapper input[type="date"]:focus + .placeholder-text {
+  display: none;
 }
 
 .calendar-icon {
@@ -408,18 +425,6 @@ a {
   pointer-events: none;
   z-index: 1;
   font-size: 14px;
-}
-
-.date-wrapper input[type="date"]::-webkit-calendar-picker-indicator {
-  position: relative;
-  z-index: 3;
-  opacity: 1;
-  cursor: pointer;
-}
-
-.date-wrapper input[type="date"]:not(:placeholder-shown) + .placeholder-text,
-.date-wrapper input[type="date"]:focus + .placeholder-text {
-  display: none;
 }
 
 .dashboard-container {
@@ -493,5 +498,29 @@ a {
 
   #barChartContainer {
     height: 280px;
+  }
+}
+
+/* ✅ Mobile responsive adjustment */
+@media (max-width: 768px) {
+  .time-period-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 0 !important;
+  }
+
+  .date-inputs {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .date-wrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #search-btn {
+    width: 100%;
   }
 }
