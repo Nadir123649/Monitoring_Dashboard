@@ -466,8 +466,11 @@ main {
   .chart-container {
     padding: 0 !important;
   }
-  .dashboard-container{
+  .dashboard-container {
     padding: 8px !important;
+  }
+  .main-div {
+    padding: 10px 8px !important;
   }
 }
 
