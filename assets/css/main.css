@@ -466,6 +466,9 @@ main {
   .chart-container {
     padding: 0 !important;
   }
+  .dashboard-container{
+    padding: 8px !important;
+  }
 }
 
 @media (max-width: 768px) {
