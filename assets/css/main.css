@@ -228,6 +228,12 @@ a {
   border-right: 0.833333px solid #e5e7eb;
 }
 
+header {
+  border-bottom: 0.833333px solid #e5e7eb;
+}
+main {
+  overflow: hidden;
+}
 .sidebar-item.active {
   align-items: center;
   background-color: #2563eb1a;
@@ -451,7 +457,6 @@ a {
     left: 0;
   }
 }
-
 
 @media (max-width: 768px) {
   .chart-container {
