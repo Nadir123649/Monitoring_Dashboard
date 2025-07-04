@@ -51,7 +51,6 @@ navLinks.forEach((link) => {
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
-
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("collapseBtn").addEventListener("click", function () {
     if (window.innerWidth < 768) {

@@ -23,13 +23,13 @@
         <!-- Overlay for Mobile -->
         <div id="overlay" class="fixed inset-0 z-20 hidden bg-black bg-opacity-50" onclick="closeMobileMenu()"></div>
         <div id="sidebar"
-            class="bg-white border-r border-gray-200 shadow-sm w-[250px] transition-all duration-300 flex flex-col overflow-hidden">
+            class="sidebar bg-white border-r border-gray-200 shadow-sm w-[250px] transition-all duration-300 flex flex-col overflow-hidden">
             <div class="flex items-center justify-between p-4 border-b border-gray-200 sidebar-top">
                 <div class="flex items-center gap-2">
                     <i class="fa-regular fa-circle-user text-[#2563EB] text-xl"></i>
                     <span class="font-bold text-gray-800 sidebar-label">IDBox™</span>
                 </div>
-                <button onclick="toggleCollapse()" class="p-1 rounded-full hover:bg-gray-100">
+                <button id="collapseBtn" class="p-1 rounded-full hover:bg-gray-100">
                     <svg id="collapseIcon" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -312,9 +312,7 @@
             <!-- Mobile Header -->
             <header class="flex items-center justify-between px-4 py-3 bg-white border-b md:hidden">
                 <div class="flex items-center gap-2">
-                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor">
-                        <circle cx="12" cy="12" r="10" stroke-width="2" />
-                    </svg>
+                    <i class="fa-regular fa-circle-user text-[#2563EB] text-xl"></i>
                     <span class="font-semibold text-gray-800">IDBox™</span>
                 </div>
                 <button onclick="openMobileMenu()" class="p-1 rounded hover:bg-gray-100">
@@ -325,7 +323,7 @@
                 </button>
             </header>
 
-            <main class="flex-1 p-6 overflow-y-auto font-sans bg-gray-50">
+            <main class="flex-1 p-[20px] md:p-6 overflow-y-auto font-sans bg-gray-50">
                 <div>
 
                     <div class="flex flex-col gap-6 mb-6 md:flex-row md:items-center md:justify-between">
