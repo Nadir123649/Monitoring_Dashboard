@@ -14,8 +14,52 @@ const dataOne = [
     value: 11,
     colors: ["#06ffa5", "#00d4aa", "#0056b3"],
   },
+  {
+    name: "Verification Success",
+    value: 72,
+    colors: ["#00d4ff", "#006eff", "#0047ff"],
+  },
+
+  {
+    name: "Verification Success",
+    value: 72,
+    colors: ["#00d4ff", "#006eff", "#0047ff"],
+  },
+  {
+    name: "Abandoned by Customer",
+    value: 16,
+    colors: ["#ff006e", "#8338ec", "#3a86ff"],
+  },
+  {
+    name: "Verification Failure",
+    value: 11,
+    colors: ["#06ffa5", "#00d4aa", "#0056b3"],
+  },
+  { name: "Not Started", value: 1, colors: ["#ffbe0b", "#fb8500", "#ff006e"] },
+  {
+    name: "Verification Success",
+    value: 72,
+    colors: ["#00d4ff", "#006eff", "#0047ff"],
+  },
+
+  {
+    name: "Verification Success",
+    value: 72,
+    colors: ["#00d4ff", "#006eff", "#0047ff"],
+  },
+  {
+    name: "Abandoned by Customer",
+    value: 16,
+    colors: ["#ff006e", "#8338ec", "#3a86ff"],
+  },
+  {
+    name: "Verification Failure",
+    value: 11,
+    colors: ["#06ffa5", "#00d4aa", "#0056b3"],
+  },
   { name: "Not Started", value: 1, colors: ["#ffbe0b", "#fb8500", "#ff006e"] },
 ];
+
 const total = dataOne.reduce((a, b) => a + b.value, 0);
 
 Highcharts.chart("pieContainer", {
@@ -28,9 +72,9 @@ Highcharts.chart("pieContainer", {
   title: {
     useHTML: true,
     text: `<div style="text-align:center;padding:25px">
-        <div style="font-size:48px;font-weight:900;color:#111;animation:pulse 2s infinite">${total}</div>
-        <div style="font-size:11px;color:#222;font-weight:700;text-transform:uppercase;letter-spacing:4px;animation:fadeIn 3s ease-in">TOTAL DATA POINTS</div>
-      </div>`,
+            <div style="font-size:48px;font-weight:900;color:#111;animation:pulse 2s infinite">${total}</div>
+            <div style="font-size:11px;color:#222;font-weight:700;text-transform:uppercase;letter-spacing:4px;animation:fadeIn 3s ease-in">TOTAL DATA POINTS</div>
+          </div>`,
     align: "center",
     verticalAlign: "middle",
     floating: true,
@@ -56,38 +100,32 @@ Highcharts.chart("pieContainer", {
     backgroundColor: "white",
     borderRadius: 20,
     borderWidth: 0,
-    shadow: {
-      color: "rgba(0,212,255,0.3)",
-      offsetX: 0,
-      offsetY: 10,
-      opacity: 0.3,
-      width: 25,
-    },
-    style: { fontSize: "13px", fontWeight: "600", color: "#fff" },
+    shadow: true,
+    style: { fontSize: "13px", fontWeight: "600", color: "#000" },
     formatter() {
       return `<div style="padding:20px;text-align:center">
-            <div style="font-weight:900;color:#111;margin-bottom:10px;font-size:15px;text-transform:uppercase">${
-              this.point.name
-            }</div>
-            <div style="color:#222;margin-bottom:6px">Value: <span style="font-weight:800;color:#111">${
-              this.y
-            }</span></div>
-            <div style="color:#222">Share: <span style="font-weight:800;color:#111">${this.percentage.toFixed(
-              1
-            )}%</span></div>
-          </div>`;
+                <div style="font-weight:900;color:#111;margin-bottom:10px;font-size:15px;text-transform:uppercase">${
+                  this.point.name
+                }</div>
+                <div style="color:#222;margin-bottom:6px">Value: <span style="font-weight:800;color:#111">${
+                  this.y
+                }</span></div>
+                <div style="color:#222">Share: <span style="font-weight:800;color:#111">${this.percentage.toFixed(
+                  1
+                )}%</span></div>
+              </div>`;
     },
   },
   legend: { enabled: false },
   series: [
     {
       name: "Data",
-      data: dataOne.map((d, i) => ({
+      data: dataOne.map((d) => ({
         name: d.name,
         y: d.value,
         color: {
           linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
-          stops: d.colors.map((c, j) => [j / (d.colors.length - 1), c]),
+          stops: d.colors.map((c, i) => [i / (d.colors.length - 1), c]),
         },
         sliced: true,
       })),
@@ -96,18 +134,22 @@ Highcharts.chart("pieContainer", {
   ],
 });
 
+// Custom Legend
 const legendEl = document.getElementById("pieLegend");
-dataOne.forEach((d, i) => {
+dataOne.forEach((d) => {
   const box = document.createElement("div");
   box.className =
-    "flex items-center gap-2 px-4 py-3 transition transform cursor-pointer bg-white/95 backdrop-blur-lg rounded-xl hover:-translate-y-1 hover:scale-105";
+    "flex items-center justify-center gap-2 py-4 px-2 border-white border-solid  mb-2 transition transform cursor-pointer bg-white/85 shadow  rounded-xl max-w-[220px] w-full min-w-[220px] ";
+
   const dot = document.createElement("div");
   dot.className = "w-4 h-4 rounded-full animate-pulse";
   dot.style.background = d.colors[d.colors.length - 1];
   dot.style.boxShadow = `0 0 10px ${d.colors[d.colors.length - 1]}80`;
+
   const label = document.createElement("span");
-  label.className = "text-xs font-semibold text-gray-800 uppercase";
+  label.className = "text-xs font-semibold text-gray-800 uppercase text-wrap text-ellipse";
   label.textContent = d.name;
+ 
   box.append(dot, label);
   legendEl.appendChild(box);
 });

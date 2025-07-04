@@ -443,6 +443,13 @@ main {
   padding: 24px;
 }
 
+.scrollable-legend {
+  max-width: 600px;
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
 @media (max-width: 768px) {
   #sidebar {
     position: fixed;
