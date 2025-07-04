@@ -20,7 +20,7 @@
 <body class="h-screen overflow-hidden font-sans">
     <div class="flex h-screen overflow-hidden">
         <!-- Overlay for Mobile -->
-        <div id="overlay" class="fixed inset-0 z-20 hidden bg-black bg-opacity-50" onclick="closeMobileMenu()"></div>
+        <div id="overlay" class="fixed inset-0 z-[44] hidden bg-black bg-opacity-50" onclick="closeMobileMenu()"></div>
         <div id="sidebar"
             class="sidebar bg-white border-r border-gray-200 shadow-sm w-[250px] transition-all duration-300 flex flex-col overflow-hidden">
             <div class="flex items-center justify-between p-4 border-b border-gray-200 sidebar-top">
@@ -360,7 +360,8 @@
                     <div
                         class="flex flex-col justify-between gap-3 p-6 bg-white shadow md:gap-6 lg:flex-row main-div rounded-2xl">
                         <!-- KPI Cards -->
-                        <div class="flex flex-col w-full gap-6 overflow-x-auto justify-center lg:max-w-[400px] text-fonts">
+                        <div
+                            class="flex flex-col w-full gap-6 overflow-x-auto justify-center lg:max-w-[400px] text-fonts">
                             <div
                                 class="flex items-center justify-center w-full h-full transition-transform bg-white shadow rounded-xl hover:scale-100">
                                 <div id="bar-containersd" class="w-full "></div>
@@ -391,7 +392,7 @@
                             </div>
 
                             <!-- Legend -->
-                        
+
                         </div>
                     </div>
 

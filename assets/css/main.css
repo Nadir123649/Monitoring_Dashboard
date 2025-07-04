@@ -445,7 +445,6 @@ main {
 
 .scrollable-legend {
   max-width: 600px;
-  width: 100%;
   overflow-y: hidden;
   overflow-x: auto;
 }
@@ -456,7 +455,8 @@ main {
     top: 0;
     left: -270px;
     height: 100%;
-    z-index: 30;
+    z-index: 50;
+
     transition: left 0.3s ease;
   }
 
