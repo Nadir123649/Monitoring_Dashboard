@@ -456,6 +456,9 @@ main {
   #sidebar.open {
     left: 0;
   }
+  .chart-container {
+    padding: 0 !important;
+  }
 }
 
 @media (max-width: 768px) {
