@@ -239,12 +239,21 @@ navLinks.forEach((link) => {
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
-let collapsed = false;
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("collapseBtn").addEventListener("click", function () {
+    if (window.innerWidth < 768) {
+      closeMobileMenu();
+    } else {
+      toggleCollapse();
+    }
+  });
+});
+
+let collapsed = false; // Sidebar starts expanded
 let dropdownOpen = {};
 
 function toggleCollapse() {
-  // 🚫 Prevent collapsing on mobile devices
-  if (window.innerWidth < 768) return;
+  if (window.innerWidth < 768) return; // Don't collapse on mobile
 
   const sidebar = document.getElementById("sidebar");
   const icon = document.getElementById("collapseIcon");
@@ -253,34 +262,30 @@ function toggleCollapse() {
 
   collapsed = !collapsed;
 
-  // toggle sidebar width
-  sidebar.classList.toggle("w-[250px]");
-  sidebar.classList.toggle("w-[70px]");
+  if (collapsed) {
+    sidebar.classList.remove("w-[250px]");
+    sidebar.classList.add("w-[70px]");
+  } else {
+    sidebar.classList.remove("w-[70px]");
+    sidebar.classList.add("w-[250px]");
+  }
 
-  // show/hide text labels in sidebar
   labels.forEach((label) => {
-    if (collapsed) {
-      label.classList.add("hidden");
-    } else {
-      label.classList.remove("hidden");
-    }
+    label.classList.toggle("hidden", collapsed);
   });
 
-  // toggle dropdown visibility
   dropdowns.forEach((dropdown) => {
-    if (collapsed) {
-      dropdown.classList.add("hidden");
-    } else {
-      const id = dropdown.id.replace("dropdown-", "");
-      if (dropdownOpen[id]) {
-        dropdown.classList.remove("hidden");
-      }
-    }
+    const id = dropdown.id.replace("dropdown-", "");
+    dropdown.classList.toggle("hidden", collapsed || !dropdownOpen[id]);
   });
 
-  // rotate arrow icon
   if (icon) icon.classList.toggle("rotate-180");
 }
+document.addEventListener("DOMContentLoaded", function () {
+  document
+    .getElementById("collapseBtn")
+    .addEventListener("click", toggleCollapse);
+});
 
 function toggleDropdown(name) {
   if (collapsed) return; // disable dropdown toggle when collapsed
@@ -298,3 +303,18 @@ function toggleDropdown(name) {
   // rotate arrow icon
   if (icon) icon.classList.toggle("rotate-180");
 }
+
+document.getElementById("search-btn").addEventListener("click", function () {
+  const fromDate = document.getElementById("from-date").value;
+  const toDate = document.getElementById("to-date").value;
+
+  if (!fromDate || !toDate) {
+    alert("Please select both 'From' and 'To' dates.");
+    return;
+  }
+
+  // Trigger your API call or data fetch logic here
+  console.log("Fetching data from", fromDate, "to", toDate);
+
+  // Example: fetchData(fromDate, toDate);
+});
