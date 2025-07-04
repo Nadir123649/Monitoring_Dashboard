@@ -357,20 +357,20 @@
                             </button>
                         </div>
                     </div>
-
-                    <div class="flex justify-between gap-6 p-6 bg-white shadow main-div rounded-2xl">
+                    <div
+                        class="flex flex-col justify-between gap-3 p-6 bg-white shadow md:gap-6 lg:flex-row main-div rounded-2xl">
                         <!-- KPI Cards -->
-                        <div class="flex flex-col w-full gap-6 overflow-x-auto max-w-[400px] left-cards text-fonts">
+                        <div class="flex flex-col w-full gap-6 overflow-x-auto justify-center lg:max-w-[400px] text-fonts">
                             <div
-                                class="flex items-center flex-1 w-full transition-transform bg-white shadow rounded-xl justify-normal hover:scale-100">
-                                <div id="bar-containersd" class="w-full"></div>
+                                class="flex items-center justify-center w-full h-full transition-transform bg-white shadow rounded-xl hover:scale-100">
+                                <div id="bar-containersd" class="w-full "></div>
                             </div>
                         </div>
 
                         <!-- Chart Card -->
-                        <div class="relative w-full flex-1 min-w-[400px]">
+                        <div class="relative w-full flex-1 lg:min-w-[400px]">
                             <div id="pie-cards"
-                                class="w-[700px] h-[500px] mx-auto p-6  hover:scale-[1.02] transition-transform flex-1 min-h-[550px] overflow-hidden">
+                                class="w-full max-w-[700px] h-[350px] sm:h-[400px] lg:h-[500px] mx-auto p-0 md:p-6 hover:scale-[1.02] transition-transform flex-1 min-h-[400px] lg:min-h-[550px] overflow-hidden">
                                 <div
                                     class="absolute inset-0 rounded-3xl bg-[length:40px_40px] bg-grid animate-[gridMove_20s_linear_infinite]">
                                 </div>
@@ -389,30 +389,12 @@
                                     class="absolute z-20 grid grid-cols-2 gap-4 transform -translate-x-1/2 bottom-6 left-1/2">
                                 </div>
                             </div>
-                            <div
-                                class="absolute z-50 bottom-[30px] left-1/2 transform -translate-x-1/2 grid grid-cols-2 gap-2">
-                                <div class="flex items-center gap-2 px-[16px] py-[12px] bg-white shadow rounded-xl">
-                                    <div class="w-4 h-4 rounded-full" style="background:#00d4ff"></div>
-                                    <span class="text-[11px] font-semibold text-gray-800 text-style">NOT STARTED</span>
-                                </div>
-                                <div class="flex items-center gap-2 px-[16px] py-[12px] bg-white shadow rounded-xl">
-                                    <div class="w-4 h-4 rounded-full" style="background:#ff006e"></div>
-                                    <span class="text-[11px] font-semibold text-gray-800 text-style">ABANDONED BY
-                                        CUSTOMER</span>
-                                </div>
-                                <div class="flex items-center gap-2 px-[16px] py-[12px] bg-white shadow rounded-xl">
-                                    <div class="w-4 h-4 rounded-full" style="background:#06ffa5"></div>
-                                    <span class="text-[11px] font-semibold text-gray-800 text-style">VERIFICATION
-                                        FAILURE</span>
-                                </div>
-                                <div class="flex items-center gap-2 px-[16px] py-[12px] bg-white shadow rounded-xl ">
-                                    <div class="w-4 h-4 rounded-full" style="background:#ffbe0b"></div>
-                                    <span class="text-[11px] font-semibold text-gray-800 text-style">VERIFICATION
-                                        SUCCESS</span>
-                                </div>
-                            </div>
+
+                            <!-- Legend -->
+                        
                         </div>
                     </div>
+
                 </div>
             </main>
 
