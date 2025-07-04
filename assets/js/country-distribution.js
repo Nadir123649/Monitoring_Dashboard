@@ -24,9 +24,9 @@ const renderTable = () => {
 
   let rows = `
         <tr class="font-medium bg-gray-50">
-          <td class="px-6 py-4 whitespace-nowrap">Approved verified</td>
-          <td class="px-6 py-4 whitespace-nowrap">369</td>
-          <td class="px-6 py-4 whitespace-nowrap">100%</td>
+          <td class="px-3 md:px-6 py-2 md:py-4 whitespace-nowrap">Approved verified</td>
+          <td class="px-3 md:px-6 py-2 md:py-4 whitespace-nowrap">369</td>
+          <td class="px-3 md:px-6 py-2 md:py-4 whitespace-nowrap">100%</td>
         </tr>
       `;
 
@@ -36,9 +36,13 @@ const renderTable = () => {
       startIdx + index === 0 ? "text-green-600 font-medium" : "";
     rows += `
           <tr class="${rowClass}">
-            <td class="px-6 py-4 whitespace-nowrap">${item.country}</td>
-            <td class="px-6 py-4 whitespace-nowrap">${item.count}</td>
-            <td class="px-6 py-4 whitespace-nowrap ${highlight}">${item.percentage.toFixed(
+            <td class="px-3 md:px-6 py-2 md:py-4 whitespace-nowrap">${
+              item.country
+            }</td>
+            <td class="px-3 md:px-6 py-2 md:py-4 whitespace-nowrap">${
+              item.count
+            }</td>
+            <td class="px-3 md:px-6  py-2 md:py-4 whitespace-nowrap ${highlight}">${item.percentage.toFixed(
       1
     )}%</td>
           </tr>
