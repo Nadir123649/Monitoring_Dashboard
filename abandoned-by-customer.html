@@ -14,6 +14,11 @@
         integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Abandoned By Customers</title>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 </head>
 
 <body class="h-screen overflow-hidden font-sans">
@@ -339,13 +344,13 @@
                             <!-- Dates Wrapper -->
                             <div class="flex flex-row flex-wrap gap-3 date-inputs sm:flex-row sm:items-center">
                                 <div class="w-full date-wrapper sm:w-auto">
-                                    <input type="date" id="from-date" placeholder="From"
+                                    <input type="text" id="from-date" placeholder="From"
                                         class="w-full sm:w-auto input-fav" />
                                     <label for="from-date" class="placeholder-text"></label>
                                     <span class="calendar-icon"></span>
                                 </div>
                                 <div class="w-full date-wrapper sm:w-auto">
-                                    <input type="date" id="to-date" placeholder="To"
+                                    <input type="text" id="to-date" placeholder="To"
                                         class="w-full sm:w-auto input-fav" />
                                     <label for="to-date" class="placeholder-text"></label>
                                     <span class="calendar-icon"></span>
@@ -414,11 +419,7 @@
             </footer>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    
     <script src="/assets/js/abandoned-customer.js"></script>
     <script src="/assets/js/main.js"></script>
 </body>
