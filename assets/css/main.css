@@ -450,7 +450,11 @@ main {
 }
 
 .dash-bordee {
-	border: 0.8px solid #E5E7EB;
+  border: 0.8px solid #e5e7eb;
+}
+
+#failureBarCharts {
+  margin: 0 !important;
 }
 
 @media (max-width: 768px) {
