@@ -432,7 +432,7 @@ input[type="text"] {
   .main-div {
     padding: 8px 8px !important;
   }
-  .date-wrapper{
+  .date-wrapper {
     flex: none;
   }
 }
