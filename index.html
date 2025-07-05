@@ -5,19 +5,16 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <link rel="stylesheet" href="https://unpkg.com/react-day-picker@8.7.3/dist/style.css" />
   <link rel="stylesheet" href="./tailwind.config.js" />
+  <link rel="stylesheet" href="path/to/line-awesome/css/line-awesome-font-awesome.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
     integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="path/to/line-awesome/css/line-awesome-font-awesome.min.css" />
-  <link rel="stylesheet" href="https://unpkg.com/react-day-picker@8.7.3/dist/style.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-  <link rel="stylesheet" href="./assets/css/main.css" />
   <title>Service Monitoring Dashboard</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://code.highcharts.com/highcharts.js"></script>
-  <script src="https://code.highcharts.com/highcharts-3d.js"></script>
-  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
 </head>
 
 <body class="h-screen overflow-hidden font-sans">
@@ -320,26 +317,29 @@
               <p class="text-gray-500">Dashboard overview of service performance</p>
             </div>
 
-            <!-- Right Section: Date Range Picker -->
             <div class="flex items-center w-full gap-3 time-period-container md:w-auto">
-              <label class="hidden mb-2 text-sm font-semibold md:block md:mb-1">Define Time Period:</label>
+              <label class="hidden mb-2 md:block md:mb-1">Define Time Period:</label>
 
-              <div class="date-inputs">
-                <div class="date-wrapper">
-                  <input type="text" id="from-date" placeholder="From Date" />
+              <!-- Dates Wrapper -->
+              <div class="flex flex-row flex-wrap gap-3 date-inputs sm:flex-row sm:items-center">
+                <div class="w-full date-wrapper sm:w-auto">
+                  <input type="date" id="from-date" placeholder="From" class="w-full sm:w-auto input-fav" />
+                  <label for="from-date" class="placeholder-text"></label>
+                  <span class="calendar-icon"></span>
                 </div>
-                <div class="date-wrapper">
-                  <input type="text" id="to-date" placeholder="To Date" />
+                <div class="w-full date-wrapper sm:w-auto">
+                  <input type="date" id="to-date" placeholder="To" class="w-full sm:w-auto input-fav" />
+                  <label for="to-date" class="placeholder-text"></label>
+                  <span class="calendar-icon"></span>
                 </div>
               </div>
 
               <!-- Search Button -->
-              <button id="search-btn" class="search-button">Search</button>
-
-
+              <button id="search-btn" class="mt-2 search-button sm:mt-3 md:mt-0">
+                Search
+              </button>
             </div>
           </div>
-
           <!-- Metric Cards -->
           <div class="grid grid-cols-1 gap-6 mb-6 md:grid-cols-3">
             <!-- Completion Rate Card -->
@@ -407,7 +407,6 @@
               </div>
             </div>
           </div>
-
           <!-- Charts -->
           <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2">
             <!-- Chart Container -->
@@ -524,14 +523,14 @@
         </div>
       </main>
 
-      <footer class="px-4 py-3 bg-white border-t border-gray-200 footer">
-        <div class="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center">
+      <footer class="px-4 py-1 bg-white border-t border-gray-200 md:py-3 footer">
+        <div class="flex flex-col items-center justify-between gap-1 md:gap-2 md:flex-row md:items-center">
           <div class="flex flex-wrap items-center gap-2">
             <i class="fa-regular fa-circle-user text-[#2563EB] text-xl"></i>
             <span class="text-sm font-semibold">IDBox™ Service Monitoring</span>
             <span class="text-xs text-gray-500">v.2.1</span>
           </div>
-          <div class="text-sm text-left text-gray-500 md:text-right">
+          <div class="text-sm text-center text-gray-500 md:text-right">
             © <span id="year"></span> Intelli Group. All rights reserved.
           </div>
         </div>
@@ -540,8 +539,11 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
   <script src="/assets/js/index.js"></script>
-  <script src="https://kit.fontawesome.com/ce278ed6db.js" crossorigin="anonymous"></script>
   <script src="/assets/js/main.js"></script>
 </body>
 

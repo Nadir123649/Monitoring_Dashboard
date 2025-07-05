@@ -303,18 +303,3 @@ function toggleDropdown(name) {
   // rotate arrow icon
   if (icon) icon.classList.toggle("rotate-180");
 }
-
-document.getElementById("search-btn").addEventListener("click", function () {
-  const fromDate = document.getElementById("from-date").value;
-  const toDate = document.getElementById("to-date").value;
-
-  if (!fromDate || !toDate) {
-    alert("Please select both 'From' and 'To' dates.");
-    return;
-  }
-
-  // Trigger your API call or data fetch logic here
-  console.log("Fetching data from", fromDate, "to", toDate);
-
-  // Example: fetchData(fromDate, toDate);
-});

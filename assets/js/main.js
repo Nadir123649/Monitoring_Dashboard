@@ -8,7 +8,6 @@ function openMobileMenu() {
   sidebar.classList.add("open");
   document.getElementById("overlay").classList.remove("hidden");
 }
-
 // Close sidebar on sidebar arrow click (collapseIcon)
 document.getElementById("collapseIcon").addEventListener("click", function (e) {
   if (window.innerWidth < 768) {
@@ -115,8 +114,6 @@ function toggleDropdown(name) {
   // rotate arrow icon
   if (icon) icon.classList.toggle("rotate-180");
 }
-
-
 
 const legendContainer = document.getElementById("pie-legendss");
 chartPieData.forEach((entry) => {
