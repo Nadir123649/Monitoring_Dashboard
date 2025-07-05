@@ -332,19 +332,21 @@
                         </div>
 
                         <!-- Right Section: Date Range Picker -->
-                        <div class="w-full time-period-container md:w-auto">
+                        <div class="flex items-center w-full gap-3 time-period-container md:w-auto">
                             <label class="hidden mb-2 md:block md:mb-1">Define Time Period:</label>
 
                             <!-- Dates Wrapper -->
                             <div class="flex flex-row flex-wrap gap-3 date-inputs sm:flex-row sm:items-center">
                                 <div class="w-full date-wrapper sm:w-auto">
-                                    <input type="date" id="from-date" class="w-full sm:w-auto" />
-                                    <label for="from-date" class="placeholder-text">From</label>
+                                    <input type="date" id="from-date" placeholder="From"
+                                        class="w-full sm:w-auto input-fav" />
+                                    <label for="from-date" class="placeholder-text"></label>
                                     <span class="calendar-icon"></span>
                                 </div>
                                 <div class="w-full date-wrapper sm:w-auto">
-                                    <input type="date" id="to-date" class="w-full sm:w-auto" />
-                                    <label for="to-date" class="placeholder-text">To</label>
+                                    <input type="date" id="to-date" placeholder="To"
+                                        class="w-full sm:w-auto input-fav" />
+                                    <label for="to-date" class="placeholder-text"></label>
                                     <span class="calendar-icon"></span>
                                 </div>
                             </div>

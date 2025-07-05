@@ -1,3 +1,35 @@
+// Initialize flatpickr on From and To inputs
+const fromPicker = flatpickr("#from-date", {
+  dateFormat: "Y-m-d",
+  onChange: function (selectedDates, dateStr) {
+    toPicker.set("minDate", dateStr);
+  },
+});
+
+const toPicker = flatpickr("#to-date", {
+  dateFormat: "Y-m-d",
+  onChange: function (selectedDates, dateStr) {
+    fromPicker.set("maxDate", dateStr);
+  },
+});
+
+// Search button click
+document.getElementById("search-btn").addEventListener("click", function () {
+  const fromDate = document.getElementById("from-date").value;
+  const toDate = document.getElementById("to-date").value;
+
+  if (!fromDate || !toDate) {
+    alert("Please select both 'From' and 'To' dates.");
+    return;
+  }
+
+  // Use the selected dates
+  console.log("Fetching data from", fromDate, "to", toDate);
+
+  // TODO: Replace with your fetch or API logic
+  alert(`Searching data from ${fromDate} to ${toDate}`);
+});
+
 function openMobileMenu() {
   if (window.innerWidth >= 768) return; // Prevent on desktop
 
@@ -288,36 +320,4 @@ Highcharts.chart("pie-charted", {
       })),
     },
   ],
-});
-
-// Initialize flatpickr on From and To inputs
-const fromPicker = flatpickr("#from-date", {
-  dateFormat: "Y-m-d",
-  onChange: function (selectedDates, dateStr) {
-    toPicker.set("minDate", dateStr);
-  },
-});
-
-const toPicker = flatpickr("#to-date", {
-  dateFormat: "Y-m-d",
-  onChange: function (selectedDates, dateStr) {
-    fromPicker.set("maxDate", dateStr);
-  },
-});
-
-// Search button click
-document.getElementById("search-btn").addEventListener("click", function () {
-  const fromDate = document.getElementById("from-date").value;
-  const toDate = document.getElementById("to-date").value;
-
-  if (!fromDate || !toDate) {
-    alert("Please select both 'From' and 'To' dates.");
-    return;
-  }
-
-  // Use the selected dates
-  console.log("Fetching data from", fromDate, "to", toDate);
-
-  // TODO: Replace with your fetch or API logic
-  alert(`Searching data from ${fromDate} to ${toDate}`);
 });

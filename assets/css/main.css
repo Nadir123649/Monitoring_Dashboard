@@ -356,11 +356,11 @@ main {
 .date-inputs {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 12px;
 }
 
 .date-wrapper {
-  flex: 1 1 200px;
+  max-width: 160px !important;
 }
 
 input[type="date"] {
@@ -378,8 +378,9 @@ input[type="date"] {
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   line-height: 24px;
   align-items: center;
+  max-width: 160px !important;
   appearance: button;
-  background-color: #f1f5f9;
+  background-color: #fff;
   border: 0.8px solid #e2e8f0;
   border-radius: 6px;
   cursor: pointer;
@@ -397,9 +398,9 @@ input[type="date"] {
 
 .input-fav:focus {
   border: 0.8px solid #e2e8f0;
-  outline: none; 
+  outline: none;
+  background-color: #f1f5f9;
 }
-
 
 .dashboard-container {
   background-color: #ffffff;
@@ -435,6 +436,9 @@ input[type="date"] {
 
     transition: left 0.3s ease;
   }
+  .date-wrapper {
+    max-width: 100% !important;
+  }
 
   #sidebar.open {
     left: 0;
@@ -450,6 +454,9 @@ input[type="date"] {
   }
   .date-wrapper {
     flex: none;
+  }
+  .input-fav {
+    max-width: 100% !important;
   }
 }
 
