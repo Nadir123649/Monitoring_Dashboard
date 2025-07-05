@@ -11,6 +11,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="path/to/line-awesome/css/line-awesome-font-awesome.min.css" />
   <link rel="stylesheet" href="https://unpkg.com/react-day-picker@8.7.3/dist/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="./assets/css/main.css" />
   <title>Service Monitoring Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -320,27 +321,22 @@
             </div>
 
             <!-- Right Section: Date Range Picker -->
-            <div class="w-full time-period-container md:w-auto">
-              <label class="hidden mb-2 md:block md:mb-1">Define Time Period:</label>
+            <div class="flex items-center w-full gap-3 time-period-container md:w-auto">
+              <label class="hidden mb-2 text-sm font-semibold md:block md:mb-1">Define Time Period:</label>
 
-              <!-- Dates Wrapper -->
-              <div class="flex flex-row flex-wrap gap-3 date-inputs sm:flex-row sm:items-center">
-                <div class="w-full date-wrapper sm:w-auto">
-                  <input type="date" id="from-date" class="w-full sm:w-auto" />
-                  <label for="from-date" class="placeholder-text">From</label>
-                  <span class="calendar-icon"></span>
+              <div class="date-inputs">
+                <div class="date-wrapper">
+                  <input type="text" id="from-date" placeholder="From Date" />
                 </div>
-                <div class="w-full date-wrapper sm:w-auto">
-                  <input type="date" id="to-date" class="w-full sm:w-auto" />
-                  <label for="to-date" class="placeholder-text">To</label>
-                  <span class="calendar-icon"></span>
+                <div class="date-wrapper">
+                  <input type="text" id="to-date" placeholder="To Date" />
                 </div>
               </div>
 
               <!-- Search Button -->
-              <button id="search-btn" class="mt-2 search-button sm:mt-3 md:mt-0">
-                Search
-              </button>
+              <button id="search-btn" class="search-button">Search</button>
+
+
             </div>
           </div>
 
@@ -543,6 +539,7 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="/assets/js/index.js"></script>
   <script src="https://kit.fontawesome.com/ce278ed6db.js" crossorigin="anonymous"></script>
   <script src="/assets/js/main.js"></script>

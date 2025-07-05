@@ -352,85 +352,37 @@ main {
 .text-fonts {
   font-family: "JetBrains Mono", system-ui, sans-serif !important;
 }
-/* Keep your existing styles... */
-.time-period-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #1a202c;
-  padding: 10px;
-  flex-wrap: wrap; /* Allow wrapping on smaller screens */
-}
-
-.time-period-container label {
-  font-size: 16px;
-  font-weight: 500;
-  white-space: nowrap;
-}
 
 .date-inputs {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap; /* Wrap inputs on smaller screens */
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .date-wrapper {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  max-width: 150px;
+  flex: 1 1 200px;
 }
 
-.date-wrapper input[type="date"] {
-  padding: 8px 12px;
-  font-size: 14px;
-  border: 1px solid #d8e1f0ff;
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
   border-radius: 6px;
-  background-color: #fff;
+  font-size: 16px;
+}
+
+.search-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
-  width: 100%;
-  position: relative;
-  z-index: 2;
-  background-color: white;
+  font-size: 16px;
 }
 
-.date-wrapper input[type="date"]:focus {
-  outline: none;
-  border-color: #3182ce;
-  box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.2);
-}
-
-.date-wrapper input[type="date"]::-webkit-calendar-picker-indicator {
-  position: relative;
-  z-index: 3;
-  opacity: 1;
-  cursor: pointer;
-}
-
-.date-wrapper input[type="date"]:not(:placeholder-shown) + .placeholder-text,
-.date-wrapper input[type="date"]:focus + .placeholder-text {
-  display: none;
-}
-
-.calendar-icon {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #718096;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.placeholder-text {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #718096;
-  pointer-events: none;
-  z-index: 1;
-  font-size: 14px;
+.search-button:hover {
+  background-color: #0056b3;
 }
 
 .dashboard-container {
@@ -479,6 +431,9 @@ main {
   }
   .main-div {
     padding: 8px 8px !important;
+  }
+  .date-wrapper{
+    flex: none;
   }
 }
 
