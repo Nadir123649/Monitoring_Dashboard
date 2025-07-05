@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     series: [
       {
-        name: "% Rate",
+        name: "",
         data: data.map((d) => d.value),
         color: "#ffffff",
         borderColor: "#60A5FA",
