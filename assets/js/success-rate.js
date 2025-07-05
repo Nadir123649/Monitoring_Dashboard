@@ -1,3 +1,60 @@
+// Initialize both pickers in a way that ensures dependency
+let fromPicker, toPicker;
+
+fromPicker = flatpickr("#from-date", {
+  dateFormat: "Y-m-d",
+  onChange: function (selectedDates, dateStr) {
+    if (selectedDates.length > 0) {
+      toPicker.set("minDate", selectedDates[0]);
+
+      // Optional: Auto-clear "to-date" if it's before new "from"
+      const toDateVal = document.getElementById("to-date").value;
+      if (toDateVal && new Date(toDateVal) < selectedDates[0]) {
+        toPicker.clear();
+      }
+    }
+  },
+});
+
+toPicker = flatpickr("#to-date", {
+  dateFormat: "Y-m-d",
+  onChange: function (selectedDates, dateStr) {
+    if (selectedDates.length > 0) {
+      fromPicker.set("maxDate", selectedDates[0]);
+
+      // Optional: Auto-clear "from-date" if it's after new "to"
+      const fromDateVal = document.getElementById("from-date").value;
+      if (fromDateVal && new Date(fromDateVal) > selectedDates[0]) {
+        fromPicker.clear();
+      }
+    }
+  },
+});
+
+// Search button click
+document.getElementById("search-btn").addEventListener("click", function () {
+  const fromDate = document.getElementById("from-date").value;
+  const toDate = document.getElementById("to-date").value;
+
+  if (!fromDate || !toDate) {
+    alert("Please select both 'From' and 'To' dates.");
+    return;
+  }
+
+  const from = new Date(fromDate);
+  const to = new Date(toDate);
+
+  if (from > to) {
+    alert("'From' date cannot be later than 'To' date.");
+    return;
+  }
+
+  console.log("Fetching data from", fromDate, "to", toDate);
+  alert(`Searching data from ${fromDate} to ${toDate}`);
+
+  // ✅ Your API call or data fetch logic here
+});
+
 const tabButtons = document.querySelectorAll(".tab-btn");
 const viewPanes = document.querySelectorAll(".view-pane");
 
