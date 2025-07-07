@@ -27,6 +27,15 @@ const barData = [
 const pieData = [
   { name: "Verification Success", value: 72, colors: FG[0] },
   { name: "Abandoned by Customer", value: 16, colors: FG[1] },
+  { name: "Abandoned by Customer", value: 16, colors: FG[1] },
+  { name: "Verification Failure", value: 11, colors: FG[2] },
+  { name: "Not Started", value: 1, colors: FG[3] },
+  { name: "Verification Failure", value: 11, colors: FG[2] },
+  { name: "Not Started", value: 1, colors: FG[3] },
+  { name: "Abandoned by Customer", value: 16, colors: FG[1] },
+  { name: "Verification Failure", value: 11, colors: FG[2] },
+  { name: "Not Started", value: 1, colors: FG[3] },
+  { name: "Abandoned by Customer", value: 16, colors: FG[1] },
   { name: "Verification Failure", value: 11, colors: FG[2] },
   { name: "Not Started", value: 1, colors: FG[3] },
 ];
@@ -170,4 +179,26 @@ Highcharts.chart("pies-chart", {
     },
   ],
   credits: { enabled: false },
+});
+
+// Scrollable Dynamic Legend for pies-chart
+const legendContainer3 = document.getElementById("pieLegend3");
+
+pieData.forEach((d) => {
+  const box = document.createElement("div");
+  box.className =
+    "flex items-center w-[200px] px-2 md:w-full gap-2 justify-center md:justify-start py-3 mb-2 min-w-[200px] md:min-w-[100%] max-w-[190px] md:max-w-[100%] transition-transform border border-white shadow cursor-pointer border-opacity-20 bg-white/85 rounded-xl";
+
+  const dot = document.createElement("div");
+  dot.className = "w-4 h-4 rounded-full";
+  dot.style.background = d.colors[d.colors.length - 1]; // last color stop
+  dot.style.boxShadow = `0 0 10px ${d.colors[d.colors.length - 1]}80`;
+
+  const label = document.createElement("span");
+  label.className =
+    "text-xs font-semibold text-gray-800 uppercase whitespace-pre-wrap";
+  label.textContent = d.name;
+
+  box.append(dot, label);
+  legendContainer3.appendChild(box);
 });
