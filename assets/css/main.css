@@ -426,6 +426,14 @@ input[type="date"] {
   margin: 0 !important;
 }
 
+.border-bottom {
+  border-bottom: 0.8px solid #e2e8f0 !important;
+}
+
+.border-top {
+  border-top: 0.8px solid #e2e8f0;
+}
+
 @media (max-width: 768px) {
   #sidebar {
     position: fixed;
