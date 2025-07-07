@@ -373,9 +373,12 @@
                         </div>
 
                         <!-- Chart Card -->
-                        <div class="relative w-full flex-1 lg:min-w-[400px]">
+                        <div class="relative flex flex-col w-full gap-6 lg:flex-row">
+                            <!-- Pie Chart -->
                             <div id="pie-cards"
-                                class="w-full max-w-[700px] h-[350px] sm:h-[400px] lg:h-[500px] mx-auto p-0 md:p-6 hover:scale-[1.02] transition-transform flex-1 min-h-[400px] lg:min-h-[550px] overflow-hidden">
+                                class="w-full max-w-[700px] h-[350px] sm:h-[400px] lg:h-[500px] mx-auto p-0 md:p-6 hover:scale-[1.02] transition-transform flex-1 min-h-[400px] lg:min-h-[550px] overflow-hidden relative">
+
+                                <!-- Background and Visual Effects -->
                                 <div
                                     class="absolute inset-0 rounded-3xl bg-[length:40px_40px] bg-grid animate-[gridMove_20s_linear_infinite]">
                                 </div>
@@ -388,15 +391,17 @@
                                 <div
                                     class="absolute inset-0 bg-white/5 backdrop-blur-[30px] rounded-3xl border border-white/5">
                                 </div>
+
+                                <!-- Chart Container -->
                                 <div id="pie-containersd"
                                     class="relative z-10 flex items-center justify-center w-full h-full"></div>
-                                <div
-                                    class="absolute z-20 grid grid-cols-2 gap-4 transform -translate-x-1/2 bottom-6 left-1/2">
-                                </div>
                             </div>
 
-                            <!-- Legend -->
-
+                            <!-- Custom Scrollable Legend -->
+                            <div id="pieLegend2"
+                                class="flex flex-row gap-2 md:gap-0  md:flex-col items-start w-full max-w-[100%] md:max-w-[220px] max-h-[200px] md:max-h-[550px] overflow-y-auto scroll-smooth pr-2">
+                                <!-- Dynamically injected legend items -->
+                            </div>
                         </div>
                     </div>
 

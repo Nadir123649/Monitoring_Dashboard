@@ -47,6 +47,16 @@ const customPieData = [
   { name: "Abandoned by Customer", value: 7644, grad: customGradients[1] },
   { name: "Verification Failure", value: 5667, grad: customGradients[2] },
   { name: "Verification Success", value: 15441, grad: customGradients[3] },
+  { name: "Verification Failure", value: 5667, grad: customGradients[2] },
+  { name: "Verification Failure", value: 5667, grad: customGradients[2] },
+  { name: "Verification Success", value: 15441, grad: customGradients[3] },
+  { name: "Not Started", value: 465, grad: customGradients[0] },
+  { name: "Not Started", value: 465, grad: customGradients[0] },
+  { name: "Abandoned by Customer", value: 7644, grad: customGradients[1] },
+  { name: "Verification Failure", value: 5667, grad: customGradients[2] },
+  { name: "Abandoned by Customer", value: 7644, grad: customGradients[1] },
+  { name: "Verification Failure", value: 5667, grad: customGradients[2] },
+  { name: "Verification Success", value: 15441, grad: customGradients[3] },
 ];
 
 const customTotal = customPieData.reduce((s, d) => s + d.value, 0);
@@ -210,4 +220,28 @@ Highcharts.chart("pie-containersd", {
   ],
   credits: { enabled: false },
   legend: { enabled: false },
+});
+
+// Inject Dynamic Legend for pie-containersd
+const legendContainer2 = document.getElementById("pieLegend2");
+
+customPieData.forEach((d) => {
+  const box = document.createElement("div");
+  box.className =
+    "flex items-center w-[190px] md:w-full gap-2 px-2 justify-center md:justify-start py-3 mb-2 min-w-[190px] md:min-w-[100%] max-w-[190px] md:max-w-[100%] transition-transform border border-white shadow cursor-pointer border-opacity-20 bg-white/85 rounded-xl";
+
+  const dot = document.createElement("div");
+  dot.className = "w-4 h-4 rounded-full";
+  dot.style.background = d.grad.stops[d.grad.stops.length - 1][1]; // last gradient stop color
+  dot.style.boxShadow = `0 0 10px ${
+    d.grad.stops[d.grad.stops.length - 1][1]
+  }80`;
+
+  const label = document.createElement("span");
+  label.className =
+    "text-xs font-semibold text-gray-800 uppercase whitespace-pre-wrap";
+  label.textContent = d.name;
+
+  box.append(dot, label);
+  legendContainer2.appendChild(box);
 });

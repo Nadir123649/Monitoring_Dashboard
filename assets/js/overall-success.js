@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
   pieData.forEach((d) => {
     const box = document.createElement("div");
     box.className =
-      "flex items-center w-[190px] md:w-full gap-2 justify-center md:justify-start py-3 mb-2 min-w-[190px] md:min-w-[100%] max-w-[190px] md:max-w-[100%] transition-transform border border-white shadow cursor-pointer border-opacity-20 bg-white/85 rounded-xl";
+      "flex items-center w-[190px] px-2 md:w-full gap-2 justify-center md:justify-start py-3 mb-2 min-w-[190px] md:min-w-[100%] max-w-[190px] md:max-w-[100%] transition-transform border border-white shadow cursor-pointer border-opacity-20 bg-white/85 rounded-xl";
 
     const dot = document.createElement("div");
     dot.className = "w-4 h-4 rounded-full";
