@@ -162,7 +162,7 @@ const pieLegendContainer = document.getElementById("successPieLegends");
 successRatePieData.forEach((entry) => {
   const legendBox = document.createElement("div");
   legendBox.className =
-    "flex items-center gap-2 px-4 py-3 transition transform rounded-lg cursor-pointer bg-white/95 backdrop-blur-lg hover:-translate-y-1 hover:scale-105";
+    "flex items-center justify-center gap-2 py-4 px-2 border-white border-solid  mb-2 transition transform cursor-pointer bg-white/85 shadow  rounded-xl max-w-[220px] w-full min-w-[220px] ";
   const dot = document.createElement("div");
   dot.className = "w-4 h-4 rounded-full animate-pulse";
   dot.style.background = entry.colors.at(-1);

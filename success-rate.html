@@ -42,7 +42,7 @@
             </div>
             <nav class="flex-1 px-3 py-4 overflow-y-auto">
                 <a href="/index.html" title="Dashboard"
-                    class="flex items-center gap-2 px-3 py-2 transition rounded hover:bg-gray-100">
+                    class="flex items-center gap-2 px-3 py-2 text-gray-700 transition rounded sidebar-item hover:bg-gray-100">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="w-5 h-5 lucide lucide-chart-column"
@@ -419,34 +419,32 @@
                             class="grid grid-cols-1 gap-3 space-y-6 md:gap-6 view-pane lg:grid-cols-2">
                             <!-- Pie Chart Card -->
                             <div
-                                class="relative p-0 overflow-hidden transition-all bg-white border border-gray-100 rounded-3xl md:p-6">
-                                <div
-                                    class="absolute inset-0 bg-[length:40px_40px] bg-[linear-gradient(rgba(0,212,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,212,255,0.03)_1px,transparent_1px)] animate-[gridMove_20s_linear_infinite] rounded-3xl">
-                                </div>
-                                <div
-                                    class="absolute top-[15%] right-[10%] w-20 h-20 bg-[radial-gradient(circle,rgba(0,212,255,0.2),rgba(0,106,255,0.1))] rounded-full filter blur-3xl animate-[float_6s_ease-in-out_infinite]">
-                                </div>
-                                <div
-                                    class="absolute bottom-[20%] left-[15%] w-15 h-15 bg-[radial-gradient(circle,rgba(255,0,110,0.2),rgba(131,56,236,0.1))] rounded-full filter blur-2xl animate-[float_8s_ease-in-out_infinite_reverse]">
-                                </div>
-                                <div
-                                    class="absolute inset-0 bg-white/5 backdrop-blur-[30px] rounded-3xl border border-white/5">
-                                </div>
-
-                                <!-- ✅ Updated Pie Chart Container -->
-                                <div id="successPieChartContainers"
-                                    class="relative z-10 flex items-center justify-center w-full h-full border rounded-2xl bg-white/5 border-white/5">
-                                </div>
-
-                                <!-- ✅ Updated Pie Legend Container -->
-                                <div id="successPieLegends"
-                                    class="absolute z-20 grid grid-cols-2 gap-4 transform -translate-x-1/2 bottom-6 left-1/2">
+                                class="relative flex flex-col items-center justify-center w-full p-2 mx-auto transition-shadow duration-300 bg-white shadow-sm md:p-6 item rounded-xl hover:shadow-md ">
+                                <!-- Flex container: chart left, legend right -->
+                                <div class="flex flex-col items-start gap-6 lg:flex-row">
+                                    <!-- Pie Chart Container -->
+                                    <div class="w-full lg:w-full">
+                                        <div id="pieCard"
+                                            class="relative bg-white rounded-[40px] p-0 overflow-hidden transition-transform duration-500 ease-in-out">
+                                            <!-- Chart Canvas -->
+                                            <div id="successPieChartContainers"
+                                                class="relative z-10 w-full h-[380px] bg-transparent rounded-2xl"></div>
+                                        </div>
+                                        <div id="successPieLegends"
+                                            class="absolute bottom-0 z-20 p-0 flex items-center gap-4 border border-gray-200 w-[max-content] scrollable-legend  rounded-2xl">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
 
                             <!-- ✅ Updated Bar Chart Container -->
                             <div id="failureBarCharts"
                                 class="flex items-center justify-center p-0 mt-0 bg-white shadow rounded-xl md:p-6">
+                            </div>
+
+                            <div id="pieLegend"
+                                class="absolute bottom-0 z-20 p-0 flex items-center gap-4 border border-gray-200 w-[max-content] scrollable-legend  rounded-2xl">
                             </div>
                         </div>
 
