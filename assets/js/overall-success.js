@@ -34,11 +34,23 @@ document.addEventListener("DOMContentLoaded", () => {
     { name: "Not Started", y: 465, grad: futuristicGradients[0] },
     { name: "Abandoned by Customer", y: 7644, grad: futuristicGradients[1] },
     { name: "Verification Failure", y: 5667, grad: futuristicGradients[2] },
+    { name: "Not Started", y: 465, grad: futuristicGradients[0] },
+    { name: "Abandoned by Customer", y: 7644, grad: futuristicGradients[1] },
+    { name: "Not Started", y: 465, grad: futuristicGradients[0] },
+    { name: "Abandoned by Customer", y: 7644, grad: futuristicGradients[1] },
+    { name: "Verification Failure", y: 5667, grad: futuristicGradients[2] },
+    { name: "Not Started", y: 465, grad: futuristicGradients[0] },
+    { name: "Abandoned by Customer", y: 7644, grad: futuristicGradients[1] },
+    { name: "Verification Failure", y: 5667, grad: futuristicGradients[2] },
+    { name: "Verification Failure", y: 5667, grad: futuristicGradients[2] },
+    { name: "Verification Success", y: 35400, grad: futuristicGradients[3] },
+    { name: "Verification Failure", y: 5667, grad: futuristicGradients[2] },
     { name: "Verification Success", y: 35400, grad: futuristicGradients[3] },
   ];
 
   const total = pieData.reduce((sum, item) => sum + item.y, 0);
 
+  // Highcharts Pie Chart
   Highcharts.chart("pie-chart-container", {
     chart: {
       type: "pie",
@@ -48,11 +60,11 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     title: {
       text: `
-                    <div style="text-align: center;">
-                        <div style="font-size: 48px; font-weight: 900; color: #333;">${total.toLocaleString()}</div>
-                        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 4px; font-weight: 700; color: #666;">Total Data Points</div>
-                    </div>
-                `,
+        <div style="text-align: center;">
+          <div style="font-size: 48px; font-weight: 900; color: #333;">${total.toLocaleString()}</div>
+          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 4px; font-weight: 700; color: #666;">Total Data Points</div>
+        </div>
+      `,
       useHTML: true,
       align: "center",
       verticalAlign: "middle",
@@ -81,9 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
           distance: -22,
           connectorWidth: 0,
         },
-        animation: {
-          duration: 2500,
-        },
+        animation: { duration: 2500 },
       },
     },
     series: [
@@ -102,5 +112,28 @@ document.addEventListener("DOMContentLoaded", () => {
     ],
     credits: { enabled: false },
     legend: { enabled: false },
+  });
+
+  // Custom Dynamic Legend
+  const legendEl = document.getElementById("pieLegends");
+  pieData.forEach((d) => {
+    const box = document.createElement("div");
+    box.className =
+      "flex items-center w-[190px] md:w-full gap-2 justify-center md:justify-start py-3 mb-2 min-w-[190px] md:min-w-[100%] max-w-[190px] md:max-w-[100%] transition-transform border border-white shadow cursor-pointer border-opacity-20 bg-white/85 rounded-xl";
+
+    const dot = document.createElement("div");
+    dot.className = "w-4 h-4 rounded-full";
+    dot.style.background = d.grad.stops[d.grad.stops.length - 1][1]; // last stop color
+    dot.style.boxShadow = `0 0 10px ${
+      d.grad.stops[d.grad.stops.length - 1][1]
+    }80`;
+
+    const label = document.createElement("span");
+    label.className =
+      "text-xs font-semibold text-gray-800 uppercase whitespace-pre-wrap";
+    label.textContent = d.name;
+
+    box.append(dot, label);
+    legendEl.appendChild(box);
   });
 });

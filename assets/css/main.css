@@ -434,6 +434,17 @@ input[type="date"] {
   border-top: 0.8px solid #e2e8f0;
 }
 
+#pieLegends::-webkit-scrollbar {
+  width: 6px;
+}
+#pieLegends::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+#pieLegends::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 @media (max-width: 768px) {
   #sidebar {
     position: fixed;
